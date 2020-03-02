@@ -1264,10 +1264,15 @@
       }    
 
       // Calling text size restriction functions once the fonts are loaded
-      var font = new FontFaceObserver('Courier New');
-
-      font.load().then(function () {
-        console.log('Font is available');
+      const fonts = ['Neue Plak Text', 'Neue Plak Extended', 'Neue Plak Text Light', 'Neue Plak Text Semi Bold', 'Cloudera Display 100 Striped', 'Courier New'];
+      const fontObservers = [];
+      
+      fonts.forEach(font => {
+        const obs = new FontFaceObserver(font);
+        fontObservers.push(obs.load())
+      });
+      
+      Promise.all(fontObservers).then(() => {
         maxLineCheck();
         maxHeightCheck();
         injectDynamicContent();
@@ -1283,29 +1288,15 @@
           alignItems: 'flex-start'
         });  
         
-      }, function () {
-        console.log('Font is not available');
+        document.dispatchEvent(new Event('printready'));        
       });
 
       checkCrop();
       checkExport();
       charLimit();
 
-      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
-
-
-setInterval(() => { textFitMin('.keyPlay__title', 60) }, 1000);
+      setInterval(() => { textFitMin('.keyPlay__title', 60) }, 1000);
 
     </script>
-
-    <script type="text/javascript">
-      // Add many fallbacks for Print Ready
-      document.addEventListener('DOMContentLoaded', function(event) {
-        document.dispatchEvent(new Event('printready'));
-      });
-
-    </script>
-
-
   </body>
 </html>
