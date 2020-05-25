@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<!--{{{ placeholder-visibility }}} {{{ background-image }}} {{{ color-theme }}} {{{ text-theme }}} {{{ key-play-text }}} {{{ leader }}} {{{ headline }}} {{{ text-theme }}} {{{ leader-size }}} {{{cta-background-colour}}}-->
+<html>
+  <head>
+    <title>Print Generic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Akzidenz%20Grotesk/stylesheet.css" rel="stylesheet">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Calibre/stylesheet.css" rel="stylesheet">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/ClouderaDisplay-50Striped/stylesheet.css" rel="stylesheet">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/neuePlak/stylesheet.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="crop.css">
+    <style>
+      
+      :root {
+        --blue: #008cff;
+        --dark-orange: #f96702;
+        --bright-orange: #ff8400;
+        --slate: #305868;
+        --mint: #00a3af;
+      }
+
+      * {
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body { font-family: 'Akzidenz Grotesk'; }
+            h1, h2 { font-weight: normal; }
+
+      .character-error { color: red !important; }
+
+      .overflow {
+        border: 1px dashed red;
+        position: relative;
+      }
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 5px;
+        right: 5px;
+        height: 15px;
+        width: 15px;
+        border: 1px solid red;
+        color: red;
+        padding: 2px 2px 2px 3px;
+        box-sizing: border-box;
+        font-size: 13px;
+        text-align: center;
+        line-height: 8px;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; 
+        z-index: 10;
+      }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content. Please remove it';
+        position: absolute;
+        top: 0;
+        right: 5px;
+        background-color: black;
+        color: white;
+        border-radius: 2px;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.1em;
+        text-align: right;
+        width: 110%;
+        z-index: 10;
+      }
+
+      .placeholder {
+        display: {{{ placeholder-visibility }}};
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.7;
+        z-index: 100;
+      }
+      
+      .facebook-checker {
+        display: none;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.7;
+        z-index: 100;
+      }
+
+      .tinymce_style--light, .tinymce_style--dark { color: {{{account.colors.cloudera-bright-orange--new-}}}; }
+
+      .page { display: flex; flex-direction: column; background-color: #3C484F; }
+      
+      .cloudera-logo {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      .cloudera-key-play { display: none; }
+      .key-play-text { color: {{{account.colors.cloudera-blue--new-}}}; font-size: 1em; font-family: 'Cloudera Display 50 Striped'; margin: 0; padding: 0; display: flex; align-items: center; }
+
+
+      .gray.pattern.thin { background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 5.2 5.2' style='enable-background:new 0 0 5.2 5.2;' xml:space='preserve'%3E %3Cstyle type='text/css'%3E .st0%7B fill:%23F5F5F5; %7D %3C/style%3E %3Cpath class='st0' d='M5.2,0L0,5.2l0,0V3.4L3.4,0H5.2L5.2,0z M5.2,5.2L5.2,5.2V3.4L3.4,5.2H5.2z'/%3E %3C/svg%3E"); }
+
+      .blue.pattern.thin { background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 5.2 5.2' style='enable-background:new 0 0 5.2 5.2;' xml:space='preserve'%3E %3Cstyle type='text/css'%3E .st0%7B fill:%2329A7DE; %7D %3C/style%3E %3Cpath class='st0' d='M5.2,0L0,5.2l0,0V3.4L3.4,0H5.2L5.2,0z M5.2,5.2L5.2,5.2V3.4L3.4,5.2H5.2z'/%3E %3C/svg%3E"); }
+
+      .background.pattern.thin { background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 5.2 5.2' style='enable-background:new 0 0 5.2 5.2;' xml:space='preserve'%3E %3Cstyle type='text/css'%3E .st0%7B fill:%23333E47; %7D %3C/style%3E %3Cpath class='st0' d='M5.2,0L0,5.2l0,0V3.4L3.4,0H5.2L5.2,0z M5.2,5.2L5.2,5.2V3.4L3.4,5.2H5.2z'/%3E %3C/svg%3E"); display: none; }
+
+        .cta-text {
+          line-height: 1em;
+          color: white;
+        }
+      
+        .cta.orange,
+        .cta.bright-orange {
+          background-color: {{{account.colors.cloudera-bright-orange--new-}}};
+        }
+        .cta.brilliant-blue,
+        .cta.cloudera-blue {
+          background-color: {{{account.colors.cloudera-blue--new-}}};
+        }         
+      
+      .content .text h1,
+      .content .text h2,
+      .content .text p {
+        font-family: 'Neue Plak Extended';
+        letter-spacing: 0.04em;          
+      }
+      
+      .color-overlay-one { position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 2; }
+      .color-overlay-two { position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 1; }
+
+      .background-image { z-index: 0; }
+      .header, .text { z-index: 3 !important; }
+      
+      .color-theme-five .color-overlay-one { background: none; } 
+      .color-theme-six .color-overlay-one { background: none; } 
+      .color-theme-seven .color-overlay-one { background: none; } 
+      .color-theme-eight .color-overlay-one { background: none; } 
+      .color-theme-nine .color-overlay-one { background: none; } 
+      .color-theme-ten .color-overlay-one { background: none; } 
+      
+      .color-theme-five .color-overlay-two { background: none; } 
+      .color-theme-six .color-overlay-two { background: none; } 
+      .color-theme-seven .color-overlay-two { background: none; } 
+      .color-theme-eight .color-overlay-two { background: none; } 
+      .color-theme-nine .color-overlay-two { background: none; } 
+      .color-theme-ten .color-overlay-two { background: none; } 
+      
+      .color-theme-five .cta-wrap { border-bottom: 1px solid white;}
+      .color-theme-six .cta-wrap { color: {{{account.colors.cloudera-slate--new-}}}; border-bottom: 1px solid {{{account.colors.cloudera-slate--new-}}}; }
+      .color-theme-seven .cta-wrap { color: {{{account.colors.cloudera-blue--new-}}}; border-bottom: 1px solid {{{account.colors.cloudera-blue--new-}}}; }
+      .color-theme-eight .cta-wrap { color: {{{account.colors.cloudera-blue--new-}}}; border-bottom: 1px solid {{{account.colors.cloudera-blue--new-}}}; }
+      .color-theme-nine .cta-wrap { color: {{{account.colors.cloudera-bright-orange--new-}}}; border-bottom: 1px solid {{{account.colors.cloudera-bright-orange--new-}}}; }
+      .color-theme-ten .cta-wrap { color: {{{account.colors.cloudera-bright-orange--new-}}}; border-bottom: 1px solid {{{account.colors.cloudera-bright-orange--new-}}}; }
+      
+      .color-theme-five .text h1 { color: {{{account.colors.cloudera-slate--new-}}}; }
+      .color-theme-six .text h1 { color: {{{account.colors.cloudera-slate--new-}}}; }
+      .color-theme-seven .text h1 { color: {{{account.colors.cloudera-blue--new-}}}; }
+      .color-theme-eight .text h1 { color: {{{account.colors.cloudera-blue--new-}}}; }
+      .color-theme-nine .text h1 { color: {{{account.colors.cloudera-bright-orange--new-}}}; }
+      .color-theme-ten .text h1 { color: {{{account.colors.cloudera-bright-orange--new-}}}; }
+      
+      .color-theme-eleven .text h1 { color: white; }
+      .color-theme-twelve .text h1 { color: white; }
+      
+      .color-theme-five .text h2 { color: white; }
+      .color-theme-six .text h2 { color: {{{account.colors.cloudera-slate--new-}}}; }
+      .color-theme-seven .text h2 { color: white; }
+      .color-theme-eight .text h2 { color: {{{account.colors.cloudera-slate--new-}}}; }
+      .color-theme-nine .text h2 { color: white; }
+      .color-theme-ten .text h2 { color: {{{account.colors.cloudera-slate--new-}}}; }
+      
+      .color-theme-eleven .text h2 { color: white; }
+      .color-theme-twelve .text h2 { color: {{{account.colors.cloudera-slate--new-}}}; }
+      
+      .color-theme-one .cta-wrap { color: white; border-bottom: 1px solid white; }
+      .color-theme-three .cta-wrap { color: white; border-bottom: 1px solid white; }
+      .color-theme-four .cta-wrap { 
+        color: white !important; 
+        border-bottom: none !important; 
+        padding: 0 !important;
+      }
+            
+      .color-theme-one .color-overlay-one { background-color: #646464 !important; mix-blend-mode: screen; z-index: 1; }
+      .color-theme-two .color-overlay-one { background-color: #1CA4D0 !important; mix-blend-mode: screen; z-index: 1; }
+      .color-theme-three .color-overlay-one { background-color: #C9A615 !important; mix-blend-mode: screen; z-index: 1; }
+
+      .color-theme-one .color-overlay-two { background-color: #66717A !important; mix-blend-mode: multiply; z-index: 2; }
+      .color-theme-two .color-overlay-two { background-color: #8FFFFF !important; mix-blend-mode: multiply; z-index: 2; }
+      .color-theme-three .color-overlay-two { background-color: #FFD14E !important; mix-blend-mode: multiply; z-index: 2; }
+      
+      .color-theme-one .text h1 { color: {{{account.colors.cloudera-bright-orange--new-}}} !important; }
+      .color-theme-two .text h1 { color: white !important; }
+      .color-theme-three .text h1 { color: white !important; }
+      
+      .color-theme-one .text h2 { color: white !important; }
+      .color-theme-two .text h2 { color: white !important; }
+      .color-theme-three .text h2 { color: white !important; }
+      
+      .cta-wrap {
+        content: "{{{ cta-choice }}}";
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+      .ko .cta-wrap {
+        font-weight: bold !important;
+      }
+      .key-play-text { text-transform: initial; }
+              
+      @media (min-width: 295px) and (max-width: 300px) and (min-height: 45px) and (max-height: 50px) {
+        .color-theme-four .cta-wrap p {
+          border-bottom: 1px solid white !important; 
+          padding: 0 0 0.3em 0;
+        }   
+        .page { flex-direction: row; }
+        .header { display: flex; position: absolute; top: 0; bottom: 0; left: 0; width: 9.8em; background-color: white; z-index: 1; }
+        .header-logos { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; padding: 0; z-index: 2; }
+        .gray.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 9%; z-index: 1; }
+        .cloudera-key-player { display: none; }
+        .content { position: relative; width: 100%; height: 100%; }
+        .background-image { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .text { display: flex; justify-content: space-between; position: absolute; top: 0.49em; bottom: 1em; right: 0.9em; left: 10.8em; } h1, h2, p { text-transform: uppercase; }
+        .text-wrap { max-width: 340px; }
+        .text h1 { display: none; } 
+        .text h2 { color: white; margin: 0 0 0.87em 0; font-size: 1.2em; } 
+        .cta { position: absolute; right: 0.2em; bottom: -0.55em; }
+        
+        .cta-wrap { 
+          max-width: 85px;
+          display: flex; 
+          padding: 0.2em 0.6em; 
+          color: white; 
+          padding: 0; 
+          font-size: 0.85em; 
+          z-index: 3; 
+          border-bottom: 1px solid white !important; 
+          border-width: 1px !important;
+        } 
+        
+        .blue.pattern.thin { display: none; position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 9%; z-index: 1; }
+
+        /* Header */
+
+        .large .text h2 { font-size: 11.5px; line-height: 14px; }
+        .medium .text h2 { font-size: 11.5px; line-height: 14px; }
+        .small .text h2 { font-size: 11.5px; line-height: 14px; }
+        
+        .headline {
+          max-width: 100px;
+        }
+        
+        /* Leader */
+        
+        .large .text h1 { font-size: 10px; }
+        .medium .text h1 { font-size: 10px; }
+        .small .text h1 { font-size: 10px; }
+        
+        .cta { background: none !important; }
+        .color-theme-one .cta-wrap, 
+        .color-theme-two .cta-wrap, 
+        .color-theme-three .cta-wrap { color: white !important; }
+        
+      }         
+      
+      @media (min-width: 295px) and (max-width: 320px) and (min-height: 45px) and (max-height: 50px) {
+        .color-theme-one .cta-wrap p {
+          border-bottom: 1px solid white;
+        }
+      }      
+      
+      @media (min-width: 305px) and (max-width: 320px) and (min-height: 45px) and (max-height: 50px) {
+        .color-theme-four .cta-wrap p {
+          border-bottom: 1px solid white !important; 
+          padding: 0 0 0.3em 0;
+        }   
+        .page { flex-direction: row; }
+        .header { display: flex; position: absolute; top: 0; bottom: 0; left: 0; width: 9.5em; background-color: white; z-index: 1; }
+        .header-logos { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; padding: 0; z-index: 2; }
+        .gray.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 8.8%; z-index: 1; }
+        .cloudera-key-player { display: none; }
+        .content { position: relative; width: 100%; height: 100%; }
+        .background-image { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .text { display: flex; justify-content: space-between; position: absolute; top: 0.5em; bottom: 1em; right: 1.8em; left: 9.9em; } h1, h2, p { text-transform: uppercase; }
+        .text-wrap { 
+          max-width: 130px; 
+        }
+        .text h1 { display: none; } 
+        .text h2 { color: white; margin: 0 0 0.87em 0; font-size: 1.2em; } 
+        .cta { 
+          position: absolute; 
+          right: -1.3em; 
+          bottom: -0.55em; 
+          max-width: 80px; 
+          text-align: right; 
+        }
+        .cta-wrap { display: flex; padding: 0.2em 0.6em; } 
+
+        .cta-wrap { 
+          color: white; 
+          padding: 0; 
+          font-size: 0.85em; 
+          z-index: 3; 
+          border-width: 1px !important; 
+        }
+        
+        .blue.pattern.thin { display: none; position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 9%; z-index: 1; }
+
+        /* Header */
+
+        .large .text h2 { font-size: 11.5px; line-height: 14px; }
+        .medium .text h2 { font-size: 11.5px; line-height: 14px; }
+        .small .text h2 { font-size: 11.5px; line-height: 14px; }
+        
+        /* Leader */
+        
+        .large .text h1 { font-size: 10px; }
+        .medium .text h1 { font-size: 10px; }
+        .small .text h1 { font-size: 10px; }
+        
+        .cta { background: none !important; }
+        .color-theme-one .cta-wrap, 
+        .color-theme-two .cta-wrap, 
+        .color-theme-three .cta-wrap { color: white !important; }
+
+      }
+
+      @media (min-width: 355px) and (max-width: 360px) and (min-height: 215px) and (max-height: 220px) {
+        .header { display: flex; position: absolute; top: 0; left: 0; right: 0; height: 3.3em; background-color: white; z-index: 1; }
+        .header-logos { display: flex; justify-content: space-between; width: 100%; height: 100%; padding: 0 1em 0 0; z-index: 2; }
+        .gray.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 3.3%; z-index: 1; }
+        .cloudera-key-player { margin: 0 0 0 0; }
+        .content { position: relative; width: 100%; height: 100%; }
+        .background-image { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .text { position: absolute; bottom: 0.85em; left: 1.2em; right: 1.2em; } h1, h2, p { text-transform: uppercase; }
+        .text h1 { color: white; margin: 0.2em 0 0.3em 0; font-size: 0.87em; letter-spacing: 0.01em; line-height: 1.16em; } 
+        .text h2 { color: white; margin: 00; font-size: 1.04em; line-height: 1.3em; }
+        .cta { position: relative; display: inline-block; background-color: #47B3E3; margin: 1.1em 0 0 0; padding: 0.35em 1em 0.4em 1em; overflow: hidden; }
+        .cta-wrap { 
+          display: flex; color: white; border-bottom: 1px solid white; padding: 0 0 0.2em 0; font-size: 0.7em;  z-index: 3; 
+        }
+        .blue.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 7.5%; z-index: 1; }
+        
+        /* Header */
+
+        .large .text h2 { font-size: 23px; line-height: 27px; }
+        .medium .text h2 { font-size: 20px; line-height: 24px; }
+        .small .text h2 { font-size: 18px; line-height: 22px; }
+        
+        /* Leader */
+        
+        .large .text h1 { font-size: 19px; }
+        .medium .text h1 { font-size: 17px; }
+        .small .text h1 { font-size: 17px; }
+
+        .key-play-text {
+          font-size: 1.6em;
+        }
+
+      }
+      
+      @media (min-width: 500px) and (max-width: 540px) and (min-height: 180px) and (max-height: 200px) {
+
+        .header, .cta { display: none; }
+        .content { position: relative; width: 100%; height: 100%; }
+        .background-image { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .text { position: absolute; bottom: 0.65em; left: 0.9em; right: 0.9em; } h1, h2, p { text-transform: uppercase; }
+        .text h1 { color: white; margin: 0; font-size: 0.75em; letter-spacing: 0.01em; } 
+        .text h2 { color: white; margin: 0.2em 0 0 0; font-size: 1.38em; line-height: 1.2em; }
+
+        /* Header */
+
+        .large .text h2 { font-size: 30px; line-height: 35px; }
+        .medium .text h2 { font-size: 27px; line-height: 32px; }
+        .small .text h2 { font-size: 27px; line-height: 32px; }
+        
+        /* Leader */
+        
+        .large .text h1 { font-size: 25px; }
+        .medium .text h1 { font-size: 23px; }
+        .small .text h1 { font-size: 23px; }
+
+      }      
+      
+      @media (min-width: 575px) and (max-width: 580px) and (min-height: 245px) and (max-height: 250px) {
+        .header, .cta { display: none; }
+        .content { position: relative; width: 100%; height: 100%; }
+        .background-image { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .text { position: absolute; bottom: 0.65em; left: 0.9em; right: 0.9em; } h1, h2, p { text-transform: uppercase; }
+        .text h1 { color: white; margin: 0; font-size: 0.75em; letter-spacing: 0.01em; } 
+        .text h2 { color: white; margin: 0.2em 0 0 0; font-size: 1.38em; line-height: 1.2em; }
+
+        /* Header */
+
+        .large .text h2 { font-size: 30px; line-height: 35px; }
+        .medium .text h2 { font-size: 27px; line-height: 32px; }
+        .small .text h2 { font-size: 27px; line-height: 32px; }
+        
+        /* Leader */
+        
+        .large .text h1 { font-size: 25px; }
+        .medium .text h1 { font-size: 23px; }
+        .small .text h1 { font-size: 23px; }
+
+      } 
+            
+      @media (min-width: 625px) and (max-width: 630px) and (min-height: 347px) and (max-height: 352px) {
+
+        .placeholder {
+          background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/13a1fb17c92c3e2e445f4c27fab3b396/630%20x%20352%20event%20grid.png');
+        }        
+
+        .header, .cta { display: none; }
+        .content { position: relative; width: 100%; height: 100%; }
+        .background-image { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .text { position: absolute; bottom: 2.45em; left: 1.6em; right: 1.7em; } h1, h2, p { text-transform: uppercase; }
+        .text h1 { color: white; margin: 0.2em 0 0.5em 0; font-size: 0.7em; letter-spacing: 0.01em; } 
+        .text h2 { color: white; margin: 0.2em 0 0.5em 0; font-size: 0.96em; line-height: 1.2em; }
+
+        /* Header */
+
+        .large .text h2 { font-size: 40px; }
+        .medium .text h2 { font-size: 35px; }
+        .small .text h2 { font-size: 35px; }
+        
+        /* Leader */
+        
+        .large .text h1 { font-size: 19px; }
+        .medium .text h1 { font-size: 17px; }
+        .small .text h1 { font-size: 15px; }
+
+      }  
+                  
+      @media (min-width: 1019px) and (max-width: 1024px) and (min-height: 507px) and (max-height: 512px) {
+        .header { display: flex; position: absolute; top: 0; left: 0; right: 0; height: 2.3em; background-color: white; z-index: 1; }
+        .header-logos { display: flex; justify-content: space-between; align-items: center; width: 100%; height: 100%; padding: 0 1.5em 0 0; z-index: 2; }
+        .gray.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 1.4%; z-index: 1; }
+        .cloudera-key-player { height: 0.95em; margin: 0; }
+        .content { position: relative; width: 100%; height: 100%; }
+        .background-image { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .text { position: absolute; bottom: 1em; left: 1.4em; right: 1.4em; } h1, h2, p { text-transform: uppercase; }
+        .text h1 { color: white; margin: 0 0 0.1em 0; font-size: 0.7em; letter-spacing: 0.03em; } 
+        .text h2 { color: white; margin: 0; font-size: 1.54em; line-height: 1.15em; } 
+        .cta { position: relative; display: none; background-color: #47B3E3; padding: 0.2em 1.2em; overflow: hidden; }
+        .cta-wrap{ display: flex; color: white; border-bottom: 1px solid white; padding: 0 0 0.25em 0; font-size: 0.47em; z-index: 3; }
+        .blue.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 9%; z-index: 1; }
+
+        /* Header */
+
+        .large .text h2 { font-size: 68px; line-height: 77px; }
+        .medium .text h2 { font-size: 60px; line-height: 68px; }
+        .small .text h2 { font-size: 54px; line-height: 62px; }
+        
+        /* Leader */
+        
+        .large .text h1 { font-size: 55px; }
+        .medium .text h1 { font-size: 50px; }
+        .small .text h1 { font-size: 45px; }
+
+        .key-play-text {
+          font-size: 1.2em;
+        }
+
+      }
+
+      @media (min-width: 1195px) and (max-width: 1200px) and (min-height: 623px) and (max-height: 628px) {
+        
+        .facebook-limiter { 
+          max-height: 4.2em;
+          overflow: hidden;
+        }
+        
+        .facebook-checker {
+          background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/e3d0ec1133de7f82a3140ab7e41fb5a4/Overlay.png');
+        }
+        
+        .page:hover > .facebook-checker {
+          display: block;
+        }
+        .header { display: flex; position: absolute; top: 0; left: 0; right: 0; height: 2.02em; background-color: white; z-index: 1; }
+        .header-logos { display: flex; justify-content: space-between; align-items: center; width: 100%; height: 100%; padding: 0 1.1em 0 0; z-index: 2; }
+        .gray.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 1%; z-index: 1; }
+        .cloudera-key-player { height: 0.8em; margin: 0; }
+        .content { position: relative; width: 100%; height: 100%; }
+        .background-image { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .text { position: absolute; bottom: 2.8em; left: 1.1em; right: 9.7em; } h1, h2, p { text-transform: uppercase; }
+        .text h1 { color: white; margin: 0; font-size: 0.5em; letter-spacing: 0.01em; } 
+        .text h2 { color: white; margin: 0; font-size: 1.5em; line-height: 1.15em; }
+        .cta { position: relative; display: none; background-color: #47B3E3; margin: 0.55em 0 0 0; padding: 0.2em 0.95em 0.25em 0.95em; overflow: hidden; }
+        .cta-wrap{ display: flex; color: white; border-bottom: 1px solid white; padding: 0 0 0.35em 0; font-size: 0.4em;  z-index: 3; }
+        .blue.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 9%; z-index: 1; }
+
+        /* Header */
+
+        .large .text h2 { font-size: 69px; line-height: 78px; }
+        .medium .text h2 { font-size: 55px; line-height: 64px; }
+        .small .text h2 { font-size: 35px; line-height: 44px; }
+
+        
+        /* Leader */
+        
+        .large .text h1 { font-size: 55px; }
+        .medium .text h1 { font-size: 48px; }
+        .small .text h1 { font-size: 41px; }
+
+      }
+
+      @media (min-width: 1195px) and (max-width: 1200px) and (min-height: 795px) and (max-height: 800px) {
+        .header { display: flex; position: absolute; top: 0; left: 0; right: 0; height: 1.81em; background-color: white; z-index: 1; }
+        .header-logos { display: flex; justify-content: space-between; align-items: center; width: 100%; height: 100%; padding: 0 0.95em 0 0; z-index: 2; }
+        .gray.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 1%; z-index: 1; }
+        .cloudera-key-player { height: 0.67em; margin: 0; }
+        .content { position: relative; width: 100%; height: 100%; }
+        .background-image { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .text { position: absolute; bottom: 1em; left: 1.2em; right: 1.2em; } h1, h2, p { text-transform: uppercase; }
+        .text h1 { color: white; margin: 0 0 0.1em 0; font-size: 0.59em; letter-spacing: 0.03em; } 
+        .text h2 { color: white; margin: 0; font-size: 1.3em; line-height: 1.2em; } 
+        .cta { 
+          position: relative; 
+          display: none; 
+          padding: 0.2em 0.8em 0.2em 0.8em; 
+          overflow: hidden; 
+        }     
+        .cta-wrap { 
+          display: flex; 
+          color: white; 
+          border-bottom: 1px solid white; 
+          padding: 0 0 0.3em 0; 
+          font-size: 0.36em; 
+          z-index: 3; 
+        }
+        .blue.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 9%; z-index: 1; }
+
+        /* Header */
+
+        .large .text h2 { font-size: 75px; line-height: 84px; }
+        .medium .text h2 { font-size: 69px; line-height: 78px; }
+        .small .text h2 { font-size: 69px; line-height: 78px; }
+        
+        /* Leader */
+        
+        .large .text h1 { font-size: 62px; }
+        .medium .text h1 { font-size: 55px; }
+        .small .text h1 { font-size: 55px; }
+
+      }      
+      
+      /********************
+      * BUTTON VARIATIONS *
+      ********************/
+      @media (min-width: 155px) and (max-width: 160px) and (min-height: 595px) and (max-height: 600px) {
+        .header { display: flex; position: absolute; top: 0; left: 0; right: 0; height: 2em; background-color: white; z-index: 1; }
+        .header-logos { display: flex; justify-content: space-between; align-items: center; width: 100%; height: 100%; padding: 0; z-index: 2; }
+        .gray.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 7%; z-index: 1; }
+        .cloudera-key-player { display: none; }
+        .content { position: relative; width: 100%; height: 100%; }
+        .background-image { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .text { position: absolute; bottom: 0.35em; left: 0.5em; right: 0.5em; } h1, h2, p { text-transform: uppercase; }
+        .text h1 { color: white; margin: 0.2em 0 0.1em 0; font-size: 0.6em; letter-spacing: 0.01em; line-height: 1.16em; text-align: left; } 
+        .text h2 { color: white; margin: 0; font-size: 0.58em; line-height: 1.25em; }
+        .cta { position: relative; display: inline-block; background-color: #47B3E3; width: 100%; margin: 0.65em 0 0 0; padding: 0.2em 0; overflow: hidden; }
+        .cta-wrap { 
+          display: flex; 
+          justify-content: center; 
+          color: white; 
+          padding: 0; 
+          font-size: 0.45em;  
+          z-index: 3;
+        } 
+        .cta-text {
+          margin: 0 0.5em;
+        }
+        .color-theme-one .cta-wrap { border: none; }
+        .color-theme-three .cta.orange,
+        .color-theme-three .cta.bright-orange,
+        .color-theme-two .cta.brilliant-blue,
+        .color-theme-two .cta.cloudera-blue {
+          background: white;
+        }
+        .color-theme-three .cta.orange .cta-wrap .cta-text,
+        .color-theme-three .cta.bright-orange .cta-wrap .cta-text {
+          color: {{{account.colors.cloudera-bright-orange--new-}}};
+        }
+        .color-theme-two .cta.brilliant-blue .cta-wrap .cta-text,
+        .color-theme-two .cta.cloudera-blue .cta-wrap .cta-text {
+         color: {{{account.colors.cloudera-blue--new-}}}; 
+        }
+        .color-theme-three .cta-wrap { border: none; }
+        .blue.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 8%; z-index: 1; }
+
+        /* Header */
+
+        .large .text h2 { font-size: 15px; line-height: 19px; }
+        .medium .text h2 { font-size: 15px; line-height: 19px; }
+        .small .text h2 { font-size: 15px; line-height: 19px; }
+        
+        /* Leader */
+        
+        .large .text h1 { font-size: 13px; }
+        .medium .text h1 { font-size: 13px; }
+        .small .text h1 { font-size: 13px; }
+
+      }      
+      
+      @media (min-width: 295px) and (max-width: 300px) and (min-height: 595px) and (max-height: 600px) {
+        .header { display: flex; position: absolute; top: 0; left: 0; right: 0; height: 2.22em; background-color: white; z-index: 1; }
+        .header-logos { display: flex; justify-content: flex-start; align-items: center; width: 100%; height: 100%; z-index: 2; }
+        .gray.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 3.5%; z-index: 1; }
+        .cloudera-key-player { display: none; }
+        .content { position: relative; width: 100%; height: 100%; }
+        .background-image { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .text { position: absolute; bottom: 0.45em; left: 0.6em; right: 0.6em; } h1, h2, p { text-transform: uppercase; }
+        .text h1 { color: white; margin: 0; font-size: 0.5em; letter-spacing: 0.01em; line-height: 1.16em; } 
+        .text h2 { color: white; margin: 0; font-size: 1em; line-height: 1.27em; }
+        .cta { 
+          max-width: 235px;
+          position: relative; display: inline-block; background-color: #47B3E3; margin: 0.35em 0 0 0; padding: 0.2em 1em; overflow: hidden; }
+        .cta-wrap { 
+          display: flex; 
+          color: white; 
+          padding: 0; 
+          font-size: 0.42em;  
+          z-index: 3; 
+        } 
+        .color-theme-one .cta-wrap { border: none; }        
+        .color-theme-three .cta.orange,
+        .color-theme-three .cta.bright-orange,
+        .color-theme-two .cta.brilliant-blue,
+        .color-theme-two .cta.cloudera-blue {
+          background: white;
+        }
+        .color-theme-three .cta.orange .cta-wrap .cta-text,
+        .color-theme-three .cta.bright-orange .cta-wrap .cta-text {
+          color: {{{account.colors.cloudera-bright-orange--new-}}};
+        }
+        .color-theme-two .cta.brilliant-blue .cta-wrap .cta-text,
+        .color-theme-two .cta.cloudera-blue .cta-wrap .cta-text {
+         color: {{{account.colors.cloudera-blue--new-}}}; 
+        }    
+        .color-theme-three .cta-wrap { border: none; }
+        .blue.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 8%; z-index: 1; }
+
+        /* Header */
+
+        .large .text h2 { font-size: 30px; line-height: 35px; }
+        .medium .text h2 { font-size: 27px; line-height: 32px; }
+        .small .text h2 { font-size: 27px; line-height: 32px; }
+        
+        /* Leader */
+        
+        .large .text h1 { font-size: 25px; }
+        .medium .text h1 { font-size: 23px; }
+        .small .text h1 { font-size: 23px; }
+
+      } 
+      
+      @media (min-width: 295px) and (max-width: 300px) and (min-height: 245px) and (max-height: 250px) {
+        .header { display: flex; position: absolute; top: 0; left: 0; right: 0; height: 3.22em; background-color: white; z-index: 1; }
+        .header-logos { display: flex; justify-content: flex-start; align-items: center; width: 100%; height: 100%; padding: 0; z-index: 2; }
+        .gray.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 3.8%; z-index: 1; }
+        .cloudera-key-player { display: none; }
+        .content { position: relative; width: 100%; height: 100%; text-align: left !important; }
+        .background-image { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .text { position: absolute; bottom: 0.95em; left: 1.2em; right: 0.5em; text-align: left !important; } h1, h2, p { text-transform: uppercase; }
+        .text h1 { color: white; margin: 0; font-size: 0.87em; letter-spacing: 0.01em; line-height: 1.16em; } 
+        .text h2 { color: white; margin: 0.6em 0 0 0; font-size: 1em; line-height: 1.3em; }
+        .cta { 
+          max-width: 230px;
+          position: relative; display: inline-block; background-color: #47B3E3; margin: 1em 0 0 0; padding: 0.39em 1.42em 0.3em 1.42em; overflow: hidden; }
+        .cta-wrap { 
+          display: flex; 
+          color: white; 
+          padding: 0; 
+          font-size: 0.65em;  
+          z-index: 3;
+        } 
+        .color-theme-one .cta-wrap { border: none; }        
+        .color-theme-three .cta.orange,
+        .color-theme-three .cta.bright-orange,
+        .color-theme-two .cta.brilliant-blue,
+        .color-theme-two .cta.cloudera-blue {
+          background: white;
+        }
+        .color-theme-three .cta.orange .cta-wrap .cta-text,
+        .color-theme-three .cta.bright-orange .cta-wrap .cta-text {
+          color: {{{account.colors.cloudera-bright-orange--new-}}};
+        }
+        .color-theme-two .cta.brilliant-blue .cta-wrap .cta-text,
+        .color-theme-two .cta.cloudera-blue .cta-wrap .cta-text {
+         color: {{{account.colors.cloudera-blue--new-}}}; 
+        }
+        .color-theme-three .cta-wrap { border: none; }
+        .blue.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 7.5%; z-index: 1; }
+
+        /* Header */
+
+        .large .text h2 { font-size: 23px; line-height: 25px; }
+        .medium .text h2 { font-size: 20px; line-height: 22px; }
+        .small .text h2 { font-size: 18px; line-height: 20px; }
+        
+        /* Leader */
+        
+        .large .text h1 { font-size: 19px; }
+        .medium .text h1 { font-size: 17px; }
+        .small .text h1 { font-size: 15px; }
+
+      }      
+      
+      @media (min-width: 595px) and (max-width: 600px) and (min-height: 310px) and (max-height: 315px) {
+        .header { display: flex; position: absolute; top: 0; left: 0; right: 0; height: 2.32em; background-color: white; z-index: 1; }
+        .header-logos { display: flex; justify-content: space-between; align-items: center; width: 100%; height: 100%; padding: 0 0.9em 0 0; z-index: 2; }
+        .gray.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 1.8%; z-index: 1; }
+        .cloudera-key-player { height: 0.85em; margin: 0; }
+        .content { position: relative; width: 100%; height: 100%; }
+        .background-image { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .text { position: absolute; bottom: 0.55em; left: 0.85em; right: 1.7em; } h1, h2, p { text-transform: uppercase; }
+        .text h1 { color: white; margin: 0.2em 0 0.3em 0; font-size: 0.8em; letter-spacing: 0.01em; } 
+        .text h2 { color: white; margin: 0 0 0.4em 0; font-size: 1.2em; line-height: 1.25em; }
+        .cta { 
+          max-width: 250px;
+          position: relative; display: inline-block; background-color: #47B3E3; margin: 0; padding: 0.3em 1.3em 0.25em 1.3em; overflow: hidden; }
+        .cta-wrap { 
+          display: flex; 
+          color: white; 
+          padding: 0; font-size: 0.5em;  z-index: 3; }
+         .color-theme-one .cta-wrap { border: none; }       
+        .color-theme-three .cta.orange,
+        .color-theme-three .cta.bright-orange,
+        .color-theme-two .cta.brilliant-blue,
+        .color-theme-two .cta.cloudera-blue {
+          background: white;
+        }
+        .color-theme-three .cta.orange .cta-wrap .cta-text,
+        .color-theme-three .cta.bright-orange .cta-wrap .cta-text {
+          color: {{{account.colors.cloudera-bright-orange--new-}}};
+        }
+        .color-theme-two .cta.brilliant-blue .cta-wrap .cta-text,
+        .color-theme-two .cta.cloudera-blue .cta-wrap .cta-text {
+         color: {{{account.colors.cloudera-blue--new-}}}; 
+        }
+        .color-theme-three .cta-wrap { border: none; }
+        .blue.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 9%; z-index: 1; }
+
+        /* Header */
+
+        .large .text h2 { font-size: 30px; line-height: 35px; }
+        .medium .text h2 { font-size: 27px; line-height: 32px; }
+        .small .text h2 { font-size: 27px; line-height: 32px; }
+        
+        /* Leader */
+        
+        .large .text h1 { font-size: 25px; }
+        .medium .text h1 { font-size: 23px; }
+        .small .text h1 { font-size: 23px; }
+        
+        .key-play-text { 
+          font-size: 1.2em;
+        }
+
+      }    
+      
+      @media (min-width: 635px) and (max-width: 640px) and (min-height: 475px) and (max-height: 480px) {
+        .header { display: flex; position: absolute; top: 0; left: 0; right: 0; height: 2.32em; background-color: white; z-index: 1; }
+        .header-logos { display: flex; justify-content: space-between; align-items: center; width: 100%; height: 100%; padding: 0 0.9em 0 0; z-index: 2; }
+        .gray.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 1.8%; z-index: 1; }
+        .cloudera-key-player { height: 0.85em; margin: 0; }
+        .content { position: relative; width: 100%; height: 100%; }
+        .background-image { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .text { position: absolute; bottom: 0.65em; left: 1em; right: 1.7em; } h1, h2, p { text-transform: uppercase; }
+        .text h1 { color: white; margin: 0.2em 0 0.3em 0; font-size: 0.8em; letter-spacing: 0.01em; } 
+        .text h2 { color: white; margin: 0; font-size: 1.2em; line-height: 1.25em; }
+        .cta { 
+          max-width: 325px;
+          position: relative; display: inline-block; background-color: #47B3E3; margin: 0.75em 0 0 0; padding: 0.2em 1.2em 0.25em 1.2em; overflow: hidden; }
+        .cta-wrap { 
+          display: flex;
+          color: white; padding: 0.4em 0 0 0; font-size: 0.4em;  z-index: 3; 
+        }
+         .color-theme-one .cta-wrap { border: none; }       
+        .color-theme-three .cta.orange,
+        .color-theme-three .cta.bright-orange,
+        .color-theme-two .cta.brilliant-blue,
+        .color-theme-two .cta.cloudera-blue {
+          background: white;
+        }
+        .color-theme-three .cta.orange .cta-wrap .cta-text,
+        .color-theme-three .cta.bright-orange .cta-wrap .cta-text {
+          color: {{{account.colors.cloudera-bright-orange--new-}}};
+        }
+        .color-theme-two .cta.brilliant-blue .cta-wrap .cta-text,
+        .color-theme-two .cta.cloudera-blue .cta-wrap .cta-text {
+         color: {{{account.colors.cloudera-blue--new-}}}; 
+        }
+        .color-theme-three .cta-wrap { border: none; }
+        .blue.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 9%; z-index: 1; }
+
+        /* Header */
+
+        .large .text h2 { font-size: 40px; line-height: 48px; }
+        .medium .text h2 { font-size: 35px; line-height: 43px; }
+        .small .text h2 { font-size: 35px; line-height: 43px; }
+        
+        /* Leader */
+        
+        .large .text h1 { font-size: 38px; }
+        .medium .text h1 { font-size: 29px; }
+        .small .text h1 { font-size: 29px; }
+
+      }   
+      
+      @media (min-width: 723px) and (max-width: 728px) and (min-height: 85px) and (max-height: 90px) {
+		.page { flex-direction: row; }
+        .header { display: flex; position: absolute; top: 0; bottom: 0; left: 0; width: 9.41em; background-color: white; z-index: 1; }
+        .header-logos { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; padding: 0; z-index: 2; }
+        .gray.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 6%; z-index: 1; }
+        .cloudera-key-player { display: none; }
+        .content { position: relative; width: 100%; height: 100%; }
+        .background-image { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .text { display: flex; justify-content: space-between; align-items: center; position: absolute; top: 0.4em; bottom: 0.4em; right: 1.4em; left: 10.6em; } h1, h2, p { text-transform: uppercase; }
+        .text-wrap { max-width: 360px; }
+        .text h1 { color: white; margin: 0 0 0.2em 0; font-size: 0.86em; letter-spacing: 0.03em; } 
+        .text h2 { color: white; margin: 0; font-size: 1.24em; } 
+        .cta { position: relative; display: inline-block; background-color: #47B3E3; margin: -0.2em 0 0 0; max-width: 160px; padding: 0.5em 1em; overflow: hidden; align-self: center; }
+        .cta-wrap { 
+          display: flex; 
+          color: white; 
+          padding: 0; 
+          font-size: 0.7em; 
+          z-index: 3; 
+          max-width: 120px; 
+        }
+        .color-theme-one .cta-wrap { border: none; }        
+        .color-theme-three .cta.orange,
+        .color-theme-three .cta.bright-orange,
+        .color-theme-two .cta.brilliant-blue,
+        .color-theme-two .cta.cloudera-blue {
+          background: white;
+        }
+        .color-theme-three .cta.orange .cta-wrap .cta-text,
+        .color-theme-three .cta.bright-orange .cta-wrap .cta-text {
+          color: {{{account.colors.cloudera-bright-orange--new-}}};
+        }
+        .color-theme-two .cta.brilliant-blue .cta-wrap .cta-text,
+        .color-theme-two .cta.cloudera-blue .cta-wrap .cta-text {
+         color: {{{account.colors.cloudera-blue--new-}}}; 
+        }       
+        .color-theme-three .cta-wrap { border: none; }
+        .blue.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 9%; z-index: 1; }
+
+        /* Header */
+
+        .large .text h2 { font-size: 23px; line-height: 27px; }
+        .medium .text h2 { font-size: 20px; line-height: 24px; }
+        .small .text h2 { font-size: 18px; line-height: 22px; }
+        
+        /* Leader */
+        
+        .large .text h1 { font-size: 19px; }
+        .medium .text h1 { font-size: 17px; }
+        .small .text h1 { font-size: 15px; }
+
+      }      
+      
+      /* NEW FACEBOOK 1080 x 1080px Size */
+      @media (min-width: 1080px) and (max-width: 1080px) and (min-height: 1080px) and (max-height: 1080px) {
+        .facebook-checker {
+          background-image: url('https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/176fab9ac5b89d3e8f8df83555a41b9f/cloudera-facebook-overlay-1080x1080.png');
+        }
+        
+        .page:hover > .facebook-checker {
+          display: block;
+        }
+        
+        .header {
+          display: flex;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 1.44em;
+          background-color: white;
+          z-index: 1;
+        }
+
+        .header-logos {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          padding: 0 0.65em 0 0;
+          z-index: 2;
+        }
+
+        .gray.pattern.thin {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background-size: 2%;
+          z-index: 1;
+        }
+
+        .key-play-text {
+          font-size: 0.82em;
+        }
+
+        .cloudera-key-player {
+          max-width: 258px;
+          margin: 0 0 0.2em;
+        }
+
+        .contain {
+          position: relative;
+          width: 100%;
+          height: 100%;
+        }
+
+        .contentMaxHeight {
+          max-height: 8rem;
+        }
+
+        .text {
+          position: absolute;
+          bottom: 1.7em;
+          left: 0.92em;
+          right: 1em;
+        }
+
+        .small .text h1 {
+          font-size: 28px;
+        }
+
+        .small .text h2 {
+          word-spacing: -1.7px;
+          font-size: 36px;
+          line-height: 1.2;
+        }
+
+        .medium .text h1 { 
+          font-size: 36.7px; 
+          line-height: 40px; 
+        }
+
+        .medium .text h2 { 
+          font-size: 58.7px; 
+          line-height: 63px; 
+        }
+
+        .large .text h1 { 
+          font-size: 40px; 
+          line-height: 43px; 
+        }
+
+        .large .text h2 { 
+          font-size: 63.6px; 
+          line-height: 60px; 
+        }
+
+        .cta {
+          display: none;
+          font-size: 0.8em;
+          padding: 0.1em;          
+          position: absolute;
+          bottom: -80px;
+        }
+      }      
+    </style>
+
+  </head>
+  <body style="background-color: #1c2125;" class="{{{ color-theme }}} {{{ text-theme }}} {{{ leader-size }}}">
+    
+    <div class="page">
+      <div class="placeholder"></div>
+      <div class="facebook-checker"></div>
+      <div class="header">
+        <div class="header-logos">
+          <img class="cloudera-logo" src="https://files.outfit.io/media_library_items/86338/cldr_corp_logo_color_rgb_101.png"><!--cloudera-logo-->
+          <img style="display: none;" class="cloudera-key-player" src="{{{key-play}}}"><!--cloudera-logo-->
+          <h2 class="key-play-text cloudera-key-player">{{{ key-play-text }}}</h2>
+        </div><!--header-logos-->
+        <div class="gray pattern thin"></div><!--gray-pattern-thin-->
+      </div><!--header-->
+
+      <div class="content">
+        <div class="color-overlay-one"></div>
+        <div class="color-overlay-two"></div>
+        <div class="background-image">{{{background-image}}}</div><!--background-image-->
+        <div class="text">
+          <div class="text-wrap">
+            <div>
+              <div class="facebook-limiter">
+                <div class="contentMaxHeight">
+                  <div class="check-overflow">
+                    <h1>{{{ leader }}}</h1>
+                    <h2>{{{ headline }}}</h2>
+                  </div><!-- end check-overflow -->
+                </div><!-- end max-height -->
+              </div>
+            </div>
+          </div>
+          <div class="cta {{{cta-background-colour}}}"><!--cta-->
+            <div class="cta-wrap"><p class="cta-text" data-limit="1">{{{ cta-choice }}}</p></div><!--cta-wrap-->
+          </div><!--cta-->  
+        </div><!--text-->
+
+      </div><!--content-->
+
+      <div class="background pattern thin"></div><!--background-pattern-thin-->
+
+    </div><!--page-->
+
+    <script>
+      
+      window.showCrop = {{show-crop}};
+                                                                                                       
+    </script>
+    
+    <script src="main.js"></script>
+    <script src="prefixfree.js"></script>
+    
+    <script>
+/*
+*  Include this Snippet to Enforce Text lockups and line limits
+*  NOTES 
+*   - This requires base.css as it utilises overflow clss styles.
+*   - Your element must have an explicit line-heights set
+*/
+
+// Grab all nodes to be checked
+var nodesToCheck = document.querySelectorAll('[data-limit]');
+
+// Set up our Observables
+var lineObservable = new ResizeObserver(function(entries, observer) {
+    entries.forEach(function(entry) {
+        checkLimitedText(entry.target);
+    })
+});  
+
+// Observe All the Nodes
+nodesToCheck.forEach(function(node) {
+    lineObservable.observe(node);      
+});
+
+function checkLimitedText(node) {
+        // Check the line limit set   
+        const limit = node.getAttribute('data-limit');
+        // Count the amount of lines currently in the element
+        const lines = countElementLines(node); 
+        if (lines > limit) {
+            node.classList.add("overflow");
+        } 
+        else {
+            node.classList.remove("overflow");
+        }
+}
+// Calculates the amount lines in a node
+// based on the css line-height value
+function countElementLines(node) {
+  	var styles = window.getComputedStyle(node);
+    const height = parseFloat(styles.getPropertyValue("height"));
+    const padding = parseFloat(styles.getPropertyValue("padding-bottom"));
+  	const border = parseFloat(styles.getPropertyValue("border-bottom"));
+    const lineHeight = parseFloat(styles.getPropertyValue('line-height'));
+    const lines = Math.ceil((height - padding - border) / lineHeight);
+    return lines;
+}     
+      
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+
+      } setInterval(loop, 500);
+      
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }
+
+      // Inject Custom CTA text if CTA choice is custom
+      var cta = document.querySelector(".cta-text");      
+      var tokenValue = cta.querySelector("token-value");
+      if(tokenValue) {
+       var ctaText = tokenValue.innerHTML;
+      }    
+      else {
+       	ctaText = cta.innerHTML;
+      }
+      if(ctaText == "custom") {
+          cta.innerHTML = "{{{custom-cta}}}";
+      } 
+    </script>
+  </body>
+</html>
