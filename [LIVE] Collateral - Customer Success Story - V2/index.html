@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html data-sign="OSM">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <style>
+      /* Inputs Order
+      {{show-crop}}
+      {{CD_support-logo--css}}
+      {{support-logo-size}} 
+      {{CD_document-type}}
+      {{CD_subheading--css}}
+      {{CD_heading--css}}
+      {{CD_wow-call-out-theme--css}}
+      */
+
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/neuePlak/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/ClouderaDisplay-100Striped/stylesheet.css');
+
+      :root {
+        --light-grey: {{{account.colors.gray}}};
+        --dark-grey: {{{account.colors.dark-gray}}};
+        --light-grey: {{{account.colors.light-gray}}};
+        --pattern-grey: {{{account.colors.pattern-gray}}};
+        --grey: {{{account.colors.gray}}};
+        --deep-blue: {{{account.colors.deep-blue}}};
+        --brilliant-blue: {{{account.colors.brilliant-blue}}};
+        --bright-orange: {{{account.colors.cloudera-bright-orange--new-}}};
+        --white: {{{account.colors.white}}};
+        --black: {{{account.colors.black}}};
+        --primary: {{{account.colors.primary}}};
+      }
+
+      html {
+        font-family: "Neue Plak Text";
+        font-size: 11pt;
+        color: var(--black);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--deep-blue);
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .fit--frontPage {
+        padding: 25pt 38.6pt 45pt;
+      }
+      .layout--usLetter .fit--frontPage { padding: 23pt 62.1pt 47pt; }
+
+      .fit--backPage {
+        padding: 45.3pt 38.1pt 43.5pt;
+      }
+      .layout--usLetter .fit--backPage { padding: 43.8pt 62.4pt 43.8pt; }
+
+      .header {
+        margin-bottom: 30.1pt;
+      }
+      .layout--usLetter .header { margin-bottom: 31.1pt; }
+      .layout--usLetter .header--back  { margin-bottom: 25pt; }
+
+      .header__top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header__top--alt {
+        justify-content: flex-end;
+      }
+
+      .header__bottom {
+        display: flex;
+        margin-top: 6pt;
+        padding: 8.9pt 0pt;
+        border-top: 2pt solid var(--bright-orange);
+        border-bottom: 2pt solid var(--bright-orange);
+      }
+      .layout--usLetter .header__bottom { padding: 6.4pt 0pt; }
+
+      .logo__container {
+        display: flex;
+        align-items: center;
+        /*margin-left: -11.2pt;*/
+      }
+      .layout--usLetter .logo__container {}
+
+      .logo,
+      .supportLogo {
+        width: 117.8pt;
+        height: 34pt;
+        object-fit: contain;
+        object-position: center;
+      }
+      .layout--usLetter .logo,
+      .layout--usLetter .supportLogo {
+        width: 113.2pt;
+      }
+      
+      .supportLogo {
+        object-position: left center;
+        transform-origin: left;
+      }
+
+      .logo--primary { 
+        margin-top: 7pt;
+      	margin-right: 13pt;
+      }
+
+      .logo--secondary {
+        width: 103.7pt;
+        height: 30pt;
+        margin: -7pt 35pt 0pt 0;
+        object-fit: contain;
+      }
+      .layout--usLetter .logo--secondary {
+        width: 96pt;
+        /*margin-left: -9pt;*/
+      }
+
+      .supportLogo__container {
+        position: relative;
+        margin-left: 13pt;
+      }
+
+      .supportLogo__container:before {
+        content: '';
+        display: inline-block;
+        width: 1px;
+        height: 24pt;
+        position: absolute;
+        top: 23pt;
+        left: -13pt;
+        background-color: var(--grey);
+      }
+
+      .text {
+        color: var(--dark-grey);
+        margin-top: 11pt;
+        font-size: 8.5pt;
+        line-height: 1.2em;
+        text-transform: uppercase;
+      }
+      .layout--usLetter .text { font-size: 7.6pt; }
+      
+      .document-type {
+        padding-left: 1em;
+      }
+
+      .heading__container {
+        flex: 1;
+        padding-right: 12pt;
+      }
+
+      .heading {
+        margin-bottom: 5pt;
+        font-family: "Neue Plak Extended";
+        text-transform: uppercase;
+        font-size: 25.6pt;
+        line-height: 1.1em;
+        color: var(--bright-orange);
+      }
+      .layout--usLetter .heading {
+        font-size: 24pt;
+        line-height: 1em;
+      }
+
+      .subheading {
+        margin-bottom: 4.6pt;
+        font-size: 15pt;
+        line-height: 1em;
+      }
+      .layout--usLetter .subheading {
+        margin-bottom: 7.7pt;
+        font-size: 14.1pt;
+      }
+
+      .body {
+        display: flex;
+        flex: 1;
+      }
+
+      .callOut {
+        font-family: 'Neue Plak Text';
+        margin-bottom: 10.6pt;
+        padding: 5pt 8.7pt 14pt;
+        background-color: var(--bright-orange);
+      }
+      .callOutTheme--theme-2 .callOut { background-color: #636466 }
+      .layout--usLetter .callOut { padding: 5.7pt 7.9pt 3pt;}
+
+      .callOut__number {
+        margin-bottom: 26pt;
+        font-family: 'Cloudera Display 100 Striped';
+        font-size: 55.6pt;
+        line-height: 1em;
+        text-transform: uppercase;
+        color: var(--white);
+      }
+      .callOutTheme--gray .callOut__number { color: var(--bright-orange); }
+      .layout--usLetter .callOut__number {
+        margin-bottom: 25pt;
+        font-size: 53pt;
+      }
+
+
+      .callOut__content {
+        position: relative;
+        color: var(--white);
+      }
+
+      .callOut__content h2 {
+        font-weight: bold;
+        margin-bottom: 7.7pt;
+        font-size: 7.8pt;
+        line-height: 1.2em;
+      }
+      .callOutTheme--gray .callOut__content h2 { color: var(--bright-orange); }
+      .layout--usLetter .callOut__content h2 {
+        margin-bottom: 6pt;
+        font-size: 7.3pt;
+      }
+
+      .callOut__content p {
+        margin-bottom: 4pt;
+        font-size: 7.4pt;
+        line-height: 1.4em;
+      }
+      .callOutTheme--theme-2 .callOut__content p { color: var(--white); }
+      .callOut__content h2:last-child,
+      .callOut__content p:last-child { margin-bottom: 0; }
+
+      .callOut__content:before {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        top: -9pt;
+        left: 0;
+        width: 28.7pt;
+        height: 1pt;
+        background-color: var(--white);
+      }
+
+      .callOutTheme--gray.callOut { background-color: var(--pattern-grey); }
+
+      .sideBar  {
+        font-family: 'Neue Plak Text Light';
+        position: relative;
+        flex-shrink: 0;
+        width: 153pt;
+        font-size: 20pt;
+        word-break: break-word;
+      }
+      .layout--usLetter .sideBar { width: 145pt; }
+
+      .sideText {
+        background-color: var(--light-grey);
+      }
+
+      .sideText--primary:before,
+      .sideText--primary:after {
+        content: '';
+        display: block;
+        height: 7pt;
+        position: absolute;
+        left: 0;
+        right: 0;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/e48ecd7b2ef9034d16b6b679bb64db43/Screen%20Shot%202018-01-30%20at%202.52.09%20pm.png);
+        background-size: 100%;
+        background-repeat: no-repeat;
+      }
+
+      .sideText--primary {
+        position: relative;
+        padding: 14.3pt 8pt;
+      }
+      .layout--usLetter .sideText--primary { padding: 13.6pt 8pt;}
+
+      .sideText--secondary {
+        margin-bottom: 11pt;
+        padding: 8.4pt 7.6pt 5pt;
+      }
+
+      .sideText--primary:before {
+        top: 0pt;
+        bottom: 0;
+      }
+
+      .sideText--primary:after {
+        bottom: 0;
+      }
+
+      .sideText h1 {
+        font-size: 7.25pt;
+        line-height: 1.45em;
+        font-weight: bold;
+      }
+
+      .sideText h2 {
+        font-size: 7.25pt;
+        line-height: 1.45em;
+        text-transform: uppercase;
+      }
+
+      .sideText p {
+        margin-bottom: 9.4pt;
+        font-size: 7.25pt;
+        line-height: 1.45em;
+      }
+      .layout--usLetter .sideText p {      
+        margin-bottom: 9.4pt;
+        font-size: 6.8pt;
+      }
+
+      .sideText ul {
+        margin-bottom: 11pt;
+        padding-left: 6pt;
+      }
+      .layout--usLetter .sideText ul { margin-bottom: 9.3pt; }
+
+      .sideText ul + h2 {
+        margin-top: -4.4pt;
+      } 
+
+      .sideText li {
+        position: relative;
+        margin-bottom: 1.3pt;
+        font-size: 7.25pt;
+        line-height: 1.4em;
+      }
+      .layout--usLetter .sideText li { font-size: 6.7pt; }
+
+      .sideText li:before {
+        content: "\2022";
+        position: absolute;
+        left: -5.2pt;
+        line-height: 1.3em;
+      }
+
+      .sideText p + ul {
+        margin-top: -8.5pt;
+      }
+
+      .sideText p + h2 {
+        margin-top: -2.1pt;
+      }
+
+      .sideText h1:last-child,
+      .sideText h2:last-child,
+      .sideText p:last-child,
+      .sideText ul:last-child,
+      .sideText li:last-child { 
+        margin-bottom: 0; 
+      }
+      
+      .sideText strong {
+        font-family: 'Neue Plak Text Semi Bold';
+        font-weight: normal;
+      }
+
+      .aboutCloudera {
+        display: none;
+        padding: 7.8pt 8.2pt;
+        background: url(https://files.outfit.io/media_library_items/184119/SidebarGraphic2.jpg);
+        background-size: cover;
+      }
+      
+      .aboutCloudera h1 {
+        font-family: 'Neue Plak Text Semi Bold';
+        font-size: 7.2pt;
+        line-height: 1.1em;
+        font-weight: normal;
+        margin-bottom: 2pt;
+      }
+
+      .page.internal-page:last-child .aboutCloudera { display: block; }
+
+      .layout--usLetter .aboutCloudera { padding: 7pt 8pt; }
+
+      .aboutCloudera p {
+        font-size: 7.25pt;
+        line-height: 1.45em;
+      }
+      .layout--usLetter .aboutCloudera p {
+        font-size: 6.7pt;
+        line-height: 1.5em;
+      }
+
+      .aboutCloudera p:last-child { margin-bottom: 0; }
+
+      .sideQuote {    
+        margin-bottom: 10pt;
+        padding: 6pt 10pt 11pt; 
+        font-family: "Neue Plak Text";
+        background: var(--light-grey);
+      }
+      .layout--usLetter .sideQuote { 
+        margin-bottom: 16pt;
+        padding: 4pt 9pt; 
+      }
+
+      .sideQuote__heading {
+        margin-bottom: 3.9pt;
+        font-size: 10.2pt;
+        line-height: 1.5em;
+        color: var(--brilliant-blue);
+      }
+      .layout--usLetter .sideQuote__heading {
+        margin-bottom: 3pt;
+        font-size: 9.3pt;
+        line-height: 1.6em;
+      }
+
+      .sideQuote__subheading {
+        font-size: 7.7pt;
+        line-height: 1.2em;
+      }
+      .layout--usLetter .sideQuote__subheading { font-size: 7.2pt; }
+
+      .sideImage__container {
+        margin-bottom: 10.1pt;
+      }
+
+      .sideImage {
+        position: relative;
+        width: 100%;
+        height: 111pt;
+      }
+      .layout--usLetter .sideImage { height: 104pt;}
+
+      .sideImage__caption {
+        padding: 6.8pt 8.7pt 12pt;
+        font-family: "Neue Plak Text";
+        font-size: 7.2pt;
+        line-height: 1.5em;
+        background-color: var(--light-grey);
+      }
+      .layout--usLetter .sideImage__caption { font-size: 6.7pt;}
+
+      .sideImage__container-child,
+      .sideQuote:last-child,
+      .aboutCloudera:last-child,
+      .callOut:last-child {
+        margin-bottom: 0;
+      }
+      
+      .u-bold {
+        font-weight: bold;
+      }
+
+      .content {
+        flex: 1;
+        margin-top: -1.9pt;
+        padding-left: 19.1pt;
+        padding-bottom: 20pt;
+      }
+      .layout--usLetter .content { padding-left: 18.1pt; }
+
+      .copy {
+        font-family: "Neue Plak Text Light";
+        margin-bottom: 15pt;
+        word-break: break-word;
+      }
+      
+      .copy strong {
+        font-family: 'Neue Plak Text Semi Bold';
+        color: var(--primary);
+      }
+
+      .copy h1 {
+        margin-bottom: 1pt;
+        font-size: 10.6pt;
+        line-height: 1.2em;
+        color: var(--bright-orange);
+      }
+      .layout--usLetter .copy h1 {
+        margin-bottom: 0.9pt;
+        font-size: 10pt;
+      }
+      .copy p {
+        font-size: 9pt;
+        line-height: 1.45em;
+        margin-bottom: 8.1pt;
+      }
+
+      .layout--usLetter .copy p {
+        margin-bottom: 7pt;
+        font-size: 8.3pt;
+      }
+
+      .copy p + h3 {
+        margin-top: 19.5pt;
+        font-size: 10.6pt;
+        line-height: 1.2em;
+      }
+      .layout--usLetter .copy p + h3 {
+        margin-top: 16pt
+      }
+
+      .copy p + h4 {
+        margin-top: 8.1pt;
+      }
+
+      .copy ul {
+        margin-bottom: 11pt;
+        padding-left: 6pt;
+      }
+      .layout--usLetter .copy ul {
+        margin-bottom: 9.7pt;
+      }
+
+      .copy li {
+        position: relative;
+        margin-bottom: 3.9pt;
+        font-size: 8.5pt;
+        line-height: 1.5em;
+      }
+      .layout--usLetter .copy li {
+        margin-bottom: 4.7pt;
+        font-size: 8.1pt;
+      }
+
+      .copy li:before {
+        content: "\2022";
+        position: absolute;
+        top: -0.8pt;
+        left: -5.2pt;
+        line-height: 1.8em;
+      }
+
+      .copy p + ul {
+        margin-top: -2.4pt;
+      }
+      .layout--usLetter .copy p + ul {
+        margin-top: -2pt;
+      }
+
+      .content__image {
+        display: block;
+        text-align: center;
+        margin-bottom: 5pt;
+      }
+
+      .content__image:last-child,
+      .copy:last-child,
+      .copy p:last-child { margin-bottom: 0; }
+
+      .footer {
+        display: none;
+        justify-content: space-between;
+        padding: 6pt 52pt 0pt 0pt;
+        border-top: 1pt solid var(--grey);
+      }
+      
+      .page:last-child .footer {
+        display: flex
+      }
+      
+      .layout--usLetter .footer { padding: 6pt 29pt 0pt 0pt; }
+
+      .info {
+        display: flex;
+        margin-bottom: 5pt;
+      }
+
+      .info__item {
+        font-size: 7.9pt;
+        line-height: 1.2em;
+      }
+      .layout--usLetter .info__item { font-size: 7.3pt; }
+
+      .finePrint {
+        color: var(--primary);
+        font-size: 6.2pt;
+        line-height: 1.6em;
+      }
+      .layout--usLetter .finePrint {   
+        font-size: 6.2pt;
+        line-height: 1.4em;
+      }
+
+      .exportID { color: var(--dark-grey); }
+
+      .no-callOut__number.no-callOut__content,
+      .no-sideQuote__heading.no-sideQuote__subheading {
+        display: none;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}"
+        data-prevent-export-overflow="true"
+        class="layout--{{{CD_layout--css}}}{{^CD_layout--css}}a4{{/CD_layout--css}}
+
+               callOutTheme--{{{CD_wow-call-out-theme--css}}}{{^CD_wow-call-out-theme--css}}theme-1{{/CD_wow-call-out-theme--css}}">
+    <div class="master">
+      <span class="js-inject-src" data-target-id="company">{{{CD_company--css}}} </span>
+      <span class="js-inject-src" data-target-id="address">{{{CD_address--css}}} </span>
+      <span class="js-inject-src" data-target-id="website">{{{CD_website--css}}} </span>
+      <div class="js-inject-src" data-target-id="finePrint">{{{CD_fine-text--css}}} </div><!--finePrint-->
+      <div class="js-inject-src" data-target-id="export">
+        {{{CD_document-title--css}}}
+      </div><!--export-->
+    </div><!--master-->
+
+    <div>
+      <div class="page">
+
+        <div class="bleed">
+
+          <div class="container fit fit--frontPage">
+            <div class="header">
+              <div class="header__top">
+                <div class="logo__container">
+                  <img class="logo logo--primary" src="{{{account.logos.New_2019_Colour_Cropped}}}">
+                  {{#CD_support-logo--css}}
+                  <div class="supportLogo__container"><img class="supportLogo" src="{{{CD_support-logo--css}}}" style="transform: scale({{{support-logo-size}}}{{^support-logo-size}}1{{/support-logo-size}})"></div><!--supportLogo__container-->
+                  {{/CD_support-logo--css}}
+                </div><!--logo__container-->
+                <div class="text document-type" data-max-line="1">{{CD_document-type}}</div><!--text-->
+              </div><!--header__top-->
+              <div class="header__bottom">
+                <div class="heading__container">
+                  <div class="subheading" data-max-line="1">{{{CD_subheading--css}}}</div><!--subheading-->
+                  <div class="heading" data-max-line="3">{{{CD_heading--css}}}</div><!--heading-->
+                </div><!--heading__container-->
+              </div><!--header__bottom-->
+            </div><!--header-->
+            <div class="body">
+              {{#collection.CD_front-page-sections--css}}
+              {{#CD_sidebar--css}}
+              <div class="sideBar">
+                <div class="sideBar__inner" data-max-height="dynamic">
+                  <div class="sideText sideText--primary">{{{CD_sidebar--css}}}</div><!--sideText-->
+                </div><!--sideBar__inner-->
+              </div><!--sidebar-->
+              {{/CD_sidebar--css}}
+              <div class="content">
+                <div class="content__inner" data-max-height="dynamic">
+                  {{#collection.CD_body-copy--css}}
+                  {{#block.CD_copy--css}}
+                  <div class="copy">{{{CD_copy--css}}}</div><!--copy-->
+                  {{/block.CD_copy--css}}
+                  {{#block.CD_column-width-image--css}}
+                  <div class="content__image"><img src="{{{CD_image--css}}}"/></div><!--content--image-->
+                  {{/block.CD_column-width-image--css}}
+                  {{/collection.CD_body-copy--css}}
+                </div><!--content__inner-->
+              </div><!--content-->
+              {{/collection.CD_front-page-sections--css}}
+            </div><!--body-->
+
+            {{^collection.CD_internal-pages--css.length}}
+            <div class="footer">
+              <img class="logo logo--secondary" src="{{{account.logos.New_2019_Colour}}}">
+              <div class="footerText" >
+                <div class="info" data-max-height="20">
+                  <span class="info__item" data-target="company"></span><!--info__item-->
+                  <span class="info__item" data-target="address"></span><!--info__item-->
+                  <span class="info__item" data-target="website"></span><!--info__item-->
+                </div><!--info-->
+                <div class="finePrint" data-max-line="3">
+                  {{{CD_fine-text--css}}}
+                  <span class="exportID">{{{CD_document-title--css}}}</span>
+                </div><!--finePrint-->
+              </div><!--footerText-->
+            </div><!--footer-->
+            {{/collection.CD_internal-pages--css.length}}
+
+          </div><!--container fit-->
+
+        </div><!--bleed-->
+
+      </div><!--page-->
+
+
+      {{#collection.CD_internal-pages--css}}
+      <div class="page internal-page">
+
+        <div class="bleed">
+
+          <div class="container fit fit--backPage">
+
+            <div class="header header--back">
+              <div class="header__top header__top--alt">
+                <div class="text">customer success story</div><!--text-->
+              </div><!--header__top--alt-->
+            </div><!--header-->
+            <div class="body">
+
+              <div class="sideBar">
+                <div class="sideBar__inner" data-max-height="dynamic">
+                  {{#collection.CD_side-bar--css}}
+                  {{#block.CD_wow-call-out--css}}
+
+                  <div class="callOut callOutTheme--{{{CD_call-out-theme--css}}}{{^CD_call-out-theme--css}}orange{{/CD_call-out-theme--css}} {{^CD_call-out-number--css}}no-callOut__number{{/CD_call-out-number--css}} {{^CD_call-out-content--css}}no-callOut__content{{/CD_call-out-content--css}}">
+                    {{#CD_call-out-number--css}}
+                    <div class="callOut__number">{{{CD_call-out-number--css}}}</div><!--callOut__number-->
+                    {{/CD_call-out-number--css}}
+                    {{#CD_call-out-content--css}}
+                    <div class="callOut__content">{{{CD_call-out-content--css}}}</div><!--callOut__content-->
+                    {{/CD_call-out-content--css}}
+                  </div><!--callOut__container-->
+                  {{/block.CD_wow-call-out--css}}
+                  {{#block.CD_sidebar-quote--css}}
+                  <div class="sideQuote {{^CD_side-quote-heading--css}}no-sideQuote__heading{{/CD_side-quote-heading--css}} {{^CD_side-quote-subheading--css}}no-sideQuote__subheading{{/CD_side-quote-subheading--css}}">
+                    <div class="sideQuote__heading">{{{CD_side-quote-heading--css}}}</div><!--sideQuote__heading-->
+                    <div class="sideQuote__subheading">{{{CD_side-quote-subheading--css}}}</div><!--sideQuote__subheading-->
+                  </div><!--sideQuote-->
+                  {{/block.CD_sidebar-quote--css}}
+                  {{#block.CD_sidebar-image--css}}
+                  <div class="sideImage__container">
+                    {{#CD_image--css}}
+                    <div class="sideImage">
+                      <div class="reposition-fix">{{{CD_image--css}}}</div><!-- reposition-fix -->
+                    </div><!--sideImage-->
+                    {{/CD_image--css}}
+                    {{#CD_caption--css}}
+                    <div class="sideImage__caption">{{{CD_caption--css}}}</div><!--sideImage__caption-->
+                    {{/CD_caption--css}}
+                  </div><!--sideImage__container-->
+                  {{/block.CD_sidebar-image--css}}
+                  {{/collection.CD_side-bar--css}}
+                  <div class="aboutCloudera"><h1>About Cloudera</h1><p>At Cloudera, we believe that data can make what is impossible today, possible tomorrow. We empower people to transform complex data into clear and actionable insights. Cloudera delivers an enterprise data cloud for any data, anywhere, from the Edge to AI. Powered by the relentless innovation of the open source community, Cloudera advances digital transformation for the world’s largest enterprises.</p><p>Learn more at <a href="https://www.cloudera.com">cloudera.com</a></p></div><!--aboutCloudera-->
+                </div><!--sideBar__inner-->
+              </div><!--sideBar-->
+              <div class="content">
+                <div class="content__inner" data-max-height="dynamic">
+                  {{#collection.CD_body-copy--css}}
+                  {{#block.CD_content--css}}
+                  <div class="copy">{{{CD_copy--css}}}</div><!--copy-->
+                  {{/block.CD_content--css}}
+                  {{#block.CD_column-width-image--css}}
+                  <div class="content__image"><img src="{{{CD_image--css}}}"/></div><!--content--image-->
+                  {{/block.CD_column-width-image--css}}
+                  {{/collection.CD_body-copy--css}}
+                </div><!--content__inner-->
+              </div><!--content-->
+            </div><!--body-->
+            <div class="footer">
+              <img class="logo logo--secondary" src="{{{account.logos.New_2019_Colour_Cropped}}}">
+              <div class="footerText" >
+                <div class="info" data-max-height="20">
+                  <span class="info__item" data-target="company"></span><!--info__item-->
+                  <span class="info__item" data-target="address"></span><!--info__item-->
+                  <span class="info__item" data-target="website"></span><!--info__item-->
+                </div><!--info-->
+                <div class="finePrint" data-max-line="3">
+                  <span data-target="finePrint"></span>
+                  <span class="exportID" data-target="export"></span> 
+                </div><!--finePrint-->
+              </div><!--footerText-->
+            </div><!--footer-->
+
+          </div><!--container fit-->
+
+        </div><!--bleed-->
+
+      </div><!--page-->
+    {{/collection.CD_internal-pages--css}}
+    </div>
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
