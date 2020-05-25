@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Print Generic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Fonts -->
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Akzidenz%20Grotesk/stylesheet.css" rel="stylesheet" />
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Calibre/stylesheet.css" rel="stylesheet" />
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/ClouderaDisplay-15Solid/stylesheet.css" rel="stylesheet" />
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/neuePlak/stylesheet.css" rel="stylesheet" />
+    
+    <script src="tinycolor.js"></script>
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="crop.css">
+    <style>
+
+      * {
+        -webkit-font-smoothing: antialiased;
+        font-family: 'Neue Plak Text';
+      }
+
+      .overflow {
+        border: 1px dashed red;
+        position: relative;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif; }
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 5px;
+        right: 5px;
+        height: 15px;
+        width: 15px;
+        border: 1px solid red;
+        color: red;
+        padding: 2px 2px 2px 3px;
+        box-sizing: border-box;
+        font-size: 13px;
+        text-align: center;
+        line-height: 8px;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 25px;
+        right: 5px;
+        background-color: black;
+        color: white;
+        border-radius: 2px;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.1em;
+        text-align: right;
+        width: 15em;
+      }
+
+      .tinymce_style--light, .tinymce_style--dark { color: {{{account.colors.dark-gray}}}; }
+
+      .document { display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: 3mm; }
+
+      .logos { position: absolute; top: 37pt; left: 55pt; display: flex; align-items: center; }
+      .cloudera-logo { display: flex; align-items: center; width: 100px; }
+      .cloudera-logo img { width: 100%; margin: 0; }
+      .seperator { height: 40px; width: 1px; margin: 0 0.8em; background-color: {{{account.colors.medium-gray}}}; }
+      .support-logo { display: flex; align-items: center; width: 100px; height: 37px}
+      .support-logo img { max-width: 100%; margin: 0; max-height: 100%}
+
+      .title { position: absolute; top: 46.1pt; right: 55pt; }
+      .title p { color: {{{account.colors.dark-gray}}}; font-size: 9.1pt; text-transform: uppercase; }
+
+      .main-content { 
+        position: absolute; top: 80pt; left: 55pt; right: 55pt; height: auto; border-top: 2pt solid {{{account.colors.cloudera-bright-orange--new-}}}; 
+        background-position: center; background-repeat: no-repeat; background-size: cover;
+      }
+
+      .header-image { 
+        background-position: center; background-repeat: no-repeat; background-size: cover;
+      }
+
+      .header-image-inner { position: relative; height: 100%; }
+      .header { max-height: 120pt;  padding: 11.2pt; }
+      .header h1 { margin: 4pt 0 0 0; color: {{{account.colors.cloudera-bright-orange--new-}}}; font-family: 'Neue Plak Extended'; font-size: 23pt; font-weight: normal; line-height: 27.7pt; letter-spacing: 0.04em; }
+      .header h2 { margin: 0; color: black; font-family: 'Neue Plak Extended'; font-size: 13pt; font-weight: normal; letter-spacing: 0.04em; }
+      .header h1 .token-value { font-family: 'Neue Plak Extended'; }
+      .header h2 .token-value { font-family: 'Neue Plak Extended'; }
+
+      
+      /*--------------------------*\
+      	START WOW SIDEBAR STYLES
+      \*--------------------------*/
+      .wow-graphic { position: absolute; top: 1em; right: 1em; height: 6.5em; }
+      .wow-graphic img { height: 100%; }
+      .sidebar-wow-image { 
+        width: 100%; 
+        margin: 0 auto; 
+        padding: 0.9rem 1.1rem 0.6rem;
+      }
+      .sidebar-wow { width: 100%; margin: 0 0 10pt 0; padding: 0; background-color: {{{account.colors.light-gray}}}; text-align: center; }
+      .sidebar-wow img { width: 100%; }
+      .sidebar-wow-image p { font-size: 9.8pt; margin: 0 0 6pt 0; }      
+      .wow-text {
+        text-transform: uppercase; 
+        font-family: 'Cloudera Display 15 Solid'; /* Note this font family only has an uppercase */
+        font-size: 4.3em;
+        line-height: 0.8em;
+        margin: 0 0 0.5rem;
+        color: #006495;
+      }
+      
+      /* Stoke Code from CSS-Tricks https://css-tricks.com/text-stroke-stuck-middle/ */
+      
+      @supports 
+        ((-webkit-text-stroke-color: #006495)
+        and
+        (-webkit-text-fill-color: {{{account.colors.light-gray}}}))
+        or
+        ((-moz-text-stroke-color: #006495)
+        and
+        (-moz-text-fill-color: {{{account.colors.light-gray}}})) {
+        .wow-text {
+             -moz-text-fill-color: {{{account.colors.light-gray}}};
+          -webkit-text-fill-color: {{{account.colors.light-gray}}};
+             -moz-text-stroke-color: #006495;
+          -webkit-text-stroke-color: #006495;
+             -moz-text-stroke-width: 2px;  
+          -webkit-text-stroke-width: 2px;
+          paint-order: stroke fill;
+        }
+      }
+      .wow-text * {
+        font-family: inherit;
+      }
+      .wow-tagline {
+        font-weight: 600;
+        margin: 0;
+      }
+      /*--------------------------*\
+      	END WOW SIDEBAR STYLES
+      \*--------------------------*/
+      
+      .page-one .sidebar-section { 
+        position: absolute; left: 0; width: 148pt;  background-color: {{{account.colors.light-gray}}};
+        border-top: 7px solid {{{account.colors.cloudera-bright-orange--new-}}}; border-bottom: 7px solid {{{account.colors.cloudera-bright-orange--new-}}}; padding: 0.8em;
+      }
+      .page-two .sidebar-wrap { 
+        position: absolute; 
+        top: 80pt; 
+        left: 55pt; 
+        width: 148pt; 
+        max-height: 630pt;
+      }
+      .page-one .sidebar-wrap { 
+          position: absolute;
+          left: 0pt;
+          width: 148pt;
+          margin: 20pt 0 0 0;
+          max-height: 560pt;
+      }
+      .page-two .main-section, .page-two .sidebar-section { position: absolute; top: 52.4pt; }
+      .page-two .main-section { left: 240pt; right: 0; }
+
+      .sidebar-text { 
+        border-top: 5px solid {{{account.colors.cloudera-bright-orange--new-}}}; 
+        border-bottom: 5px solid {{{account.colors.cloudera-bright-orange--new-}}}; 
+        margin: 0 0 8.7pt 0; 
+        padding: 10pt 12pt 8pt 12pt; 
+        background-color: {{{account.colors.light-gray}}}; 
+      }
+      .sidebar-text p { margin: 4pt 0 0 0; font-size: 7.8pt; }
+      .sidebar-text h3:first-of-type { margin: 0; }
+      .sidebar-text h3 { margin: 10pt 0 0 0; font-size: 9pt; font-weight: bold; }
+      .sidebar-text strong { font-weight: bold; }
+      .sidebar-quote { 
+        border-top: 5px solid {{{account.colors.cloudera-bright-orange--new-}}}; 
+        border-bottom: 5px solid {{{account.colors.cloudera-bright-orange--new-}}}; padding: 10pt 12pt 8pt 12pt; margin: 0 0 8.7pt 0; background-color: {{{account.colors.light-gray}}}; }
+      .sidebar-quote h3 { color: {{{account.colors.cloudera-blue--new-}}}; font-size: 9pt; font-weight: normal; line-height: 1.4em; }
+      .sidebar-quote p { margin: 5pt 0 0 0; font-size: 7.8pt; line-height: 1.4em; }
+      .sidebar-quote .quote-text {
+        font-size: 9.5pt;
+      }
+
+      .sidebar-section { margin: 20pt 0 0 0; }
+      
+      .main-wrap { position: absolute; top: 83pt; left: 240pt; right: 55pt; }
+      .page-two .main-section { position: relative; top: auto; bottom: auto; left: auto; right: auto; margin: 0; max-height: 630pt; }
+
+      .main-section { position: absolute; left: calc(240pt - 55pt); right: 0; margin: 20pt 0 0 0; max-height: 560pt; }
+      .main-section h2:first-of-type { margin: 0 0 -8pt 0; }
+      .main-section h2 { color: {{{account.colors.cloudera-blue--new-}}}; margin: 20pt 0 -8pt 0; font-size: 14.8pt; }
+      .main-section p { margin: 6pt 0 0 0; font-size: 9.5pt; line-height: 1.26em; font-weight: normal; }
+
+      .footer { position: absolute; bottom: 33.5pt; left: 240pt; right: 55pt; border-top: 1pt solid black; }
+
+      .website { color: {{{account.colors.cloudera-blue--new-}}}; }
+
+      .footer h3 { margin: 5pt 0; font-size: 7.5pt; }
+      .footer p { font-size: 7pt; }
+
+      .placeholder {
+        background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/b9237a8612efa63f618febefed327f2e/Cloudera_Customer_Case_Study_Template_Page_2.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.7;
+        z-index: 100;
+      }
+
+      .pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-size: 100%;
+        z-index: -10;
+      }
+
+      .pattern-two {
+        width: 100%;
+        height: 10px;
+        background-size: 2%;
+      }
+
+      .gray.pattern.thin {
+        background-image: url("https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/e079e30363028fd0bf3f0b6324eba01b/Screen%20Shot%202018-01-30%20at%202.49.51%20pm.png");
+      }
+
+      .gray.pattern-two.thin {
+        background-image: url("https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/d10798b02c4894230c5e0c2fc234ce63/Screen%20Shot%202018-02-15%20at%201.44.53%20pm.png");
+        background-size: 100%;
+        height: 5px;
+      }
+
+      .page-one .sidebar-section h3:first-of-type { margin: 0; }
+      .page-one .sidebar-section h3 { margin: 6pt 0 0 0; font-size: 9pt; font-weight: bold; line-height: 1.1em; }
+      .page-one .sidebar-section p { font-size: 8pt; line-height: 9pt; font-weight: normal; }
+      .page-one .sidebar-section ul { position: relative; list-style-type: none; margin: 2.2pt 0 0 0; font-size: 8pt; }
+      .page-one .sidebar-section li:before { position: absolute; top: -0.5pt; left: -0.5pt; content: "_"; font-size: 12pt; font-weight: 100;}
+      .page-one .sidebar-section li { font-size: 8pt; position: relative; padding: 0 0 0 5pt; font-size: 8pt; line-height: 1.3em; font-weight: normal; }
+      .page-one .sidebar-section strong { font-weight: bold; }
+
+      .sidebar-quote ul { position: relative; list-style-type: none; margin: 2.2pt 0 0 0; font-size: 8pt; }
+      .sidebar-quote li:before { position: absolute; top: -0.5pt; left: -0.5pt; content: "_"; font-size: 12pt; font-weight: 100;}
+      .sidebar-quote li { font-size: 8pt; position: relative; padding: 0 0 0 5pt; line-height: 1.3em; font-weight: normal; }
+
+      .sidebar-text p { font-size: 8pt; line-height: 9pt; font-weight: normal; }
+      .sidebar-text ul { position: relative; list-style-type: none; margin: 2.2pt 0 0 0; font-size: 8pt; }
+      .sidebar-text li:before { position: absolute; top: -0.5pt; left: -0.5pt; content: "_"; font-size: 12pt; font-weight: 100;}
+      .sidebar-text li { font-size: 8pt; position: relative; padding: 0 0 0 7pt; line-height: 1.3em; font-weight: normal; }
+      .sidebar-text { font-weight: bold; }
+
+      .main-section ul { position: relative; list-style-type: none; margin: 2.2pt 0 0 10pt; font-size: 9.5pt; }
+      .main-section li:before { position: absolute; top: 2pt; left: -0.5pt; content: "_"; font-size: 12pt; font-weight: 100;}
+      .main-section li { position: relative; padding: 0 0 0 5pt; font-size: 9.5pt; line-height: 1.3em; font-weight: normal; }
+
+      .orange.pattern {
+        width: 100%;
+        height: 8px;
+        background-color: {{{account.colors.pattern-orange}}};
+      }
+
+      .footer {display:none;}
+      
+      .hide-last-page .page-one .footer { display: block; position: absolute; left: 240pt; right: 55pt; }
+      .hide-last-page .page-two.page-last { display: none; }
+      .hide-last-page .main-section { max-height: 42em !important; }
+      
+      .hide-page-two .page-2nd { display: none; }
+
+      .quote-text {
+        color: {{{account.colors.cloudera-blue--new-}}};
+        font-size: 1em;
+      }
+      
+    </style>
+  </head>
+  <body style="background: white" class="">
+    <div class="page-one page page-1">
+      <div class="bleed">
+        <div class="document">
+
+          <div class="logos">
+            <div class="cloudera-logo"><img src="{{{account.logos.New_2019_Colour_Cropped}}}"></div><div class="seperator"></div><div class="support-logo"><img src="{{{ support-logo }}}"></div>
+          </div>
+
+          <div class="title"><p>{{{ title }}}</p></div>
+
+          <div class="main-content">
+
+            <div class="header-image">
+              <div class="header-image-inner">
+                <div class="gray pattern thin"></div>
+                <div class="header">
+                  <section class="header-overflow check-overflow">
+                    <h2>{{{ headline }}}</h2>
+                    <h1 style="text-transform: uppercase;">{{{ subheader }}}</h1>
+                  </section>
+                </div>
+              </div>
+            </div>            
+            <div class="sidebar-wrap">
+              <div class="check-overflow">
+                {{#collection.sidebar-page-one}}
+                  {{#block.text}}
+                    <div class="sidebar-text">
+                      {{{ sidebar }}}
+                    </div>
+                  {{/block.text}}
+                  {{#block.quote}}
+                    <div class="sidebar-quote">
+                      <p class="quote-text">
+                      	&ldquo;{{{ quote-text }}}&rdquo;
+                      </p>
+                      <p class="quote-attribute">
+                        {{{ quote-attribution }}}
+                      </p>
+                    </div>
+                  {{/block.quote}}
+                  {{#block.wow}}
+                    <div class="sidebar-wow">
+                      <div class="gray pattern-two thin"></div>
+                      <div class="sidebar-wow-image">
+                        <h2 class="wow-text">{{{ wow-text }}}</h2>
+                        <p class="wow-tagline">{{{ wow-quote }}}</p>
+                      </div>
+                      <div class="gray pattern-two thin"></div>
+                    </div>
+                  {{/block.wow}}
+                {{/collection.sidebar-page-one}}
+              </div>
+          </div>
+
+            <div class="main-section">
+              <div class="main-section-overflow check-overflow">
+                {{{ copy-one }}}
+              </div>
+            </div>
+
+          </div>
+
+          <div class="footer">
+            <h3>{{{ company }}} <span style="margin: 0 5px;">{{{ adress }}}</span><span style="margin: 0 0 5px 0;" class="website">{{{ website }}}</span></h3>
+            <p>{{{ details }}}</p>
+          </div>
+
+        </div><!--document-->
+
+      </div><!--bleed-->
+    </div><!--page-->
+    
+    <div class="page-two page-2nd page page-2">
+      <div class="bleed">
+
+        <div class="document">
+
+          <div class="logos">
+            <div class="cloudera-logo"><img src="{{{account.logos.New_2019_Colour_Cropped}}}"></div><div class="seperator"></div><div class="support-logo"><img src="{{{ support-logo }}}"></div>
+          </div>
+
+          <div class="title" style="color: {{{account.colors.dark-gray}}};"><p>{{{ title }}}</p></div>
+
+          <div class="sidebar-wrap" style="max-height: 700pt">
+            <div class="check-overflow">
+              {{#collection.sidebar-page-two}}
+              {{#block.text}}
+              <div class="sidebar-text">
+                {{{ sidebar }}}
+              </div>
+              {{/block.text}}
+              {{#block.quote}}
+              <div class="sidebar-quote">
+                <p class="quote-text">
+                  &ldquo;{{{ quote-text }}}&rdquo;
+                </p>
+                <p class="quote-attribute">
+                  {{{ quote-attribution }}}
+                </p>
+              </div>
+              {{/block.quote}}
+              {{#block.wow}}
+              <div class="sidebar-wow">
+                <div class="gray pattern-two thin"></div>
+                <div class="sidebar-wow-image">
+                  <h2 class="wow-text">{{{ wow-text }}}</h2>
+                  <p class="wow-tagline">{{{ wow-quote }}}</p>
+                </div>
+                <div class="gray pattern-two thin"></div>
+              </div>
+              {{/block.wow}}
+              {{/collection.sidebar-page-two}}
+            </div>
+          </div>
+
+          <div class="main-wrap">
+            <div class="main-section" style="max-height: 700pt">
+              <div class="main-section-overflow check-overflow">
+                {{{ page-two-copy }}}
+              </div>
+            </div>
+          </div>
+          
+          <div class="footer">
+            <h3>{{{ company }}} <span style="margin: 0 5px;">{{{ adress }}}</span><span style="margin: 0 0 5px 0;" class="website">{{{ website }}}</span></h3>
+            <p>{{{ details }}}</p>
+          </div>
+        </div><!--document-->
+
+      </div><!--bleed-->
+    </div><!--page-->
+
+    <div class="page-two page-last page page-3">
+      <div class="bleed">
+
+        <div class="document">
+
+          <div class="logos">
+            <div class="cloudera-logo"><img src="{{{account.logos.New_2019_Colour_Cropped}}}"></div><div class="seperator"></div><div class="support-logo"><img src="{{{ support-logo }}}"></div>
+          </div>
+
+          <div class="title" style="color: {{{account.colors.dark-gray}}};"><p>{{{ title }}}</p></div>
+
+          <div class="sidebar-wrap">
+            <div class="check-overflow">
+              {{#collection.sidebar-content-one}}
+              {{#block.text}}
+              <div class="sidebar-text">
+                {{{ sidebar }}}
+              </div>
+              {{/block.text}}
+              {{#block.quote}}
+              <div class="sidebar-quote">
+                <p class="quote-text">
+                  &ldquo;{{{ quote-text }}}&rdquo;
+                </p>
+                <p class="quote-attribute">
+                  {{{ quote-attribution }}}
+                </p>
+              </div>
+              {{/block.quote}}
+              {{#block.wow}}
+              <div class="sidebar-wow">
+                <div class="gray pattern-two thin"></div>
+                <div class="sidebar-wow-image">
+                  <h2 class="wow-text">{{{ wow-text }}}</h2>
+                  <p class="wow-tagline">{{{ wow-quote }}}</p>
+                </div>
+                <div class="gray pattern-two thin"></div>
+              </div>
+              {{/block.wow}}
+              {{/collection.sidebar-content-one}}
+            </div>
+          </div>
+
+          <div class="main-wrap">
+            <div class="main-section">
+              <div class="main-section-overflow check-overflow">
+                {{{ copy-two }}}
+              </div>
+            </div>
+          </div>
+
+          <div class="footer">
+            <h3>{{{ company }}} <span style="margin: 0 5px;">{{{ adress }}}</span><span style="margin: 0 0 5px 0;" class="website">{{{ website }}}</span></h3>
+            <p>{{{ details }}}</p>
+          </div>
+
+        </div><!--document-->
+
+      </div><!--bleed-->
+    </div><!--page-->
+
+    <script>
+      window.showCrop = {{show-crop}};
+    </script>
+    <script src="main.js"></script>
+    <script src="prefixfree.js"></script>
+
+    <script>
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+
+      } setInterval(loop, 500);
+
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            /* 
+          	NOTE this is flakey and only works because
+            we only check overflow on one Section the
+            others are Divs
+            Additional Logic to Check for Heading 
+          */
+            if(element[i].tagName == "SECTION") {
+				// Reduce heading size
+              	var heading = element[i].querySelector("h1");
+              var fontSize = window.getComputedStyle(heading, null).getPropertyValue('font-size');
+              var roundFS = Math.ceil(parseInt(fontSize));
+              // If still at 23pt reduce to 22pt
+              if(roundFS == 30) {
+              	heading.style.fontSize = "22pt";  
+              }
+              // Else already at 22pt so we must go smaller
+              else {
+                parent.classList.add('overflow');  
+              }
+            }
+            else {
+              parent.classList.add('overflow');  
+            }
+            
+          } else {
+            parent.classList.remove('overflow');
+            // Change heading font-size back up
+            if(element[i].tagName == "SECTION") {
+				var heading = element[i].querySelector("h1");
+              // Grab the height before any font mods
+              var initHeight = heading.offsetHeight;
+              var fontSize = window.getComputedStyle(heading, null).getPropertyValue('font-size');
+              var roundFS = Math.ceil(parseInt(fontSize));
+              // If still at 22pt increase to 23pt
+              if(roundFS == 29) {
+              	heading.style.fontSize = "23pt";
+                // If we are too big at 23pt reduce again.
+                if(heading.offsetHeight > initHeight) {
+                  heading.style.fontSize = "22pt";
+                }
+              }
+            }
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }
+      
+      var hidePages = JSON.parse(`{{{csStory-hidePages}}}`);
+      hidePages.forEach(pageStatus => {
+        var body = document.body;
+        if(pageStatus == "page-2"){
+          document.querySelector(".page-2").remove();
+        } else if(pageStatus == "page-3"){
+          document.querySelector(".page-3").remove();
+        }
+      });
+      
+      var pages = document.getElementsByClassName("page");
+      var lastShownPage = pages[pages.length-1];
+      lastShownPage.querySelector(".footer").style.display = "block";
+      
+      
+      
+    </script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.1.min.js"></script>
+    <script>
+          TextFit.fit({
+        selector: '.wow-text',
+        fitMode: 'horizontal',
+        fontSize: '100px'
+      });
+    </script>
+  </body>
+</html>
