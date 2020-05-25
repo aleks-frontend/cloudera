@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html async style="background: #ffffff;">
+  <head>
+    <title>Print Generic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/ClouderaDisplay-100Striped/stylesheet.css" rel="stylesheet" />
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/neuePlak/stylesheet.css" rel="stylesheet" />
+    <link href="global.css" rel="stylesheet" type="text/css">
+    <link href="main.css" rel="stylesheet" type="text/css">
+    <style>
+      :root {
+        --black: #000000;
+        --darker-gray: #231F20;
+        --dark-gray: #828282;
+        --medium-gray: #939598;
+        --gray: #C7C8CA;
+        --light-gray: #DCDDDE;
+        --lighter-gray: #E8E7E7;
+        --lightest-gray: #F3F4F4;
+        --white: #ffffff;
+        --dark-orange: #f96702;
+        --bright-orange: #ff8400;
+        --blue: #008cff;
+        --mint: #00a3af;
+        --slate: #305868;
+
+        --primary: var(--{{{Theme-Color}}}{{^Theme-Color}}blue{{/Theme-Color}});
+      }
+    </style>    
+  </head>
+  <body class="ct-{{{Theme-Color}}}{{^Theme-Color}}blue{{/Theme-Color}}">
+    <div class="page page-front">
+      <div class="bleed">
+        <div class="fit wrapper">
+          <div class="header">
+          	<div class="logos">
+              <div class="cloudera-logo">
+                <img src="{{{account.logos.New_2019_Colour_Cropped}}}">
+              </div>
+              {{#support-logo}}
+              <div class="seperator"></div>
+              <div class="support-logo">
+                <img src="{{{ support-logo }}}">
+              </div>
+              {{/support-logo}}
+            </div>
+            <div class="box-limit p document-type">
+              <div class="box-inner">
+                <p>{{{Document-Type}}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="masthead">
+            {{#heading}}
+            <div class="box-limit h1 heading">
+              <div class="box-inner">
+                <h1>{{{heading}}}</h1>
+              </div>
+            </div>
+            {{/heading}}
+            {{#subheading}}
+            <div class="box-limit h2 subheading">
+              <div class="box-inner">
+                <h2>{{{subheading}}}</h2>
+              </div>
+            </div>
+            {{/subheading}}            
+          </div>
+          <div class="main left-area">
+            <div class="absolute-container key-play-container">
+              <div class="box-limit h1 key-play">
+                <div class="box-inner">
+                  <div class="textfit">{{{keyplay-text}}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!--wrapper-->
+        <div class="fit placeholder contain d-none" style="background-image: url(https://files.outfit.io/media_library_items/123409/wp1.png);"></div>
+        <div class="fit boundary-l"></div>
+        <div class="fit boundary-r"></div>
+        <div class="fit boundary-b"></div>
+        <div class="fit boundary-t"></div>
+      </div><!--bleed-->
+    </div><!--page-->
+        
+    <div class="page page-toc {{{hide-toc}}}{{^hide-toc}}show{{/hide-toc}}">
+      <div class="bleed">
+        <div class="fit wrapper">
+          <div class="header">
+          	<div class="logos">
+              <div class="cloudera-logo">
+                <img src="{{{account.logos.New_2019_Colour_Cropped}}}">
+              </div>              
+            </div>
+            <div class="box-limit p document-type">
+              <div class="box-inner">
+                <p class="document-type-populated"></p>
+              </div>
+            </div>
+          </div>
+          <div class="main">
+            <div class="sidebar"></div>
+            <div class="content">
+              <div class="absolute-container">
+                <div class="box-limit page-content-limit">
+                  <div class="box-inner page-content">
+                    <h2 class="text-light">Table of Contents</h2>
+                    <div class="toc">
+                      {{#spreadsheet.table-of-contents}}
+                      {{#heading-1}}<div class="toc-text lv1"><h3 class="hd">{{{ heading-1 }}}</h3><h3 class="pn">{{{ page-number }}}</h3></div>{{/heading-1}}
+                      {{#heading-2}}<div class="toc-text lv2"><h3 class="hd">{{{ heading-2 }}}</h3><h3 class="pn">{{{ page-number }}}</h3></div>{{/heading-2}}
+                      {{/spreadsheet.table-of-contents}}
+                    </div>
+                  </div>
+                </div>                
+              </div>
+            </div>
+          </div>
+          <div class="footer">
+            <span class="page-number"></span>
+            <div class="box-limit p page-title">
+              <div class="box-inner">
+                <p class="heading-populated"></p>
+              </div>
+            </div>
+          </div>
+        </div><!--wrapper-->
+        <div class="fit placeholder contain d-none" style="background-image: url(https://files.outfit.io/media_library_items/123410/wp2.png);"></div>
+        <div class="fit boundary-l"></div>
+        <div class="fit boundary-r"></div>
+        <div class="fit boundary-b"></div>
+        <div class="fit boundary-t"></div>
+      </div><!--bleed-->
+    </div><!--page-->
+    
+    {{#collection.internal-page}}
+    <div class="page page-internal">
+      <div class="bleed">
+        <div class="fit wrapper">
+          <div class="header">
+          	<div class="logos">
+              <div class="cloudera-logo cloudera-logo-populated"></div>
+            </div>
+            <div class="box-limit p document-type">
+              <div class="box-inner">
+                <p class="document-type-populated"></p>
+              </div>
+            </div>
+          </div>
+          <div class="main">
+            {{#block.internal-page}}
+            <div class="sidebar">
+              <div class="absolute-container">
+                <div class="box-limit page-content-limit">
+                  <div class="box-inner page-content">
+                    {{#collection.internal-page-sidebar}}
+                    {{#block.sidebar-text}}
+                    <div class="widget widget-text">
+                      {{{text}}}
+                    </div>
+                    {{/block.sidebar-text}}
+                    {{#block.sidebar-image}}
+                    <div class="widget widget-image">
+                      <div class="image-container">
+                        {{{sidebar-image-repositionable}}}
+                      </div>
+                      {{#caption}}
+                      <div class="caption p">
+                        <p>{{{caption}}}</p>
+                      </div>
+                      {{/caption}}
+                    </div>
+                    {{/block.sidebar-image}}
+                    {{#block.sidebar-quote}}
+                    <div class="widget widget-quote">
+                      <p class="quote-heading">{{{quote-heading}}}</p>
+                      <p class="quote-subheading">{{{quote-subheading}}}</p>
+                    </div>
+                    {{/block.sidebar-quote}}
+                    {{/collection.internal-page-sidebar}}
+                  </div>
+                </div>
+              </div>                            
+            </div>
+            <div class="content copy">
+              <div class="absolute-container">
+                <div class="box-limit page-content-limit">
+                  <div class="box-inner page-content">
+                    {{#collection.internal-page-content}}
+                    {{#block.page-content-text}}
+                    {{{text}}}
+                    {{/block.page-content-text}}
+                    {{#block.page-content-image}}
+                    <div class="content-image">
+                      <div class="image-container">
+                        {{{content-image-repositionable}}}
+                      </div>
+                      {{#caption}}
+                      <div class="caption">
+                        <p>{{{caption}}}</p>
+                      </div>
+                      {{/caption}}
+                    </div>
+                    {{/block.page-content-image}}
+                    {{#block.page-content-quote}}
+                    <div class="content-quote">
+                      <span class="data-line"></span>
+                      <h3>{{{quote-heading}}}</h3>
+                      {{{quote-text}}}
+                    </div>                
+                    {{/block.page-content-quote}}
+                    {{/collection.internal-page-content}}
+                  </div>
+                </div>                
+              </div>
+            </div>
+            {{/block.internal-page}}            
+          </div>
+          <div class="footer">
+            <span class="page-number"></span>
+            <div class="box-limit p page-title">
+              <div class="box-inner">
+                <p class="heading-populated"></p>
+              </div>
+            </div>
+          </div>
+        </div><!--wrapper-->
+        <div class="fit placeholder contain d-none" style="background-image: url(https://files.outfit.io/media_library_items/123413/wp4.png);"></div>
+        <div class="fit boundary-l"></div>
+        <div class="fit boundary-r"></div>
+        <div class="fit boundary-b"></div>
+        <div class="fit boundary-t"></div>
+      </div><!--bleed-->
+    </div><!--page-->
+    {{/collection.internal-page}}
+    
+    <div class="page page-back">
+      <div class="bleed">
+        <div class="fit wrapper">
+          <div class="header">
+          	<div class="logos">
+              <div class="cloudera-logo">
+                <img src="{{{account.logos.New_2019_Colour_Cropped}}}">
+              </div>              
+            </div>
+            <div class="box-limit p document-type">
+              <div class="box-inner">
+                <p>{{{Document-Type}}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="main">
+            <div class="sidebar">
+              <div class="absolute-container">
+                <div class="box-limit page-content-limit">
+                  <div class="box-inner page-content">
+                    {{#collection.back-page-sidebar}}
+                    {{#block.sidebar-text}}
+                    <div class="widget widget-text">
+                      {{{text}}}
+                    </div>
+                    {{/block.sidebar-text}}
+                    {{#block.sidebar-image}}
+                    <div class="widget widget-image">
+                      <div class="image-container">
+                        {{{sidebar-image-repositionable}}}
+                      </div>
+                      {{#caption}}
+                      <div class="caption p">
+                        <p>{{{caption}}}</p>
+                      </div>
+                      {{/caption}}
+                    </div>
+                    {{/block.sidebar-image}}
+                    {{#block.sidebar-quote}}
+                    <div class="widget widget-quote">
+                      <p class="quote-heading">{{{quote-heading}}}</p>
+                      <p class="quote-subheading">{{{quote-subheading}}}</p>
+                    </div>
+                    {{/block.sidebar-quote}}
+                    {{/collection.back-page-sidebar}}
+                  </div>
+                </div>
+              </div>              
+            </div>
+            <div class="content">
+              <div class="absolute-container">
+                <div class="box-limit page-content-limit">
+                  <div class="box-inner page-content">
+                    <div class="copy">
+                      {{#collection.back-page-content}}
+                      {{#block.page-content-text}}
+                      {{{text}}}
+                      {{/block.page-content-text}}
+                      {{#block.page-content-image}}
+                      <div class="content-image">
+                        <div class="image-container">
+                          {{{content-image-repositionable}}}
+                        </div>
+                        {{#caption}}
+                        <div class="caption">
+                          <p>{{{caption}}}</p>
+                        </div>
+                        {{/caption}}
+                      </div>
+                      {{/block.page-content-image}}
+                      {{#block.page-content-quote}}
+                      <div class="content-quote">
+                        <span class="data-line"></span>
+                        <h3>{{{quote-heading}}}</h3>
+                        {{{quote-text}}}
+                      </div>
+                      {{/block.page-content-quote}}
+                      {{/collection.back-page-content}}
+                    </div>
+                    <div class="sources">
+                      <h4>{{{sources-heading}}}</h4>
+                      {{{sources-text}}}
+                    </div>
+                  </div>
+                </div>                
+              </div>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="cloudera-logo">
+              <img src="{{{account.logos.New_2019_Colour_Cropped}}}">
+            </div> 
+            <div class="box-limit p company-info">
+              <div class="box-inner">
+                <h3>{{{ company }}}  {{{ adress }}} <a href="#" target="blank" class="website">{{{ website }}}</a></h3>
+                <p>{{{ details }}}</p>
+              </div>
+            </div>
+          </div>
+        </div><!--wrapper-->
+        <div class="fit placeholder contain d-none" style="background-image: url(https://files.outfit.io/media_library_items/123415/wp6.png);"></div>
+        <div class="fit boundary-l"></div>
+        <div class="fit boundary-r"></div>
+        <div class="fit boundary-b"></div>
+        <div class="fit boundary-t"></div>
+      </div><!--bleed-->
+    </div><!--page-->
+    
+    <script src="prefixfree.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+      const showCrop = '{{show-crop}}' === 'true';
+      const heading = '{{{heading}}}';
+      const documentType = '{{{Document-Type}}}';
+      var heightObservableTimeout = null;
+
+      function cropMarks(showCrop) {
+        if (showCrop) {
+          document.querySelector('body').classList.add('crop');
+        }
+
+        Array.prototype.slice.call(document.querySelectorAll('.page')).forEach(function (page) {
+          const parser = new DOMParser();
+          const cropString = '<div class="crop-marks"><span class="cm1"></span><span class="cm2"></span><span class="cm3"></span><span class="cm4"></span></div>';
+          const cropNode = parser.parseFromString(cropString, "text/html").body.firstChild;
+          !!showCrop && page.insertBefore(cropNode, null);
+        });
+      }
+
+      function getSize() {
+        const vw = (showCrop ? window.innerWidth : window.innerWidth + 57.62) / 100;
+        const vh = (showCrop ? window.innerHeight : window.innerHeight + 57.62) / 100;
+        const vmin = Math.min(vw, vh);
+        const vmax = Math.max(vw, vh);
+        return (vmin * 2) + (vmax * 1.41891892) + (vh * 2);
+      }
+
+      function setSize() {
+        const size = getSize();
+        document.documentElement.style.fontSize = `${size}px`;
+      };
+
+      function heightObservable() {
+        Array.prototype.slice.call(document.querySelectorAll('.box-limit .box-inner')).forEach(function (e) {
+          checkHeight(e);
+        });
+      }
+
+      function checkHeight(element) {
+        const elementHeight = element.getBoundingClientRect().height;
+        const parent = element.parentElement;
+        const parentHeight = parent.getBoundingClientRect().height;
+
+        if (elementHeight > parentHeight) {
+          parent.classList.add('overflow');
+        } else {
+          parent.classList.remove('overflow');
+        }
+      }
+      
+      function populate(selector, content) {
+        Array.prototype.slice.call(document.querySelectorAll(selector)).forEach(function (e) {
+          if (e.innerHTML !== content) {
+            e.innerHTML = content;            
+          }
+        });
+      }
+
+      cropMarks(showCrop);
+      populate('.cloudera-logo-populated', '<img src="{{{account.logos.New_2019_Colour_Cropped}}}">');
+      TextFit.fit({
+        selector: '.textfit',
+        fitMode: 'horizontal',
+      });
+      
+      window.addEventListener('load', function(e) {
+        heightObservable();
+        populate('.heading-populated', heading.replace(/<br\s*[\/]?>/gi, " "));
+        populate('.document-type-populated', documentType);
+      });
+
+      window.addEventListener('DOMSubtreeModified', function (e) {        
+        if (e.target.tagName === 'TOKEN-VALUE') {
+          const props = JSON.parse(e.target.dataset.clickablePropsList)[0];
+          
+          if (props.tagName === 'heading') {
+            const fitHTML = e.target.innerHTML.replace(/<br\s*[\/]?>/gi, " ");
+            populate('.heading-populated', fitHTML);
+          }
+          
+          if (props.tagName === 'Document-Type') {
+            populate('.document-type-populated', e.target.innerHTML);
+          }
+          
+          if (heightObservableTimeout) {
+            clearTimeout(heightObservableTimeout);
+          }
+          
+          heightObservableTimeout = setTimeout(() => heightObservable(), 500);
+        }        
+      });
+    </script>    
+  </body>
+</html>
