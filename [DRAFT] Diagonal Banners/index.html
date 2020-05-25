@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #ffffff;">
+
+<head>
+  <title>Full Photo Banners</title>
+  <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/neuePlak/stylesheet.css" rel="stylesheet" />
+  <link type="text/css" rel="stylesheet" href="global.css" />
+  <link type="text/css" rel="stylesheet" href="main.css" />
+  <style type="text/css">
+    :root {
+      --black: #000;
+      --dark-gray: #828282;
+      --white: #fff;
+      --dark-orange: #f96702;
+      --bright-orange: #ff8400;
+      --blue: #008cff;
+      --mint: #00a3af;
+      --slate: #305868;
+      
+      --white-cta-background-color: var(--white);
+      --white-cta-color: var(--bright-orange);
+      
+      --bright-orange-cta-background-color: var(--bright-orange);
+      --bright-orange-cta-color: var(--white);
+      --bright-orange-data-lines-start: rgba(0, 0, 0, 0);
+      --bright-orange-data-lines-end: var(--bright-orange);
+      
+      --blue-cta-background-color: var(--blue);
+      --blue-cta-color: var(--white);
+      --blue-data-lines-start: rgba(0, 0, 0, 0);
+      --blue-data-lines-end: var(--blue);
+      
+      --slate-data-lines-start: rgba(0, 0, 0, 0);
+      --slate-data-lines-end: var(--slate);
+      
+      --slate-to-bright-orange-data-lines-start: var(--slate);
+      --slate-to-bright-orange-data-lines-end: var(--bright-orange);
+
+      --background-color: var(--white);
+      --data-lines-start: var(--{{{DB-Color-Overlay}}}{{^DB-Color-Overlay}}bright-orange{{/DB-Color-Overlay}}-data-lines-start);
+      --data-lines-end: var(--{{{DB-Color-Overlay}}}{{^DB-Color-Overlay}}bright-orange{{/DB-Color-Overlay}}-data-lines-end);
+      --separator-color: var(--bright-orange);
+      --cta-background-color: var(--{{{DB-CTA-Theme}}}{{^DB-CTA-Theme}}bright-orange{{/DB-CTA-Theme}}-cta-background-color);
+      --cta-color: var(--{{{DB-CTA-Theme}}}{{^DB-CTA-Theme}}bright-orange{{/DB-CTA-Theme}}-cta-color);
+    }
+    
+    .bg {
+      filter: grayscale(100%) {{#image-brightness}}brightness({{ image-brightness }}%){{/image-brightness}}{{^image-brightness}}brightness(100%){{/image-brightness}};
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page cwsh-{{{DB-Color-Overlay}}}{{^DB-Color-Overlay}}bright-orange{{/DB-Color-Overlay}}">
+    <div class="bleed">
+      <div class="fit wrapper">
+        <div class="bg">{{{B-Image}}}</div>
+        <div class="overlay"></div>
+        <div class="data-lines"></div>
+        <div class="header">
+          <img class="logo" src="{{{account.logos.New_2019_Colour_Cropped}}}" />
+          <div class="textfit lockup headings-{{{B-Headings-Mode}}} has-p">
+            <p class="box-inner">{{{Lockup}}}</p>
+          </div>
+        </div>
+        <div class="separator"></div>
+        <div class="main">
+          <div class="headings {{{B-Headings-Mode}}}">
+            {{#B-Subheading}}
+            <div class="box-limit h2 subheading">
+              <div class="box-inner">
+                <h2>{{{B-Subheading}}}</h2>
+              </div>
+            </div>
+            {{/B-Subheading}}
+            {{#B-Headline}}
+            <div class="box-limit h1 headline">
+              <div class="box-inner">
+                <h1>{{{B-Headline}}}</h1>
+              </div>
+            </div>
+            {{/B-Headline}}
+          </div>
+          {{#CTA-Title}}
+          <div class="box-width-limit cta has-p">
+            <div class="box-inner">
+              <p><a target="_blank">{{{CTA-Title}}}</a></p>
+            </div>
+          </div>
+          {{/CTA-Title}}
+        </div>
+      </div>
+      <div class="fit test contain d-none"></div>
+      <div class="fit boundary-l"></div>
+      <div class="fit boundary-r"></div>
+      <div class="fit boundary-b"></div>
+      <div class="fit boundary-t"></div>
+    </div>
+  </div>
+
+  <script src="./textfit.js"></script>
+  <script>
+    const showCrop = '{{show-crop}}' === 'true';
+
+    function cropMarks(showCrop) {
+      if (showCrop) {
+        document.querySelector('body').classList.add('crop');
+      }
+
+      Array.prototype.slice.call(document.querySelectorAll('.page')).forEach(function (page) {
+        const parser = new DOMParser();
+        const cropString = '<div class="crop-marks"><span class="cm1"></span><span class="cm2"></span><span class="cm3"></span><span class="cm4"></span></div>';
+        const cropNode = parser.parseFromString(cropString, "text/html").body.firstChild;
+        !!showCrop && page.insertBefore(cropNode, null);
+      });
+    }
+
+    function getSize() {
+      const vw = (showCrop ? window.innerWidth : window.innerWidth + 57.62) / 100;
+      const vh = (showCrop ? window.innerHeight : window.innerHeight + 57.62) / 100;
+      const vmin = Math.min(vw, vh);
+      const vmax = Math.max(vw, vh);
+      return (vmin * 2) + (vmax * 1.41891892) + (vh * 2);
+    }
+
+    function setSize() {
+      const size = getSize();
+      document.documentElement.style.fontSize = `${size}px`;
+    };
+
+    function heightObservable() {
+      Array.prototype.slice.call(document.querySelectorAll('.box-limit .box-inner')).forEach(function (e) {
+        checkHeight(e);
+      });
+    }
+
+    function widthObservable() {
+      Array.prototype.slice.call(document.querySelectorAll('.box-width-limit .box-inner')).forEach(function (e) {
+        checkWidth(e);
+      });
+    }
+
+    function checkHeight(element) {
+      const elementHeight = element.getBoundingClientRect().height;
+      const parent = element.parentElement;
+      const parentHeight = parent.getBoundingClientRect().height;
+
+      if (elementHeight > parentHeight) {
+        parent.classList.add('overflow');
+      } else {
+        parent.classList.remove('overflow');
+      }
+    }
+    
+    function checkWidth(element) {
+      const elementWidth = element.getBoundingClientRect().width;
+      const parent = element.parentElement;
+      const parentWidth = parent.getBoundingClientRect().width;
+
+      if (elementWidth > parentWidth) {
+        parent.classList.add('overflow');
+      } else {
+        parent.classList.remove('overflow');
+      }
+    }
+    
+    cropMarks(showCrop);
+    setSize();
+
+    TextFit.fit({
+      selector: '.lockup p',
+      fitMode: 'horizontal',
+      alignItems: 'center',
+      min: 0.5, // percentage of basic size [0.25 - 1]
+      onResized: (e) => checkWidth(e),
+    });       
+
+    window.addEventListener('resize', function () {
+      setSize();
+    });
+
+    window.addEventListener('load', function () {
+      heightObservable();
+      widthObservable();
+    });
+
+    window.addEventListener('DOMSubtreeModified', function () {
+      heightObservable();
+      widthObservable();
+    });   
+  </script>
+</body>
+
+</html>
