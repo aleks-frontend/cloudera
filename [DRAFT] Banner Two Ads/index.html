@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Print Generic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Akzidenz%20Grotesk/stylesheet.css" rel="stylesheet">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Calibre/stylesheet.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="crop.css">
+    <style>
+
+      * {
+        -webkit-font-smoothing: antialiased;
+      }
+      
+      body { font-family: 'Akzidenz Grotesk'; }
+      
+      h1, h2, h3, h4, h5, h6 { font-weight: 500; }
+      
+      p { font-weight: normal; }
+      
+      .character-error { color: red !important; }
+      
+      .overflow {
+        border: 1px dashed red;
+        position: relative;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif; }
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 5px;
+        right: 5px;
+        height: 15px;
+        width: 15px;
+        border: 1px solid red;
+        color: red;
+        padding: 2px 2px 2px 3px;
+        box-sizing: border-box;
+        font-size: 13px;
+        text-align: center;
+        line-height: 8px;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {Banner Ad Redo
+›
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 25px;
+        right: 5px;
+        background-color: black;
+        color: white;
+        border-radius: 2px;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.1em;
+        text-align: right;
+        width: 15em;
+      }
+      
+      .tinymce_style--light, .tinymce_style--dark { color: {{{account.colors.orange}}}; }
+      
+      .page { display: flex; flex-direction: row; justify-content: space-between; }
+      .content { display: flex; align-items: flex-start; justify-content: space-between; flex-direction: column; width: 50%; height: 100%; background-color: {{{account.colors.primary}}}; padding: 0.8em 1.2em; z-index: 2; }
+      .image { position: relative; width: calc(50% - 1em); height: 100%; padding: 1.2em; z-index: 2; }
+
+      .text-one { width: 100%; text-transform: uppercase; z-index: 2; }
+      .text-one h1 { color: {{{ heading-colour }}}; margin: 1em 0 0 0; font-weight: normal; }
+      .outfit-resizable-background { z-index: -1; }
+      
+      .cloudera-logo img { height: 100%; }
+      .cloudera-logo-reversed { height: 0.7em; }
+      
+      .key-play img { height: 100%; }
+      .key-play { display: flex; height: 0.7em; }
+      
+      .cta { position: relative; display: flex; justify-content: center; background-color: #47B3E3; padding: 0.3em 0.6em; }
+      .cta p { display: inline; color: white; border-bottom: 2px solid white; line-height: 1.4em; font-size: 0.6em; font-weight: 500; z-index: 1; }
+      
+      .pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 0; background-size: 5%; }
+      .image .blue.pattern.thin { position: absolute; top: 0; bottom: 0; left: -1em; z-index: 0; background-size: 15%; width: 2em; }
+
+      .white.pattern.thin {
+        background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 5.2 5.2' style='enable-background:new 0 0 5.2 5.2;' xml:space='preserve'%3E %3Cstyle type='text/css'%3E .st0%7B fill:%23F5F5F5; %7D %3C/style%3E %3Cpath class='st0' d='M5.2,0L0,5.2l0,0V3.4L3.4,0H5.2L5.2,0z M5.2,5.2L5.2,5.2V3.4L3.4,5.2H5.2z'/%3E %3C/svg%3E"); 
+      }
+      .blue.pattern.thin {
+        background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 5.2 5.2' style='enable-background:new 0 0 5.2 5.2;' xml:space='preserve'%3E %3Cstyle type='text/css'%3E .st0%7B fill:%2329A7DE; %7D %3C/style%3E %3Cpath class='st0' d='M5.2,0L0,5.2l0,0V3.4L3.4,0H5.2L5.2,0z M5.2,5.2L5.2,5.2V3.4L3.4,5.2H5.2z'/%3E %3C/svg%3E");
+      }
+      
+      @media
+        (min-width: 950px) and (max-width: 970px) and (min-height: 230px) and (max-height: 250px),
+        (min-width: 1920px) and (max-width: 1940px) and (min-height: 480px) and (max-height: 500px),
+        (min-width: 2980px) and (max-width: 3000px) and (min-height: 780px) and (max-height: 800px) {
+          
+          .text-one h1 { margin: 0.3em 0 0 0; }
+        
+      }
+      
+      @media
+        (min-width: 280px) and (max-width: 320px) and (min-height: 30px) and (max-height: 50px),
+        (min-width: 580px) and (max-width: 640px) and (min-height: 80px) and (max-height: 100px) {
+          
+          .cta p { border-bottom: 1px solid white; }
+      
+      }
+      
+      @media
+        (min-width: 280px) and (max-width: 300px) and (min-height: 580px) and (max-height: 600px),
+        (min-width: 580px) and (max-width: 600px) and (min-height: 1180px) and (max-height: 1200px) {
+          
+          .page { flex-direction: column; }
+          .content { width: 100% !important; height: 70% !important; text-align: center; align-items: center; padding: 1.4em 0.6em 2em 0.6em; }
+          .image { width: 100% !important; height: calc(30% - 0.5em) !important; }
+          .cta { width: 100%; padding: 1em 0.6em !important; }
+          .cta p { font-size: 0.8em; }
+          
+          .image .blue.pattern.thin { top: -0.5em; bottom: auto; left: 0; right: 0; width: 100%; height: 1em; background-size: 2.5% !important; z-index: 0; }
+
+      }      
+      
+      @media
+        (min-width: 560px) and (max-width: 580px) and (min-height: 230px) and (max-height: 250px),
+        (min-width: 1140px) and (max-width: 1160px) and (min-height: 480px) and (max-height: 500px) {
+      
+          .cta { display: none; }
+          .key-play { height: 1em; }
+          .text-one h1 { margin: 0.4em 0 0 0; font-size: 1em; }
+          
+      }
+      
+      .image .blue.pattern.thin
+      
+      @media
+        (min-width: 560px) and (max-width: 580px) and (min-height: 230px) and (max-height: 250px),
+        (min-width: 1140px) and (max-width: 1160px) and (min-height: 480px) and (max-height: 500px),
+        (min-width: 600px) and (max-width: 630px) and (min-height: 330px) and (max-height: 352px),
+        (min-width: 1230px) and (max-width: 1260px) and (min-height: 670px) and (max-height: 704px) {
+          
+          .content { padding: 1.4em 1.2em; }
+          .cloudera-logo-reversed { height: 1.2em; }
+          
+      }
+      
+      @media
+        (min-width: 600px) and (max-width: 630px) and (min-height: 330px) and (max-height: 352px),
+        (min-width: 1230px) and (max-width: 1260px) and (min-height: 670px) and (max-height: 704px) {
+          
+          .image .blue.pattern.thin { background-size: 16%; }
+      }
+      
+      @media
+        (min-width: 698px) and (max-width: 728px) and (min-height: 60px) and (max-height: 90px),
+        (min-width: 1426px) and (max-width: 1456px) and (min-height: 30px) and (max-height: 180px),
+        (min-width: 280px) and (max-width: 320px) and (min-height: 30px) and (max-height: 50px),
+        (min-width: 600px) and (max-width: 640px) and (min-height: 80px) and (max-height: 100px),
+        (min-width: 1920px) and (max-width: 1940px) and (min-height: 160px) and (max-height: 180px),
+        (min-width: 950px) and (max-width: 970px) and (min-height: 70px) and (max-height: 90px) {
+        
+        .content { flex-direction: row; align-items: center; width: 100%; padding: 0.8em 0.8em 0.8em 0; }
+        .image { display: none; }
+        .key-play { display: none; }
+        .cloudera-logo-reversed { height: 3.5em; margin: 0 2em; }
+        .cta { align-items: center; width: 30%; height: 100%; text-align: center; }
+        .text-one { margin: 0 2em 0 0; }
+        .text-one h1 { margin: 0; font-size: 1.1em; }
+
+      }
+      
+      @media 
+        (min-width: 1180px) and (max-width: 1200px) and (min-height: 608px) and (max-height: 628px),
+        (min-width: 2380px) and (max-width: 2400px) and (min-height: 1236px) and (max-height: 1256px) {
+          
+          .content { justify-content: flex-start; }
+          .text-one { margin: 3em 0 0 0; }
+          .cta { margin: 1em 0 0 0; }
+
+      }
+      
+      @media (max-aspect-ratio: 6/5) {
+        
+        .content { width: 55%; padding: 1.2em; }
+        .image { width: calc(45% - 1em); }
+        .cloudera-logo-reversed { height: 1.3em; }
+        .text-one h1{ margin: 0; }
+        .cta { padding: 0.3em 1em; }
+        .key-play { display: none; }
+        
+      }
+      
+      @media (max-aspect-ratio: 4/15) {
+        
+        .page { flex-direction: column; }
+        .content { width: 100%; height: 62%; text-align: center; align-items: center; padding: 1.2em 0.6em 1.2em 0.6em; }
+        .image { width: 100%; height: calc(38% - 0.5em); }
+        .cloudera-logo-reversed { height: 1em; }
+        .key-play { display: none; }
+        .text-one { width: 100%; }
+        .text-one h1 { font-size: 0.75em; }
+        .cta { width: 100%; padding: 1em 0.6em; }
+        
+        .image .blue.pattern.thin { top: -0.5em; bottom: auto; left: 0; right: 0; width: 100%; height: 1em; background-size: 5%; z-index: 0; }
+        
+      }
+      
+    </style>
+  </head>
+  <body style="background-color: {{{account.colors.primary}}};">
+
+    <div class="page">
+      
+      <div class="content">
+        <div class="cloudera-logo">
+          <div class="cloudera-logo-reversed">
+            <img src="{{{account.logos.reversed}}}">
+          </div>
+        </div>
+        <div class="text-one">
+          <div class="key-play">
+            <img src="{{{ key-play }}}">
+          </div>
+          <h1 class="character-limit">{{{ heading }}}</h1>
+        </div>
+        <div class="cta">
+          <p>{{{ cta }}}</p>
+          <div class="blue pattern thin"></div>
+        </div>
+      </div>
+
+      <div class="image">
+        <div class="blue pattern thin"></div>
+        {{{ image }}}
+      </div>
+
+    </div><!--page-->
+
+    <script>
+      window.showCrop = {{show-crop}};
+    </script>
+    <script src="main.js"></script>
+    <script src="prefixfree.js"></script>
+
+    <script>
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+
+      } setInterval(loop, 500);
+
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }
+      
+      function checkLength() {
+        setInterval(function(){
+          var nodes = document.querySelectorAll('.character-limit');
+          
+          Array.prototype.slice.call(nodes).forEach(function(node) {
+            console.log(node.innerText.length)
+            if (node.innerText.length >= 61) {
+              if (!node.classList.contains('character-error')) {
+                node.classList.add('character-error');
+              }
+            } else {
+              if (node.classList.contains('character-error')) {
+               node.classList.remove('character-error');
+              }
+            }
+          })
+          
+        }, 1000);
+      }
+
+      checkLength()
+    </script>
+
+  </body>
+</html>
