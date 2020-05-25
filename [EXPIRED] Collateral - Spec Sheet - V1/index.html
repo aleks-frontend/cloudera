@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html async>
+  <head>
+    <title>Print Generic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Akzidenz%20Grotesk/stylesheet.css" rel="stylesheet">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Calibre/stylesheet.css" rel="stylesheet">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/neuePlak/stylesheet.css" rel="stylesheet">
+    <script src="tinycolor.js"></script>
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="crop.css">
+    <style>
+      /* CSS REGIONS STYLES */
+      .hidden {
+        display: none;
+      }
+      * {
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body { font-family: 'Neue Plak Text'; }
+      
+      .overflow {
+        border: 1px dashed red;
+        position: relative; }
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 5px;
+        right: 5px;
+        height: 15px;
+        width: 15px;
+        border: 1px solid red;
+        color: red;
+        padding: 2px 2px 2px 3px;
+        box-sizing: border-box;
+        font-size: 13px;
+        text-align: center;
+        line-height: 8px;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 25px;
+        right: 5px;
+        background-color: black;
+        color: white;
+        border-radius: 2px;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.1em;
+        text-align: right;
+        width: 15em;
+      }
+      
+      .container {
+        position: absolute;
+        top: 38pt;
+        left: 55pt;
+        right: 55pt;
+        bottom: 45pt;
+      }
+      
+      .page-one .main-container {
+        height: 71%;
+      }
+      .js-page .main-container {
+        height: 94.5% !important;
+      }
+      .main-container {
+        height: 65%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 0 0 2.5rem;
+      }
+
+      .tinymce_style--light, .tinymce_style--dark { color: {{{account.colors.dark-gray}}}; }
+
+      .document { display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: 3mm; }
+      
+      .callout { margin: 2em auto 0 auto; font-size }
+		
+      header {
+        padding: 0 0 23pt;
+      }
+      .page-one .logos { 
+        display: flex; 
+        align-items: center; 
+      }
+      .cloudera-logo { max-width: 6.6em; }
+      .cloudera-logo img { width: 100%; }
+      .seperator { height: 40px; width: 1px; margin: 0 0.8em; background-color: black; }
+      .support-logo { max-width: 6.6em; }
+      .support-logo img { width: 100%; }
+      
+      .title { 
+        position: absolute; 
+        top: 35pt; 
+        right: 48px; 
+      }
+      .title p { font-size: 8.5pt; letter-spacing: 0.5px; text-transform: uppercase; }
+      
+      .header-image { 
+        max-height: 140px;
+        margin: 0 0 23pt;
+        border-top: 2px solid {{{account.colors.cloudera-blue--new-}}}; border-bottom: 2px solid {{{account.colors.cloudera-blue--new-}}};
+      }
+      .header-image-inner { position: relative; height: 100%; }
+      .header { width: 80%; max-height: 7.8em; }
+      .header h1 { margin: 8pt 0 0 0; color: {{{account.colors.cloudera-blue--new-}}}; font-family: 'Neue Plak Extended'; font-size: 25pt; font-weight: normal; line-height: 1.2em; letter-spacing: 0.04em; }
+      .header h2 { margin: 0 0 14pt 0; color: black; font-family: 'Neue Plak Extended'; font-size: 12.5pt; font-weight: normal; letter-spacing: 0.04em; }
+      .header h1 .token-value { font-family: 'Neue Plak Extended'; }
+      .header h2 .token-value { font-family: 'Neue Plak Extended'; }
+      .header h3 { margin: 0.9em 0 0 0; color: {{{account.colors.cloudera-blue--new-}}}; font-size: 1.2em; }
+
+      .wow-graphic { position: absolute; top: 1em; right: 1em; height: 6.5em; }
+      .wow-graphic img { height: 100%; }
+      
+      .sidebar-section { width: 150pt; }
+      .main-sidebar-item { background-color: {{{account.colors.light-gray}}}; }
+      .sidebar-quote {
+        background-color: {{{account.colors.light-gray}}};
+        padding: 10pt;
+        margin-top: 15pt;
+      }
+      
+      .sidebar-quote h2 {
+        color: {{{account.colors.cloudera-blue--new-}}};
+        font-size: 9pt;
+        line-height: 1.4em;
+        margin-bottom: 6pt;
+        font-weight: normal;
+      }
+      
+      .sidebar-quote p {
+        font-size: 8pt;
+        font-weight: normal;
+        line-height: 1.3;
+      }
+      
+      .sidebar-inner { padding: 0.9em 0.8em; }
+      
+      .sidebar-section h3:first-of-type { margin: 0 0 0.9em 0; }
+      .sidebar-section h3 { margin: 1em 0 0.6em 0; font-size: 9pt; font-weight: bold; line-height: 1.1em; }
+      .sidebar-section p { font-size: 8pt; line-height: 1.3em; }
+      .sidebar-section ul { position: relative; list-style-type: none; font-size: 8pt; }
+      .sidebar-section li:before { position: absolute; left: 0.2em; content: "_"; font-size: 12px; }
+      .sidebar-section li { font-size: 8pt; position: relative; padding: 0.3em 0 0 0.8em; line-height: 1.3em; }
+      .sidebar-section strong { font-weight: bold; }
+
+      .page-content-copy {    
+        max-height: 100%; }
+      .page-content-copy h2 { color: {{{account.colors.cloudera-blue--new-}}}; margin: 1em 0 0.2em 0; font-size: 10.5pt; line-height: 1.26em; }
+      .page-content-copy p { margin: 8pt 0 0 0; font-size: 9.4pt; line-height: 1.27em; font-weight: normal; }
+      .page-content-copy h2 + p {
+        margin-top: 0;
+      }
+      .page-content-copy p:first-child {
+        margin-top: 0;
+      }
+      .page-content-copy img { margin: 0.7em 0 0 0 }
+      .page-content-copy strong { font-weight: bold; }
+      .page-content-copy ul { position: relative; list-style-type: none; margin: 0; padding: 0 0 0 0.8em; }
+      .page-content-copy li:before { position: absolute; left: 0em; top: 4px; content: "_"; }
+      .page-content-copy li { position: relative; padding: 0.4em 0 0 0.45em; line-height: 1.3em; font-weight: normal; font-size: 9.4pt; }
+
+      /*div[id*='outflo-region-container']>div:first-of-type:last-of-type footer {
+        display: block;
+      }*/
+      
+      div[id*='outflo-region-container']>div:first-of-type:last-of-type footer,
+      .outflo-bleed:last-of-type footer {
+        display: block;
+      }
+      div[id*='outflo-region-container']>div:first-of-type footer,
+      .outflo-bleed footer {
+        display: none;
+      }
+      
+      .footerWrapper { 
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-top: 1px solid black;
+        margin: 0;
+      }
+      .page-content-copy {
+        margin: 0 0 24pt;
+      }
+      .website { color: {{{account.colors.cloudera-blue--new-}}}; }
+      
+      .footer h3 { margin: 0.6em 0; font-size: 0.7em; }
+      .footer p { font-size: 0.6em; margin: 0; }
+      .footer {
+        margin: 0;
+      }
+      .pattern {
+        width: 100%;
+        height: 7px;
+      }
+      
+      .gray.pattern.thin {
+        background-image: url("https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/be35e5efcea821d8e2298d8319497612/Screen%20Shot%202018-01-30%20at%203.23.22%20pm.png");
+        background-size: 100%;
+      }
+      
+      .lightgray.pattern.thin {
+        background-image: url("https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/8f2ab473a91871bb7cc58e61a62163f3/Screen%20Shot%202018-01-30%20at%203.31.18%20pm.png");2
+      }      
+      
+      .placeholder {
+        background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/b1981ed70e9fb999d706d3e2f2095fa8/Cloudera_Datasheet_with_table_Template_101_Page_2.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.7;
+        z-index: 100;
+        pointer-events: none;
+      }
+      
+      .page-two .logos { position: absolute; left: 0; }
+      footer .cloudera-logo { width: 6.6em; margin: 0.6em 0 0 0; }
+      footer .cloudera-logo img { width: 100%; }
+      .page-two .main-section { position: absolute; top: 42pt; left: 55pt; right: 55pt; width: initial; margin: 1.5em 0 0; }
+      .page-two .footer { position: absolute;     bottom: 77pt; left: 55pt; right: 55pt; border-top: 1px solid black; }
+      .footer-inner { 
+        width: 69.5%;
+      }
+      .page-two .callout .pattern { width: 100%; height: 100%; background-size: 100%; margin: 0; text-align: center; }
+      .page-two .callout p { color: {{{account.colors.cloudera-slate--new-}}}; font-size: 12pt; line-height: 19pt; padding-bottom: 10pt; font-weight: normal; }
+      .page-two .callout strong { color: {{{account.colors.cloudera-blue--new-}}}; font-size: 14pt; font-weight: normal; }
+ 		
+      .page-two.hide {
+        display: none;
+      }
+      /* TABLE RESET CODE */
+      table, caption, tbody, tfoot, thead, tr, th, td {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font: inherit;
+        vertical-align: middle;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      /* END RESET CODE */
+      table { 
+        width: 100%; 
+        margin: 0 0 8pt;
+      }
+      table td { 
+        font-weight: normal; padding: 2px 5px 5px 5px; font-size: 8pt; vertical-align: top; 
+      }      
+      
+      table tr td:last-child {
+        border-right: none;
+      }
+      
+      .table-row td { 
+        border-right: 1px solid {{{account.colors.medium-gray}}}; 
+      }
+      .table-row {
+        break-inside: avoid;
+		break-after: page;
+      }
+      .table-main-header td {
+        text-transform: uppercase; 
+        border-top: 1px solid {{{account.colors.cloudera-slate--new-}}}; 
+        border-bottom: 1px solid {{{account.colors.cloudera-slate--new-}}};
+        font-size: 10pt; font-weight: bold; padding: 2px 5px 5px 5px; vertical-align: top;
+        border-right: 1px solid #D1D2D4; line-height: 1em;
+      }
+
+      .table-row-header { 
+        border-bottom: 1px solid {{{account.colors.cloudera-blue--new-}}};
+        color: {{{account.colors.cloudera-slate--new-}}};  
+      }
+
+      .table-row-header td { padding: 2px 1px 2px 3px; line-height: 1em; font-size: 9.5pt; font-weight: bold; background-color: {{{account.colors.medium-gray}}} !important; text-align: left !important; }
+      
+    </style>
+  </head>
+  <body style="background: white">
+    <!-- DYNAMIC PAGE CONTENT -->
+      <div id="print-container">
+        <div class="header-image">
+              <div class="header-image-inner">
+                <div class="header">
+                  <div class="header-overflow check-overflow">
+                    <h1 style="text-transform: uppercase;">{{{ headline }}}</h1>
+                    <h2>{{{ subheader }}}</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+    {{#collection.page-one-sections}}
+      {{#block.text-section}}
+        <div class="page-content-copy">{{{ copy-section }}}</div>
+      {{/block.text-section}}
+
+      {{#block.image-section}}
+          <img src="{{{ image }}}"/>
+      {{/block.image-section}}
+
+      {{#block.table-section}}
+        <table class="row-align-{{{ row-alignment }}} flowTable">
+          <tbody>
+
+            {{#spreadsheet.table-rows}}
+            <tr class="table-row {{{ row-style }}}">
+              {{#col-1}}<td>{{{ col-1 }}}</td>{{/col-1}}
+              {{#col-2}}<td>{{{ col-2 }}}</td>{{/col-2}}
+              {{#col-3}}<td>{{{ col-3 }}}</td>{{/col-3}}
+              {{#col-4}}<td>{{{ col-4 }}}</td>{{/col-4}}
+              {{#col-5}}<td>{{{ col-5 }}}</td>{{/col-5}}
+              {{#col-6}}<td>{{{ col-6 }}}</td>{{/col-6}}
+              {{#col-7}}<td>{{{ col-7 }}}</td>{{/col-7}}
+              {{#col-8}}<td>{{{ col-8 }}}</td>{{/col-8}}
+              {{#col-9}}<td>{{{ col-9 }}}</td>{{/col-9}}
+              {{#col-10}}<td>{{{ col-10 }}}</td>{{/col-10}}
+            </tr>
+            {{/spreadsheet.table-rows}}
+
+          </tbody>
+        </table>
+      {{/block.table-section}}
+    {{/collection.page-one-sections}}
+  </div>
+   
+    <script>
+      window.showCrop = {{show-crop}};
+    </script>
+    <script src="main.js"></script>
+    <script src="prefixfree.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+
+      } //setInterval(loop, 500);
+
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }
+    </script>
+    <script>
+      if ($('.table-row').hasClass('table-row-header')) {
+          $('.table-row-header td:first-child').attr('colspan', '10')
+      }
+    </script>
+	<!-- Flow script Controls page creation and CSS Regions -->
+    <script type="text/javascript" src="https://s3-ap-southeast-2.amazonaws.com/outfit-assets-production/scripts/outflo.0.1.1.min.js"></script>
+    <script>
+        var outflo = new OutFlo({
+          domID: 'print-container', // The id of the HTML element that contains the content to be printed
+          size: '{{{format-size}}}', // Dimensions when printed (A4, A3, letter, legal, or tabloid), takes precedence over width and height
+          width: 816, // Width when printed (pixels), does not apply if size is set
+          height: 1056, // Height when printed (pixels), does not apply if size is set
+          marginTop: 48, // Margin when printed (pixels), defaults to 0 if omitted
+          marginBottom: 48, // Margin when printed (pixels), defaults to 0 if omitted
+          marginLeft: 48, // Margin when printed (pixels), defaults to 0 if omitted
+          marginRight: 48, // Margin when printed (pixels), defaults to 0 if omitted,
+          showCrop: {{show-crop}}, // Weather to show crop or, defaults to 0 if Digital PDF
+          bleedPadding: '6.7mm', // The padding for the bleed when turning on showCrop, defaults to 6.7mm
+          createHeaderTemplate: function(pageNumber) { 
+            // Optional, called every time a page is created, should return a DOM node
+            var header = document.createElement('header');
+            // Create Logo Wrapper
+            var logosDiv = document.createElement("div");
+            logosDiv.classList.add("logos");
+            // Add to header
+            header.appendChild(logosDiv);
+            // Create Secondary Logo Wrapper
+            var logoWrapper = document.createElement("div");
+            logoWrapper.classList.add("cloudera-logo");
+            // Add to Logos Div
+            logosDiv.appendChild(logoWrapper);
+            // Create Logo Img
+            var img = document.createElement("img");
+            img.src = "{{{account.logos.New_2019_Colour_Cropped}}}";
+            // Add to LogoWrapper
+            logoWrapper.appendChild(img);
+            
+            // Create Title
+            var title = document.createElement("div");
+            title.classList.add("title");
+            title.setAttribute("style","color: {{{account.colors.dark-gray}}};");
+            // Add to Header
+            header.appendChild(title);
+            
+            // Create Title content
+            var titleText = document.createElement("p");
+            titleText.innerHTML = "{{{ title }}}";
+			// Add to Title
+            title.appendChild(titleText);
+
+            return header;
+          },
+          createFooterTemplate: function(pageNumber) { // Optional, called every time a page is created, should return a DOM node
+            var footer = document.createElement('footer');
+            footer.classList.add("footer");
+            // Create Footer Content Wrapper
+            var footerWrapper = document.createElement("div");
+            footerWrapper.classList.add("footerWrapper");
+            // Add To Footer
+            footer.appendChild(footerWrapper);
+            
+            // Create Logo Wrapper
+            var logoDiv = document.createElement("div");
+            logoDiv.classList.add("logos");
+            // Add to Footer
+            footerWrapper.appendChild(logoDiv);
+            
+            // Create Logo Img Wrapper
+            var imgWrapper = document.createElement("div");
+            imgWrapper.classList.add("cloudera-logo");
+            // Add to Wrapper
+            logoDiv.appendChild(imgWrapper);
+            
+            // Create Img
+            var img = document.createElement("img");
+            img.src = "{{{account.logos.New_2019_Primary_Cropped}}}";
+            // Add to Img Wrapper
+            imgWrapper.appendChild(img);
+            
+            // Create Footer Inner
+            var footerInner = document.createElement("div");
+            footerInner.classList.add("footer-inner");
+            // Add to Footer
+            footerWrapper.appendChild(footerInner);
+            
+            // Create Inner H3
+            var h3 = document.createElement("h3");
+            h3.setAttribute("style","color: {{{account.colors.cloudera-slate--new-}}}; font-weight: bold;");
+            h3.innerHTML = "{{{ company }}}" + " " + "{{{ adress }}}";
+            // Add to Footer Inner
+            footerInner.appendChild(h3);
+            
+            // Create h3 span
+            var span = document.createElement("span");
+            span.classList.add("website");
+            span.innerHTML = " {{{ website }}}";
+            // Add to Inner h3
+            h3.appendChild(span);
+            
+            // Create Details P
+            var p = document.createElement("p");
+            p.innerHTML = '{{{ details }}}';
+            // Add to Footer Inner
+            footerInner.appendChild(p);
+            
+            return footer;
+          },
+          before: function() { //Optional, runs before printing
+            // Do any necessary preparations for printing
+            styleTable();
+          },
+          after: function() { //Optional, runs after printing
+            // Clean up any preparations for printing
+          }
+        });
+      
+        window.addEventListener('load', function() {
+          outflo.pagify();
+        });
+      
+      /* Function to add Alternate Row Colours to tables */
+      /* This is to get around CSS regions being weird and nth-child selectors not working correctly */
+      function styleTable() {
+        var tables = document.querySelectorAll(".flowTable");
+
+        // Loop Through Each Table and Grab the Rows
+        for(var i = 0; i < tables.length; i++) {
+          var tableNode = tables.item(i);
+          var tableRows = tableNode.querySelectorAll("tr");
+
+          // Starting i from 1 because the first row should have header styling
+          for(var j = 1; j < tableRows.length; j++) {
+            // Check if we are an odd or even row
+            if(j % 2 == 1) {
+              // We are odd so we should be grey
+              tableRows.item(j).setAttribute("style","background: {{{account.colors.light-gray}}}");
+            }
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
