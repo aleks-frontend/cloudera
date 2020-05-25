@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Print Generic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Akzidenz%20Grotesk/stylesheet.css" rel="stylesheet">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Calibre/stylesheet.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="crop.css">
+    <style>
+
+      * {
+        -webkit-font-smoothing: antialiased;
+      }
+      
+      body { font-family: 'Akzidenz Grotesk'; }
+      
+      h1, h2, h3, h4, h5, h6 { font-weight: 500; }
+      
+      p { font-weight: normal; }
+      
+      .character-error { color: red !important; }
+      
+      .overflow {
+        border: 1px dashed red;
+        position: relative;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif; }
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 5px;
+        right: 5px;
+        height: 15px;
+        width: 15px;
+        border: 1px solid red;
+        color: red;
+        padding: 2px 2px 2px 3px;
+        box-sizing: border-box;
+        font-size: 13px;
+        text-align: center;
+        line-height: 8px;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {Banner Ad Redo
+›
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 25px;
+        right: 5px;
+        background-color: black;
+        color: white;
+        border-radius: 2px;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.1em;
+        text-align: right;
+        width: 15em;
+      }
+      
+      .tinymce_style--light, .tinymce_style--dark { color: {{{account.colors.orange}}}; }
+      
+      .page { display: flex; flex-direction: column; }
+      .header { position: relative; display: flex; align-items: center; justify-content: space-between; width: 100%; height: 20%; background-color: white; padding: 0.4em 1.2em; z-index: 10; }
+      .content { width: 100%; height: 80%; padding: 1.2em; z-index: 11; }
+      
+      .gradient {
+        position: absolute; bottom: 0; left: 0; right: 0; height: 15%; z-index: 1;
+        background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(3,3,3,1) 99%, rgba(0,0,0,1) 100%);
+        background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(3,3,3,1) 99%,rgba(0,0,0,1) 100%);
+        background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(3,3,3,1) 99%,rgba(0,0,0,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#000000',GradientType=0 );
+      }
+      
+      .foreground-image { position: absolute; bottom: 0; left: 50%; right: 0; height: 50%; z-index: 0; }
+      .foreground-image div { overflow: inherit !important; }    
+      
+      .background-image { position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: -99999; }
+      
+      .text-wrap { display: flex; justify-content: space-between; flex-direction: column; height: 100%; }
+      .text-one { text-transform: uppercase; z-index: 2; }
+      .text-one h1 { color: {{{ heading-colour }}}; font-weight: normal; }
+      .text-two { position: relative; width: 30%; color: white; z-index: 2; }
+      .speaker { display: none; }
+      .speaker h2 {margin: 0 0 0.2em 0; font-family: 'Calibre'; font-size: 0.65em; font-weight: 500; }
+      .speaker h3 { font-family: 'Calibre'; font-size: 0.65em; font-weight: normal; }
+      .outfit-resizable-background { z-index: -1; }
+      
+      .cloudera-logo, .key-play { z-index: 10; }
+      .cloudera-logo img { height: 100%; }
+      .cloudera-logo-primary { display: flex; height: 0.7em; }
+      .cloudera-logo-reversed { display: none; height: 0.7em; }
+      
+      .key-play img { height: 100%; }
+      .key-play { display: flex; height: 0.7em; }
+      .key-play.reversed { display: none; }
+      
+      .cta { position: relative; display: flex; justify-content: center; background-color: #47B3E3; padding: 0.3em 0.6em; text-align: center; }
+      .cta p { display: inline; color: white; border-bottom: 2px solid white; line-height: 1.4em; font-size: 0.6em; font-weight: 500; z-index: 1; }
+      .cta.reversed { display: none; }
+      
+      .pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 0; background-size: 5%; }
+
+      .white.pattern.thin {
+        background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 5.2 5.2' style='enable-background:new 0 0 5.2 5.2;' xml:space='preserve'%3E %3Cstyle type='text/css'%3E .st0%7B fill:%23F5F5F5; %7D %3C/style%3E %3Cpath class='st0' d='M5.2,0L0,5.2l0,0V3.4L3.4,0H5.2L5.2,0z M5.2,5.2L5.2,5.2V3.4L3.4,5.2H5.2z'/%3E %3C/svg%3E"); 
+      }
+      .blue.pattern.thin {
+        background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 5.2 5.2' style='enable-background:new 0 0 5.2 5.2;' xml:space='preserve'%3E %3Cstyle type='text/css'%3E .st0%7B fill:%2329A7DE; %7D %3C/style%3E %3Cpath class='st0' d='M5.2,0L0,5.2l0,0V3.4L3.4,0H5.2L5.2,0z M5.2,5.2L5.2,5.2V3.4L3.4,5.2H5.2z'/%3E %3C/svg%3E");
+      }
+      .gray.pattern.thin {
+        background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 5.2 5.2' style='enable-background:new 0 0 5.2 5.2;' xml:space='preserve'%3E %3Cstyle type='text/css'%3E .st0%7B fill:%23333E47; %7D %3C/style%3E %3Cpath class='st0' d='M5.2,0L0,5.2l0,0V3.4L3.4,0H5.2L5.2,0z M5.2,5.2L5.2,5.2V3.4L3.4,5.2H5.2z'/%3E %3C/svg%3E");
+      }
+      .orange.pattern.thin {
+        background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 5.2 5.2' style='enable-background:new 0 0 5.2 5.2;' xml:space='preserve'%3E %3Cstyle type='text/css'%3E .st0%7B fill:%23FF8F00; %7D %3C/style%3E %3Cpath class='st0' d='M5.2,0L0,5.2l0,0V3.4L3.4,0H5.2L5.2,0z M5.2,5.2L5.2,5.2V3.4L3.4,5.2H5.2z'/%3E %3C/svg%3E");
+      }
+      
+      @media
+        (min-width: 950px) and (max-width: 970px) and (min-height: 230px) and (max-height: 250px),
+        (min-width: 1920px) and (max-width: 1940px) and (min-height: 480px) and (max-height: 500px),
+        (min-width: 2980px) and (max-width: 3000px) and (min-height: 780px) and (max-height: 800px) {
+          
+        .page { flex-direction: row; }
+        .header { width: 25%; height: 100%; justify-content: center; z-index: 3; }
+        .content { display: flex; align-items: center; width: 75%; height: 100%; padding: 1.5em 0.7em 0.7em 0.7em !important; }
+          
+        .gradient { height: 40%; }
+          
+        .cta p { border-bottom: 3px solid white; }
+          
+        .cloudera-logo-primary { height: 1em; }
+        .key-play, .cta { display: none; }
+        .cta.reversed { display: flex; width: 50%; margin: 1em 0 0 0; }
+        .speaker { display: block; border-left: 1px solid white; padding: 0 0 0 0.4em; }
+        .text-wrap { flex-direction: row; align-items: flex-start !important; }
+        .text-two { display: flex; align-items: flex-end; justify-content: flex-end; height: 100%; margin: 0 1em 0 0; }
+        .foreground-image { left: 70%; height: 85%; }
+        
+      }
+      
+      @media
+        (min-width: 280px) and (max-width: 320px) and (min-height: 30px) and (max-height: 50px),
+        (min-width: 580px) and (max-width: 640px) and (min-height: 80px) and (max-height: 100px) {
+
+        .text-one h1 { margin: 0 1em 0 0; }
+        .text-two { width: 40%; }
+        .cta p { font-size: 0.6em !important; }
+        .cta p { border-bottom: 1px solid white; }
+      
+      }
+      
+       @media
+        (min-width: 280px) and (max-width: 300px) and (min-height: 230px) and (max-height: 250px),
+        (min-width: 580px) and (max-width: 600px) and (min-height: 480px) and (max-height: 500px),
+        (min-width: 620px) and (max-width: 640px) and (min-height: 460px) and (max-height: 480px),
+        (min-width: 1260px) and (max-width: 1280px) and (min-height: 940px) and (max-height: 960px) {
+          
+        .white.pattern.thin { background-size: 3%; }
+
+      }
+      
+      @media
+        (min-width: 280px) and (max-width: 300px) and (min-height: 580px) and (max-height: 600px),
+        (min-width: 580px) and (max-width: 600px) and (min-height: 1180px) and (max-height: 1200px) {
+        
+        .header { justify-content: center; }
+        .key-play { display: none; }
+        .text-wrap { flex-direction: column; align-items: center; }
+        .text-two { width: 100% !important; }
+        .cta { width: 100%; align-items: center; }
+        .cta p { font-size: 0.9em; }
+
+      }
+      
+      @media
+        (min-width: 560px) and (max-width: 580px) and (min-height: 230px) and (max-height: 250px),
+        (min-width: 1140px) and (max-width: 1160px) and (min-height: 480px) and (max-height: 500px),
+        (min-width: 600px) and (max-width: 630px) and (min-height: 330px) and (max-height: 352px),
+        (min-width: 1230px) and (max-width: 1260px) and (min-height: 670px) and (max-height: 704px) {
+       
+        .header { height: 27%; padding: 0 1.2em; }
+        .content { position: relative; height: 73%; }
+        .gradient { height: 25%; }
+        .text-wrap { height: 100%; flex-direction: row; }
+        .cloudera-logo-primary, .key-play { height: 1.3em; }
+        .text-one { width: 75%; }
+        .text-one h1 { font-size: 1em; }
+        .text-two { width: auto; align-self: flex-end; }
+        .speaker { display: flex; flex-direction: column; width: 40%; margin: 0 8em 0 0; border-right: 1px solid white; padding: 0 0.4em 0 0; }
+        .cta.reversed { display: flex; width: 50%; margin: 1em 0 0 0; }
+        .cta { display: none; }
+        .white.pattern.thin { background-size: 2%; }
+
+      }
+      
+      @media (max-aspect-ratio: 20/1) and (min-aspect-ratio: 20/5) {
+        
+        .page { flex-direction: row; }
+        .header { width: 25%; height: 100%; justify-content: center; z-index: 3; }
+        .content { display: flex; align-items: center; width: 75%; height: 100%; padding: 0.7em; }
+        .gradient { height: 50%; }
+        .cloudera-logo-primary { height: 1.4em; }
+        .key-play { display: none; }
+        .text-wrap { flex-direction: row; align-items: center; width: 100%; }
+        .text-one { width: 65%; }
+        .text-two { width: 30%; height: 100%; }
+        .cta { align-items: center; height: 100%; }
+        .cta p { font-size: 0.9em; }
+        .foreground-image { height: 100%; }
+
+      }
+      
+      @media 
+        (min-width: 1180px) and (max-width: 1200px) and (min-height: 608px) and (max-height: 628px),
+        (min-width: 2380px) and (max-width: 2400px) and (min-height: 1236px) and (max-height: 1256px) {
+        
+        .cloudera-logo-primary { display: none; }
+        .cloudera-logo-reversed { display: block; }
+        .header { background: none; }
+        .content { padding: 1.6em 1.2em 2.2em 1.2em; }
+        .gradient { height: 50%; }
+        .text-one { width: 55%; }
+        .text-one h1 { margin: 1em 0 0 0; font-size: 0.8em; }
+        .key-play { display: none; }
+        .key-play.reversed { display: block; height: 0.85em; }
+        .white.pattern.thin { display: none; }
+
+      }
+      
+      @media (max-aspect-ratio: 6/5) {
+        
+        .header { padding: 0.4em 1.2em; }
+        .cloudera-logo-primary, .key-play { height: 1em; }
+        .text-two { width: 50%; }
+        
+      }
+      
+      @media (max-aspect-ratio: 4/15) {
+        
+        .page { flex-direction: column; }
+        .header { width: 100%; height: 15%; padding: 0.4em 0.7em; }
+        .content { width: 100%; height: 85%; padding: 1em 0.4em; }
+        .text-one h1 { font-size: 0.62em; text-align: center; }
+        .text-two { width: 100%; }
+        .speaker { display: flex; flex-direction: column; margin: 0 0 0.4em 0; text-align: center; }
+        .cta { padding: 1.3em 0.6em; }
+        .key-play { display: none; }
+        .pattern.thin { background-size: 8%; }
+        .foreground-image { left: 0; height: 70%; }
+        
+        .gradient {
+          height: 25%; 
+          background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 40%);
+          background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(0,0,0,1) 40%);
+          background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(0,0,0,1) 40%);
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#001e5799', endColorstr='#000000',GradientType=0 );
+        }
+
+      }
+      
+    </style>
+  </head>
+  <body style="background-color: {{{account.colors.primary}}};">
+
+    <div class="page">
+      
+      <div class="header">
+        <div class="cloudera-logo">
+          <div class="cloudera-logo-primary">
+            <img src="{{{account.logos.primary}}}">
+          </div>
+          <div class="cloudera-logo-reversed">
+            <img src="{{{account.logos.reversed}}}">
+          </div>
+        </div>
+        <div class="key-play">
+          <img src="{{{ key-play }}}">
+        </div>
+        <div class="white pattern thin"></div>
+      </div>
+      
+      <div class="content">
+        <div class="text-wrap">
+          
+          <div class="text-one">
+            <div class="key-play reversed">
+              <img src="{{{ key-play }}}">
+            </div>
+            <h1 class="character-limit">{{{ heading }}}</h1>
+            <div class="cta reversed">
+              <p>{{{ cta }}}</p>
+              <div class="blue pattern thin"></div>
+            </div>
+          </div>
+          
+          <div class="text-two">
+			<div class="speaker">
+              <h2>{{{ speaker-name }}}</h2>
+              <h3>{{{ speaker-company }}}</h3>
+            </div>
+            <div class="cta">
+              <p>{{{ cta }}}</p>
+              <div class="blue pattern thin"></div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="gradient"></div>
+        
+        <div class="foreground-image">
+          {{{ foreground-image }}}
+        </div>
+        
+        <div class="background-image">
+          {{{ image }}}
+        </div>
+        
+      </div>
+
+    </div><!--page-->
+
+    <script>
+      window.showCrop = {{show-crop}};
+    </script>
+    <script src="main.js"></script>
+    <script src="prefixfree.js"></script>
+
+    <script>
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+
+      } setInterval(loop, 500);
+
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }
+      
+      function checkLength() {
+        setInterval(function(){
+          var nodes = document.querySelectorAll('.character-limit');
+          
+          Array.prototype.slice.call(nodes).forEach(function(node) {
+            console.log(node.innerText.length)
+            if (node.innerText.length >= 61) {
+              if (!node.classList.contains('character-error')) {
+                node.classList.add('character-error');
+              }
+            } else {
+              if (node.classList.contains('character-error')) {
+               node.classList.remove('character-error');
+              }
+            }
+          })
+          
+        }, 1000);
+      }
+
+      checkLength()
+    </script>
+
+  </body>
+</html>
