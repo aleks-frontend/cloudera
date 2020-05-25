@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html async>
+  <head>
+    <title>Print Generic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Akzidenz%20Grotesk/stylesheet.css" rel="stylesheet">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Calibre/stylesheet.css" rel="stylesheet">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/neuePlak/stylesheet.css" rel="stylesheet" />
+    <script src="tinycolor.js"></script>
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="crop.css">
+    <style>
+
+      * {
+        -webkit-font-smoothing: antialiased;        
+      }
+      
+      body {
+        font-family: 'Neue Plak Text';
+      }
+
+      .overflow {
+        border: 1px dashed red;
+        position: relative;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif; }
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 5px;
+        right: 5px;
+        height: 15px;
+        width: 15px;
+        border: 1px solid red;
+        color: red;
+        padding: 2px 2px 2px 3px;
+        box-sizing: border-box;
+        font-size: 13px;
+        text-align: center;
+        line-height: 8px;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 25px;
+        right: 5px;
+        background-color: black;
+        color: white;
+        border-radius: 2px;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.1em;
+        text-align: right;
+        width: 15em;
+      }
+      
+      .fit {
+        position: absolute;
+        top: 3mm;
+        right: 3mm;
+        bottom: 3mm;
+        left: 3mm;
+      }
+
+      .tinymce_style--light, .tinymce_style--dark { color: var(--medium-gray); }        
+
+      .wow-graphic { position: absolute; top: 1em; right: 1em; height: 6.5em; }
+      .wow-graphic img { height: 100%; }
+
+      .excess-sidebar {
+        height: initial !important;
+        color: red;
+        background: rgba(255,255,255,0.8);
+        padding: 30px 72px !important;
+        font-weight: 700;
+      }
+      .sidebar-section,
+      .sidebar-offset-inner { 
+        width: 155pt;
+        background-color: var(--light-gray); }
+      .sidebar-inner { padding: 0.8em; }
+      .sidebar-offset-inner li, .sidebar-inner li {
+        font-family: 'Neue Plak Text Light';
+  		font-size: 7.25pt;
+  		line-height: 10pt;
+  		margin-bottom: 4pt;
+        letter-spacing: -0.04em;
+      }
+
+      .about-section { position: absolute; 
+        bottom: 105pt;
+        left: 55pt;
+        width: 155pt;
+        padding: 0.8em; }
+      .about-inner { position: relative; }
+
+      .sidebar-section h3:first-of-type,
+      .sidebar-offset-inner h3:first-of-type { margin: 0; }
+      .sidebar-section h2,
+      .sidebar-offset-inner h2 { 
+      	font-family: 'Neue Plak Text Light';
+  		font-size: 7.25pt;
+  		line-height: 10pt;
+  		margin-bottom: 4pt;
+        letter-spacing: -0.04em;
+      }
+      .sidebar-section h3,
+      .sidebar-offset-inner h3 { 
+      	font-family: 'Neue Plak Text Light';
+  		font-size: 7.25pt;
+  		line-height: 10pt;
+  		margin-bottom: 4pt;
+        letter-spacing: -0.04em;
+      }
+      .sidebar-section p, 
+      .sidebar-offset-inner p{ margin: 0.8em 0 0 0; font-size: 8pt; line-height: 1.25em; font-weight: normal; }
+      .sidebar-section strong,
+      .sidebar-offset-inner strong { font-size: 8pt; font-weight: bold; }
+      .sidebar-inner ul,
+      .sidebar-offset-inner ul{ list-style: none; margin: 0; font-size: 8pt; line-height: 1.25em; font-weight: normal; }
+      .sidebar-inner li:before,
+      .sidebar-offset-inner li:before { position: absolute; left: 0; content: "\2022"; font-size: 12px; top: 0; }
+      .sidebar-inner li,
+      .sidebar-offset-inner li { position: relative; padding: 0 0 0 0.8em; font-size: 7.25pt; line-height: 1.3em; font-weight: normal; }
+
+      .sidebar-offset-inner {
+        position: relative;
+        padding: 9.6px 0.8em !important;
+      }
+
+      .page.two .sidebar-section p,
+      .page.two .sidebar-offset-inner p { line-height: 1em; }
+
+      .about-section h3:first-of-type { margin: 0 0 0.5em 0; }
+      .about-section h3 { color: var(--bright-orange); margin: 0 0 0.5em 0; font-size: 0.85em; font-weight: bold; }
+      .about-section p { margin: 0.2em 0 0 0; font-size: 0.7em; }
+      .about-section strong { color: black; font-weight: bold; }
+
+      .main-section { width: 64%; max-height: 49em; } .hide .main-section { max-height: 42em; }
+      .main-section h2 { color: var(--bright-orange); margin: 1em 0 0 0; font-size: 10.5pt; line-height: 1.27em; font-weight: normal; }
+      .main-section p { font-size: 9.5pt; line-height: 1.27em; font-weight: normal; margin-bottom: 4pt; }
+      .main-section strong { font-weight: bold; }
+      .main-section ul { position: relative; list-style-type: none; font-size: 0.8em; margin: 0; padding: 0 0 0 0.8em; }
+      .main-section li:before { position: absolute; left: 0.2em; content: "_"; }
+      .main-section li { position: relative; padding: 0.1em 0 0 0.75em; line-height: 1.3em; font-weight: normal; }
+            
+      .page-content li { font-family: 'Neue Plak Text'; font-size: 8.5pt; line-height: 12pt; letter-spacing: -0.04em; }
+
+      .main-flow { margin: 0 0 0 180pt !important; }
+      .main-flow p, .main-flow ul, .main-flow ol { margin-bottom: 6pt; }
+      .main-flow h2 { 
+        color: var(--bright-orange); 
+      	font-family: 'Neue Plak Text';
+        font-size: 10pt;
+        line-height: 1.25em;
+        letter-spacing: -0.02em;
+      }
+      .main-flow h3 { font-size: 9.4pt; line-height: 1.27em; font-weight: bold; margin-bottom: 2pt; } 
+
+      .two .sidebar-section,
+      .two .sidebar-offset-inner { top: 7.9em; }
+      .two .main-section { top: 7em; }
+      .two .cloudera-logo { padding: 0.6em; }
+
+      .image { width: 100%; margin: 1em 0 0 0; border: 1px solid var(--gray); }
+      .image img { width: 100%; }
+
+      .footer { display: flex; justify-content: space-between; position: absolute; bottom: 55pt; left: 55pt; right: 55pt; border-top: 1px solid black; }
+      .footer-inner { position: absolute; left: 180pt; }
+
+      .website { color: var(--bright-orange); }
+
+      .footer h3 { margin: 0.6em 0; font-size: 0.7em; }
+      .footer p { font-size: 0.6em; }
+
+      a { color: var(--bright-orange); }
+      .sidebar-offset p:last-child { margin: 0; }
+
+      .page-two.title { right: 2.7em; text-align: right; padding: 23px 0 0 0; width: 50%; float: right; }
+      .page-two.cloudera-logo { padding: 7px 0 0 0; max-width: 71pt; }
+            
+      .gray.pattern.about {
+        background-image: url("https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/ee42aa1c1e99829edfeb709e3aec3aa4/Screen%20Shot%202018-01-30%20at%202.55.53%20pm.png");
+        background-size: 100%;
+        opacity: 1;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .placeholder {
+        background-image: url('https://files.outfit.io/media_library_items/100014/briefv2.png');
+        background-size: contain;
+        background-position: top center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 3mm;
+        left: 3mm;
+        right: 3mm;
+        bottom: 3mm;
+        opacity: 0.7;
+        z-index: 100;
+        pointer-events: none;
+      }
+      .sidebar-offset { position: absolute; margin: 0 0 0 -177pt; width: 155pt;}
+      .sidebar-offset-inner { background-color: #eee; padding: 0.6em; }
+      .sidebar-offset h2 { color: black; margin-top: 0; margin-bottom: 1.75pt; font-size: 9pt; font-weight: bold; line-height: 1.2em; }
+      .sidebar-offset p { margin: 0 0 6pt 0; font-size: 8pt; line-height: 1.25em; }
+      .sidebar-offset h3 { margin-top: 0; font-weight: normal; text-transform: uppercase; font-size: 7.5pt; }
+      .sidebar-offset li {
+        font-size: 8pt;
+        line-height: 1.19em;
+        margin-bottom: 2.4pt;
+      }
+
+      [data-css-region] { padding-bottom: 55pt; padding-top: 30px; }
+
+      .container {
+        position: absolute;
+        top: 81pt;
+        left: 55pt;
+        right: 55pt;
+        bottom: 55pt;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+
+      .main-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        max-height: 84%;
+      }
+
+      p, h1, h2, h3, h4, h5, h6, li, ul, ol {
+        min-height: 10px;
+      }
+
+      img {
+        margin: 6pt 0;
+      }
+
+      .solution-brief.hide > div:nth-of-type(3) { display: none; }      
+
+      .hide .page.one .footer { display: block !important; position: absolute; left: 0; right: 0; bottom: 30px; }
+      .hide .page.two { display: none; }
+
+      .sidebar.injectable {
+        display: block !important;
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 30px 0 0 72px;
+        width: 300px;    
+        height: 100%;
+      }
+      .sidebar.injectable img {
+        margin: 0 0 8px;
+      }
+      .relative {
+        position: relative !important;
+      }
+      .sidebarImg__wrapper {
+        width: 155pt;
+      }
+    </style>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <style type="text/css">
+      :root {
+        --black: #000000;      
+        --dark-gray: #828282;
+        --medium-gray: #cdcdcd;
+        --gray: #e6e6e6;
+        --light-gray: #f5f5f5;
+        --white: #ffffff;
+        --dark-orange: #f96702;
+        --bright-orange: #ff8400;
+        --blue: #008cff;
+        --mint: #00a3af;
+        --slate: #305868;
+        
+        --primary: var(--{{{Theme-Color}}}{{^Theme-Color}}blue{{/Theme-Color}});
+      }
+      
+      @media print {
+        .outflo-page {
+          width: 100vw !important;
+          height: calc(100vh - 1px) !important;
+          overflow: hidden;
+        }
+      }
+    </style>
+  </head>
+  <body style="background: white" class="solution-brief {{{ hide-page-two }}} ct-{{{Theme-Color}}}{{^Theme-Color}}blue{{/Theme-Color}}">
+    <div class="page one" style="height: calc(100vh - 1px); width: 100vw;">
+      <div class="bleed">
+        <!--<div class="placeholder"></div>-->
+        <div class="fit wrapper">
+          <div class="header">
+          	<div class="logos">
+              <div class="cloudera-logo">
+                <img src="{{{account.logos.New_2019_Colour_Cropped}}}">
+              </div>
+              {{#support-logo}}
+              <div class="seperator"></div>
+              <div class="support-logo">
+                <img src="{{{ support-logo }}}">
+              </div>
+              {{/support-logo}}
+            </div>
+            <div class="box-limit p document-type">
+              <div class="box-inner check-overflow">
+                <p>{{{Document-Type}}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="masthead">
+            {{#Title}}
+            <div class="box-limit h1 title">
+              <div class="box-inner check-overflow">
+                <h1>{{{Title}}}</h1>
+              </div>
+            </div>
+            {{/Title}}
+            {{#Subheading}}
+            <div class="box-limit h2 subheading">
+              <div class="box-inner check-overflow">
+                <h2>{{{Subheading}}}</h2>
+              </div>
+            </div>
+            {{/Subheading}}
+            {{#Descriptor}}
+            <div class="box-limit h3 descriptor">
+              <div class="box-inner check-overflow">
+                <h3>{{{Descriptor}}}</h3>
+              </div>
+            </div>
+            {{/Descriptor}}
+          </div>            
+          <div class="main">
+            <div class="sidebar">
+              <div class="sidebar-overflow check-overflow">
+                <div class="border"></div>
+                <div class="sidebar-inner">
+                  {{{ Sidebar-Text }}}
+                </div>
+                <div class="border"></div>
+              </div>
+            </div>
+            <div class="page-content">
+              <div class="page-content-overflow check-overflow">
+                {{#collection.front-page-sections}}
+                {{#block.text-section}}
+                {{{ copy }}}
+                {{/block.text-section}}
+                {{#block.image-section}}
+                {{#image}}
+                <img style="margin: 8pt 0;" src="{{{ image }}}" />
+                {{/image}}
+                {{#figure}}
+                <p class="caption">{{{ figure }}}</p>
+                {{/figure}}
+                {{/block.image-section}}
+                {{/collection.front-page-sections}}
+              </div>
+            </div>            
+          </div>
+          <div class="page-footer">
+            <div class="page-footer-logo">
+              <img src="{{{account.logos.New_2019_Colour_Cropped}}}">
+            </div>
+            <div class="page-footer-content">
+              <h3>{{{ company }}} {{{ adress }}}<span class="website">{{{ website }}}</span></h3>
+              <p>{{{ details }}}</p>
+            </div>
+          </div>
+        </div>
+      </div><!--bleed-->
+    </div><!--page-->
+
+    <div class="main-flow" id="print-container">
+      <div style="position: relative; padding: 0 0 0 0; height: 90%; margin-bottom: 100px;">
+        {{#collection.content}}
+        <div class="body-copy">
+          {{#block.block-copy}}
+          {{{ flow-copy }}}
+          {{/block.block-copy}}
+          {{#block.block-image}}
+          <img src="{{{ flow-image }}}">
+          {{#figure}}<p style="font-size: 7pt;">{{{ figure }}}</p>{{/figure}}
+          {{/block.block-image}}
+        </div>
+        {{/collection.content}}
+      </div>
+
+      <div class="about-section">
+        <div class="gray pattern about"></div>
+        <div class="about-inner">
+          {{{ about }}}
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="page-two cloudera-logo">
+          <img src="{{{account.logos.New_2019_Colour_Cropped}}}">
+        </div>
+        <div class="footer-inner">
+          <h3>{{{ company }}} {{{ adress }}}<span style="margin-left: 5px;" class="website">{{{ website }}}</span></h3>
+          <p>{{{ details }}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar__wrapper">
+      {{#collection.sidebars}}
+      {{#block.block-sidebar}}
+      <div class="sidebar injectable">
+        {{#sidebar-image}}
+        <div class="sidebarImg__wrapper">
+          <img style="display: block; width: 100%;" src="{{{sidebar-image}}}">
+        </div>
+        {{/sidebar-image}}
+        {{#flow-copy}}<div class="sidebar-offset-inner check-overflow">{{{ flow-copy }}}</div>{{/flow-copy}}
+      </div>
+      {{/block.block-sidebar}}        
+      {{/collection.sidebars}}
+    </div>
+
+    <script>
+      window.showCrop = {{show-crop}};
+    </script>
+    <script src="main.js"></script>
+    <script src="prefixfree.js"></script>
+
+    <script type="text/javascript" src="css-regions-polyfill.min.js"></script>
+    <script type="text/javascript" src="outflo.js"></script>
+
+    <script>
+
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+      } setInterval(loop, 5000);
+
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {            
+            if (!(currentElement).parentNode.classList.contains('overflow')) {
+              parent.classList.add('overflow');
+            }
+          } else {
+            // Check that we have alreadyflow in the first place
+            if ((currentElement).parentNode.classList.contains('overflow')) {
+              parent.classList.remove('overflow');
+            }
+          }
+        }
+      }
+
+      var print = new OutFlo({
+        domID: 'print-container', // The id of the HTML element that contains the content to be printed
+        size: '{{{ format-size }}}', // Dimensions when printed (A4, A3, letter, legal, or tabloid), takes precedence over width and height
+        width: 816, // Width when printed (pixels), does not apply if size is set
+        height: 1056, // Height when printed (pixels), does not apply if size is set
+        marginTop: 0, // Margin when printed (pixels), defaults to 0 if omitted
+        marginBottom: 0, // Margin when printed (pixels), defaults to 0 if omitted
+        marginLeft: 72, // Margin when printed (pixels), defaults to 0 if omitted
+        marginRight: 72, // Margin when printed (pixels), defaults to 0 if omitted
+        showCrop: {{ show-crop }}, // Weather to show crop or, defaults to 0 if Digital PDF
+        bleedPadding: '6.7mm', // The padding for the bleed when turning on showCrop, defaults to 6.7mm
+        createHeaderTemplate: function(pageNumber) { // Optional, called every time a page is created, should return a DOM node
+        	var header = document.createElement('div');
+        	header.innerHTML = `<div class="p document-type" style="position: absolute; top: 46pt; right: 56pt;"><p>{{{ Document-Type }}}</p></div>`;
+        	return header;
+      	},
+        createFooterTemplate: function(pageNumber) { // Optional, called every time a page is created, should return a DOM node
+          var footer = document.createElement('div');
+          footer.innerHTML = ``
+
+          return footer;
+        },
+        before: function() { //Optional, runs before printing
+          // Do any necessary preparations for printing
+       	},
+        after: function() { //Optional, runs after printing
+          // Clean up any preparations for printing
+        }
+      });
+
+      window.addEventListener('load', function() {
+        print.pagify();
+      });
+
+      /* Sidebar Injection Script Must be run after print.pagify() */
+      document.addEventListener('printready', sideBarInit);
+
+      function sideBarInit(){
+        // Grab the Sidebars.
+        var allBars = document.querySelectorAll(".sidebar.injectable");
+        // Find the Print Container
+        var printContainer = document.getElementById("print-container");
+        var outflowDiv = printContainer.nextSibling;
+
+        // Grab all the Pages
+        var pages = outflowDiv.querySelectorAll(".outflo-region");
+
+        loadSideBars(allBars,pages);
+      }
+
+      function loadSideBars(allBars,pages) {
+        // Loop through and populate
+        if(allBars.length > document.querySelectorAll("cssregion").length) {
+          allBars.item(allBars.length - 1).innerHTML = "Sorry you cannot have more sidebars than pages in your document";
+          allBars.item(allBars.length - 1).classList.add("overflow");
+          allBars.item(allBars.length - 1).classList.add("excess-sidebar");
+        }
+
+        for(var i = 0; i < allBars.length; i++) {
+          var bar = allBars.item(i);
+          var page = pages.item(i);
+
+          // Check for nulls.
+          if(bar == undefined || page == undefined) { return }          
+
+          // Add position relative
+          page.classList.add("relative");
+
+          // Inject side bar into relevant page
+          page.appendChild(bar);
+        }
+      }
+    </script>
+  </body>
+</html>
