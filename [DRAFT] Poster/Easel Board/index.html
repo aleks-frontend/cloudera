@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Print Generic</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Akzidenz%20Grotesk/stylesheet.css" rel="stylesheet" />
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Calibre/stylesheet.css" rel="stylesheet" />
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/neuePlak/stylesheet.css" rel="stylesheet" />
+    <script src="tinycolor.js"></script>
+    <link rel="stylesheet" href="minireset.css" />
+    <link rel="stylesheet" href="crop.css" />
+    <style>
+      * {
+        --webkit-font-smoothing: antialiased;
+      }
+      body { font-family: 'Neue Plak Text'; }
+      body.show-crop .page {
+        height: calc(100vh - 1px) !important;
+      }
+
+      .logos img {
+        width: 100%;
+      }
+
+      .overflow {
+        border: 1px dashed red;
+        position: relative; }
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 5px;
+        right: 5px;
+        height: 15px;
+        width: 15px;
+        border: 1px solid red;
+        color: red;
+        padding: 2px 2px 2px 3px;
+        box-sizing: border-box;
+        font-size: 13px;
+        text-align: center;
+        line-height: 8px;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 25px;
+        right: 5px;
+        background-color: black;
+        color: white;
+        border-radius: 2px;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.1em;
+        text-align: right;
+        width: 15em;
+      }
+
+      .fit {
+        margin: 3mm;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      .header-image-inner { position: relative; height: 100%; }
+      .header { width: 80%; max-height: 7.8em; }
+      .header h1 { margin: 8pt 0 0 0; color: {{{account.colors.cloudera-blue--new-}}}; font-family: 'Neue Plak Extended'; font-size: 25pt; font-weight: normal; line-height: 1.2em; letter-spacing: 0.04em; }
+      .header h2 { margin: 0 0 14pt 0; color: black; font-family: 'Neue Plak Extended'; font-size: 12.5pt; font-weight: normal; letter-spacing: 0.04em; }
+      .header h1 .token-value { font-family: 'Neue Plak Extended'; }
+      .header h2 .token-value { font-family: 'Neue Plak Extended'; }
+      .header h3 { margin: 0.9em 0 0 0; color: {{{account.colors.cloudera-blue--new-}}}; font-size: 1.2em; }      
+
+      .placeholder {
+        background-image: url('');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.7;
+        z-index: 100;
+        pointer-events: none;
+      }
+
+      /* .with-logo .blueprint { background-image:url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/a4d1dcf63abc75f066bb4f910677fbd0/clo_event_signage_2x3_101.png'); }
+      .with-title .blueprint { background-image:url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/6f3302e874340f73e4778a90853d9356/clo_event_signage_2x3_101.png'); }
+      .logo-only .blueprint { background-image:url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/4dd57e622caa45860e796aaf842cf681/clo_event_signage_2x3_101.png'); }
+      */
+
+      .orange .header-data-line,
+      .bright-orange .header-data-line {
+        background-image: url(https://files.outfit.io/media_library_items/92929/birght-orange-data-line.png);
+      }
+
+      .blue .header-data-line, 
+      .cloudera-blue .header-data-line {
+        background-image: url(https://files.outfit.io/media_library_items/92923/blue-data-line-artwork.png);
+      }
+
+      .grey .header-data-line,
+      .cloudera-slate .header-data-line {
+        background-image: url(https://files.outfit.io/media_library_items/92928/cloudera-slate-data-line.png);
+      }
+
+      .header-data-line {
+
+        background-size: 100%;
+        background-position: 0% 0%;
+        position: absolute;
+        top: 0mm;
+        height: 241pt;
+        background-repeat:no-repeat;
+      }
+
+      .footer-data-line {
+        background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/f18dea114a2af8f474ab5024325d7356/zh-qrAsset%208%404x.png');
+        background-size: 100%;
+        background-position: 0% 0%;
+        position: absolute;
+        bottom: 0mm;
+        height: 239pt;
+        background-repeat:no-repeat;
+      }
+
+      .logos {
+        padding-left: 25pt;
+        margin-top: -8pt;
+      }
+
+      .cloudera-logo {
+        width: 926pt;
+      }
+
+      .event-logo {
+        height: 32pt;
+      }
+
+      .intro {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 37pt;
+      }
+      .blueprint {
+        background-image:url('');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 100;
+        pointer-events: none;
+        opacity: 0.7;
+      }
+      .show{
+        display:block;
+      }
+      .hide{
+        display:none;
+      }
+      /* BODY */
+      .body {
+        position: absolute;
+        top: 116mm;
+        left: 36mm;
+        right: 36mm;
+        bottom: 127mm;
+      }
+
+
+      p, li {
+        font-size: 23pt;
+        font-weight: normal;
+        line-height: 1.18em;
+        color: #221F20;
+      }
+
+      strong {
+        font-weight: bold; 
+      }
+
+      ul {
+        margin-top: 3pt;
+      }
+
+      li:before {
+        content: '_';
+        padding-right: 7pt;
+      }
+
+      .disclaimer {
+        margin-top: 9pt;
+        font-size: 16pt;
+        line-height: 1.2em;
+      }
+
+      .text-container {
+        margin-bottom: 22pt;
+      }
+
+      .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 2pt;
+        flex-shrink: 0;
+      }
+
+      .row p:first-child {
+        width: 33%;
+      }
+
+      .row p:last-child {
+        width: 64%;
+      }
+
+      .url {
+        width: 100%;
+        text-align: center;
+        font-size: 23pt;
+        font-weight: bold;
+        line-height: 1.18em;
+        color: #221F20;
+        position: absolute;
+        bottom: -8pt;
+        left: 0;
+        right: 0;
+      }
+
+      .url span {
+        color: {{{account.colors.cloudera-blue--new-}}};
+      }
+
+      .flyer-copy {
+        max-height: 4.8em;
+      }
+
+      /* A4 ADJUSTMENTS */
+      .a4 .body {
+        top: 336pt;
+        left: 96pt;
+        right: 96pt;
+        bottom: 334pt;
+      }
+
+      .a4 .header-data-line, .a4 .footer-data-line {
+        left: 34mm;
+        right: 34mm;
+      }
+
+      .a4 .free-text {
+        max-height: 500px;
+      }
+
+      .a4 .left {
+        width: 34%;
+      }
+
+      .a4 .right {
+        width: 64%;
+      }  
+
+      .a4 .flyer-copy {
+        max-height: 6em;
+      }
+
+
+
+      .header{
+        display: flex;
+        position: absolute;
+
+      }
+
+      .header img{
+        width: 42.73em;
+        height: 6.69em;
+
+      }
+      .logo{
+        display:flex;
+        position:absolute;
+        bottom:0em;
+      }
+      .footer-background{
+        width: 42.73em;
+        height: 6.69em;
+      }
+      .footer-logo{
+        height: 100%;
+        width: auto;
+      }
+
+      .main{
+        display: flex;
+        width: 100%;
+        background: #313e49;
+        height: 100%;
+      }
+
+      .title{
+        color: #fff;
+        font-size: 150pt;
+        font-family: Neue Plak Extended;
+        font-weight: normal;
+        letter-spacing: 0.04em;
+        margin: 0px;
+      }
+     
+
+      .headline{
+        display: flex;
+        color: #fff;
+        font-family: Neue Plak Extended;
+        font-weight: normal;
+        letter-spacing: 0.04em;
+        margin: 0px;
+
+      }
+      .with-logo .large .headline-overflow{
+        max-height: 900pt;
+        top: 412pt;
+        left: 99pt;
+        position: absolute;
+        overflow: hidden;
+        width: 90%;
+      }
+      .with-title .large .headline-overflow{
+        max-height: 900pt;
+        top: 569pt;
+        left: 99pt;
+        position: absolute;
+        overflow: hidden;
+        width: 90%;
+      }
+
+
+      .large .headline{
+        line-height: 284pt;
+        font-size: 247pt;        
+      }
+      .small .headline-overflow{
+        position: absolute;
+        top: 595pt;
+        left: 92pt;
+        max-height: 876pt;
+        overflow: hidden;
+      }
+
+
+      .small .headline{
+        font-size: 182pt;
+        line-height: 1.16em;
+
+      }
+
+      .blue .headline,
+      .cloudera-blue .headline {
+        color: {{{account.colors.cloudera-blue--new-}}};
+      }
+      .blue .orange-image,
+      .cloudera-blue .orange-image {
+        display:none;
+      }
+
+      .orange .headline, 
+      .bright-orange .headline {
+        color: {{{account.colors.cloudera-bright-orange--new-}}};
+      }
+
+      .orange .blue-image,
+      .bright-orange .blue-image {
+        display:none;
+      }
+
+      .grey .headline,
+      .cloudera-slate .headline {
+        color: {{{account.colors.cloudera-blue--new-}}};
+      }
+
+      .with-title .cloudera-logo{
+        display:none;
+      }
+      .with-title .logo_only{
+        display:none;
+      }
+      .with-logo .title{
+        display:none;
+      }
+      .with-logo .logo_only{
+        display:none;
+      }
+      .logo-only .text_only{
+        display:none;
+      }
+
+      .logo_only img{
+        width: 1199pt;
+        position: absolute;
+        top: 47%;
+        left: 49%;
+        transform: translate(-50%, -50%);
+      }
+
+
+      .title-container{
+
+        height:100%;
+      }
+
+      .headline-container{
+        height:100%;
+      }
+      .with-logo .title-overflow{
+        display: block;
+        position: absolute;
+        left: 106pt;
+        width: 1330pt;
+        top: 258pt;
+        max-height: 180pt;
+        overflow: hidden;  
+      }
+
+      .with-title .title-overflow {
+        display: block;
+        position: absolute;
+        left: 99pt;
+        width: 1330pt;
+        top: 376pt;
+        max-height: 180pt;
+        overflow: hidden;
+      }
+        .title-wrapper{
+          display: flex;
+          max-width: 18em;
+          position: absolute;
+          top: 7.1em;
+          left: 2.72em;
+        }
+
+        .headline-overflow{
+          left: 105pt;
+          width: 1330pt;
+          top: 592pt;
+          position: absolute;
+          overflow: hidden;
+        }
+
+
+        .header-wrapper{
+          display: flex;
+          max-width: 18em;
+          position: absolute;
+          top: 7.1em;
+          left: 2.72em;
+        }
+
+
+
+        .overflow {
+          border: 1px dashed red;
+          position: relative; }
+        .overflow h1, 
+        .overflow h2, 
+        .overflow h3, 
+        .overflow h4, 
+        .overflow h5, 
+        .overflow h6, 
+        .overflow p, 
+        .overflow li { color: red !important; }
+        .overflow::before {
+          content: '+';
+          position: absolute;
+          z-index: 5;
+          top: 5px;
+          right: 5px;
+          height: 15px;
+          width: 15px;
+          border: 1px solid red;
+          color: red;
+          padding: 2px 2px 2px 3px;
+          box-sizing: border-box;
+          font-size: 13px;
+          text-align: center;
+          line-height: 8px;
+          background-color: white;
+          text-align: center; }
+        .overflow:hover:before {
+          background-color: red;
+          color: white; }
+        .overflow:after {
+          display: none; }
+        .overflow:hover:after {
+          display: block;
+          content: 'There is overset content in this column. Please remove it';
+          position: absolute;
+          top: 25px;
+          right: 5px;
+          background-color: black;
+          color: white;
+          border-radius: 2px;
+          padding: 5px;
+          box-sizing: border-box;
+          font-size: 11px;
+          font-weight: 400;
+          line-height: 1.1em;
+          text-align: right;
+          width: 15em;
+        }
+
+	
+		@media (min-width: 8.4in) and (max-width: 8.6in) and (min-height: 13.9in) and (max-height: 14.1in) {
+          body {
+            font-size: 5px;
+          }
+          .a4 .header-data-line,
+          .a4 .footer-data-line,
+          .a4 .body {
+            left: 8em;
+            right: 8em;
+          }
+          
+          .a4 .body {
+            top: 31em;
+            bottom: 31em;
+          }
+          
+          .a4 .header-data-line,
+          .a4 .footer-data-line {
+            height: 22em;
+          }
+          .footer-logo {
+            width: 44em;
+            top: 6em;
+            left: 8em;
+          }
+          .logo_only img {
+            width: unset;
+            max-width: 75%;
+            top: 50%;
+            left: 50%;
+          }
+          .with-title .title-overflow,
+          .with-title .large .headline-overflow,
+          .with-logo .large .headline-overflow,
+          .small .headline-overflow,
+          .with-logo .title-overflow {
+            left: 8em;
+            width: 125em;
+          }
+          .title-wrapper {
+            left: 0;
+          }          
+          .with-title .title-overflow {
+            top: 34em
+          }
+          .with-title .large .headline-overflow,
+          .small .headline-overflow {
+            top: 55em;
+          }
+          .title {
+            font-size: 28pt;
+          }
+          .large .headline {
+            font-size: 26pt;
+            line-height: 1.2em;
+          }
+          .small .headline {
+            font-size: 16pt;
+          }
+          .cloudera-logo {
+            max-width: 100%;
+            max-height: 100%;
+            width: initial;
+          }
+          .with-logo .title-overflow {
+            height: 120pt;
+            top: 30em;
+          } 
+          .with-logo .small .headline-overflow,
+          .with-logo .large .headline-overflow {
+            top: 80em;
+          }
+        }
+      
+      @media (min-width: 13.9in) and (max-width: 14.1in) and (min-height: 8.4in) and (max-height: 8.6in) {
+          body {
+            font-size: 5px;
+          }
+          .a4 .header-data-line,
+          .a4 .footer-data-line,
+          .a4 .body {
+            left: 10em;
+            right: 10em;
+          }
+          
+          .a4 .body {
+            top: 31em;
+            bottom: 31em;
+          }
+          
+          .a4 .header-data-line,
+          .a4 .footer-data-line {
+            height: 22em;
+          }
+          .footer-logo {
+            width: 44em;
+            top: 6em;
+            left: 8em;
+          }
+          .logo_only img {
+            width: unset;
+            max-width: 75%;
+            max-height: 75%;
+            top: 50%;
+            left: 50%;
+          }
+          .with-title .title-overflow,
+          .with-title .large .headline-overflow,
+          .with-logo .large .headline-overflow,
+          .small .headline-overflow,
+          .with-logo .title-overflow {
+            left: 8em;
+            width: 230em;
+          }
+          .title-wrapper {
+            left: 0;
+          }          
+          .with-title .title-overflow {
+            top: 10em
+          }
+          .with-title .large .headline-overflow,
+          .small .headline-overflow {
+            top: 30em;
+          }
+          .title {
+            font-size: 28pt;
+          }
+          .large .headline {
+            font-size: 26pt;
+            line-height: 1.2em;
+          }
+          .small .headline {
+            font-size: 16pt;
+          }
+          .cloudera-logo {
+            max-width: 100%;
+            max-height: 100%;
+            width: initial;
+          }
+          .with-logo .title-overflow {
+            height: 120pt;
+            top: 10em;
+          } 
+          .with-logo .small .headline-overflow,
+          .with-logo .large .headline-overflow {
+            top: 55em;
+          }
+      }
+    </style>
+  </head>
+  <body style="background: white" class="a4">
+    <div class="page-one page">
+      <div class="bleed">
+        <div class="document {{ClouderaPosterType}}  {{^ClouderaPosterType}} with-logo {{/ClouderaPosterType}}">
+          <div class="fit {{ClouderaTheme}} {{^ClouderaTheme}} orange {{/ClouderaTheme}}">
+            <div class="blueprint"></div>
+            <!--<div class="placeholder"></div>-->
+
+            <div class="header-data-line">
+
+            </div>
+
+            <div class="body">
+              <div class="main {{Headline-Font-Size}}  {{^Headline-Font-Size}} large {{/Headline-Font-Size}}">
+                <div class="text_only">
+                  <div class="title-wrapper">
+                    <div class="title-overflow">
+                      <div class="title-container">
+                        <p class="title">
+                          {{{Title}}}
+                        </p>
+                        <img class="cloudera-logo" src="{{{logo}}}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="headline-overflow">
+                    <div class="headline-container">
+                      <h1 class="headline"> {{{headline}}}</h1>
+                    </div>
+                  </div><!--headline-->
+                </div>
+                <div class="logo_only">
+                  <img src="{{main-logo}}">
+                </div>
+
+
+
+              </div>
+            </div><!--body-->
+
+            <div class="footer-data-line">
+              <img  class="footer-logo {{display-logo}}" src="{{{ account.logos.New_2019_Primary }}}">
+            </div>
+
+          </div>
+        </div><!--document-->
+
+      </div><!--bleed-->
+    </div><!--page-->
+
+    <script>
+      window.showCrop = {{show-crop}};
+      
+      if (window.showCrop === true) {
+        document.body.classList.add('show-crop');
+      } else {
+        document.body.classList.remove('hide-crop'); 
+      }
+    </script>
+    <script src="main.js"></script>
+    <script src="prefixfree.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    <script>
+      function checkLimitedText() {
+        Array.prototype.slice.call(document.querySelectorAll('.text-overflow'))
+          .forEach(function(e) {
+          const height = $(e).height();          	
+          const maxHeight = $(e).data('limit') 
+          ? parseFloat($(e).data('limit'))
+          : $(e).css('max-height');
+
+          $(e)
+            .css('max-height', 'none')
+            .attr('data-limit', maxHeight);
+
+          if (height > maxHeight) {
+            e.classList.add("overflow");
+          } else {
+            e.classList.remove("overflow");
+          }
+        });
+      }
+
+      function loop() {
+        checkLimitedText();
+      } setInterval(loop, 1000);
+
+      $(window).bind("load", function() {
+        // Document has been loaded..        
+      });
+    </script>
+
+    <script>
+
+      function loop() {
+        checkHeight(document.getElementsByClassName('sub-headline-container'));
+        checkHeight(document.getElementsByClassName('body-container'));
+        checkHeight(document.getElementsByClassName('title-container'));
+        checkHeight(document.getElementsByClassName('headline-container'));
+        checkHeight(document.getElementsByClassName('body-container'));
+
+        /* Add any other text boxes you want to check the overflows on with the following: checkHeight(document.getElementsByClassName('CLASS NAME')); */
+
+      } setInterval(loop, 500);
+
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }
+
+    </script>
+
+  </body>
+</html>
