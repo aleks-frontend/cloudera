@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html async>
+    <head>
+    <title>Print Generic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Akzidenz%20Grotesk/stylesheet.css" rel="stylesheet">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Neue Plak Text/stylesheet.css" rel="stylesheet">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/neuePlak/stylesheet.css" rel="stylesheet">
+     <link href="minireset.css" rel="stylesheet">
+    <style>
+
+      .placeholder {
+        background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/5b444655d83cb6938f67d42279e16f35/Cloudera_event%20prospectus%20v2_FINAL_ART_121017_Page_2.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.7;
+        z-index: 100;
+        pointer-events: none;
+      }
+
+      html {
+        -webkit-font-smoothing: antialiased;
+        font-family: 'Neue Plak Text', sans-serif !important;
+        background-color: #fff;
+      }
+      
+      p, h1, h2, h3, h4, h5, h6, li, ul, ol {
+        min-height: 10px;
+      }
+      
+      .cover-page h1 {
+        font-family: 'Neue Plak Extended';
+        font-size: 63pt !important;
+        line-height: 0.92em !important;
+        letter-spacing: 0.04em !important;
+        color: {{{account.colors.cloudera-blue--new-}}};
+      }
+      
+      h1 .tinymce_style--dark {
+        color: {{{account.colors.cloudera-slate--new-}}};
+      }
+      
+      h1 .tinymce_style--light {
+        color: {{{account.colors.cloudera-bright-orange--new-}}};
+      }
+      
+      h1 {
+        font-family: 'Neue Plak Extended';
+        text-transform: uppercase;
+        font-size: 44pt !important;
+        margin-bottom: 5.5pt !important;
+        font-weight: normal;
+        line-height: 1.05em !important;
+        letter-spacing: 0.04em !important;
+        color: {{{account.colors.cloudera-blue--new-}}};
+      }
+      
+      h2 {
+        font-family: 'Neue Plak Extended';
+        font-weight: normal;
+        font-size: 27pt !important;
+        line-height: 1.2em !important;
+        color: {{{account.colors.cloudera-slate--new-}}};
+      }
+      
+      h3 {
+        font-family: 'Neue Plak Text';
+        font-weight: normal;
+        font-size: 18pt !important;
+        line-height: 1.2em !important;
+        margin-bottom: 19.5pt !important;
+        color: {{{account.colors.cloudera-slate--new-}}};
+      }
+      
+      h4 {
+        font-family: 'Neue Plak Text';
+        font-weight: bold;
+        font-size: 14pt;
+        line-height: 1.2em;
+        margin-bottom: 4pt;
+        color: {{{account.colors.cloudera-blue--new-}}};
+      }
+      
+      h5 {
+        font-family: 'Neue Plak Text';
+        font-weight: normal;
+        font-size: 12pt !important;
+        line-height: 1.2em !important;
+        color: {{{account.colors.cloudera-slate--new-}}};
+      }
+      
+      p {
+        font-family: 'Neue Plak Text';
+        font-weight: normal;
+        font-size: 11pt !important;
+        line-height: 1.36em !important;
+        margin-bottom: 15pt !important;
+        color: {{{account.colors.cloudera-slate--new-}}};
+      }
+      
+      p ~ p {
+        margin-bottom: 5pt !important;
+      }
+      
+      h5 ~ p {
+        margin-bottom: 15pt !important;
+      }
+      
+      ul {
+        list-style-position: inside;
+        list-style: none;
+      }
+      ul, ol {
+        margin-bottom: 24.83pt;
+      }      
+      ol ul,
+      ul ol {
+        margin-bottom: 5pt !important;
+      }
+      
+      li {
+        font-family: 'Neue Plak Text';
+        font-weight: normal;
+        font-size: 11pt !important;
+        line-height: 1.36em !important;
+        color: {{{account.colors.cloudera-slate--new-}}};
+        position: relative;
+        padding-left: 4pt;
+        margin-bottom: 0;
+      }
+      
+      li p {
+        margin-bottom: 2pt !important;
+      }
+      ol {
+        padding: 0 0 0 0.9em;
+      }
+      
+      ul>li:before {
+        color: inherit !important;
+        content: '_';
+        position: absolute;
+        left: 0;
+        font-family: 'Neue Plak Text' !important;
+        font-weight: normal !important;
+      }
+
+      strong {
+        font-weight: bold;
+      }
+      
+      h1, h2, h3, h4, h5, h6 { margin: 0; line-height: 1.2em; }
+      p { line-height: 1.5em; }
+
+      .header { width: 100%; height: 0; position: relative; }
+      .footer-container { position: relative; }
+
+      .title { position: absolute; top: 2.4rem; left: 0; }
+      .title h1 { color: {{{account.colors.cloudera-slate--new-}}}; font-size: 1.2em; font-weight: bold; text-transform: uppercase; }
+
+      .page .logo { position: absolute; top: -57pt; left: -34pt; width: 122pt; }
+      .page .logo img { width: 100%; }
+      
+      .event-logo { height: 75px; }
+      .event-logo img { max-height: 100%; }
+
+      #region-container { top: auto !important; }
+
+      .outflo-region { position: relative; }
+
+      .page { position: relative; }
+
+      .main { counter-reset: section; }
+	  
+      .footer {
+        font-family: 'Neue Plak Text';
+        font-weight: normal;
+        color: #333e47;
+        font-size: 7pt;
+        line-height: 1.2em;
+        border-top: 1px solid #333e47;
+        padding-top: 1pt;
+        position: absolute;
+        bottom: -86pt;
+        right: 0;
+        left: 0;
+      }
+      
+      .footer:before {
+        counter-increment: section;
+        content: counter(section);
+        font-size: 10px;
+        font-weight: bold;
+        padding-right: 8pt;
+      }
+
+      .cover-page {     
+        width: 100%;
+        height: 100vh;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        padding: 48px;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .cover-page .logo {
+        position: absolute;
+        top: 49pt;
+        left: 44pt;
+        width: 122pt;
+        height: 27pt;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      
+      .headline-container {
+        position: absolute;
+        top: 190pt;
+        left: 80pt;
+        width: 460pt;
+        height: 510pt;
+      }
+      
+      .headline-container h2 {
+        margin-top: 23pt;
+      }
+      
+      div[id*='outflo-region-container'] > div {
+        position: relative;
+      }
+      
+      div[id*='outflo-region-container'] > div:first-child:before {
+        content: '';
+        background-image: url("https://files.outfit.io/media_library_items/92932/cloudera-blue-vertical.png");
+        position: absolute;
+        top: 130pt;
+        left: 0;
+        bottom: 57pt;
+        width: 45pt;
+        background-size: cover;
+      }
+      
+      div[id*='outflo-region-container'] > div:before {
+        content: '';
+        background-image: url("https://files.outfit.io/media_library_items/92931/grey-vertical.png");
+        position: absolute;
+        top: 130pt;
+        left: 0;
+        bottom: 57pt;
+        width: 45pt;
+        background-size: cover;
+      }
+      
+      .cover-page:before {
+        content: '';
+        background-image: url("https://files.outfit.io/media_library_items/92932/cloudera-blue-vertical.png");
+        position: absolute;
+        top: 130pt;
+        left: 0;
+        bottom: 57pt;
+        width: 45pt;
+        background-size: cover;
+      }
+      
+      .form {
+        width: 100%;
+      }
+      
+      .form .form-row {
+        border-bottom: 1px solid #000;
+        display: flex;
+        flex-direction: row;
+        margin-top: 11pt;
+      }
+      
+      .form .form-row .form-cell:first-child {
+        width: 60%;
+      }
+      
+      .form .form-row .form-cell:nth-child(even) {
+        width: 20%;
+      }
+      
+      .form .form-row .form-cell:last-child {
+        width: 20%;
+      }
+      
+      .form .form-cell {
+        font-size: 7.5pt;
+        line-height: 1.2em;
+        font-family: 'Neue Plak Text';
+        font-weight: normal;
+      }
+      
+      .two .cover-page:before {
+		background-image: url('https://files.outfit.io/media_library_items/93850/birght-orange-vertical.png');
+        width: 45pt;
+        background-size: cover;
+      }
+      
+      .two div[id*='outflo-region-container'] > div:first-child:before { 
+        background-image: url('https://files.outfit.io/media_library_items/93850/birght-orange-vertical.png');
+        background-size: cover;
+        bottom: 57pt;
+      }
+      
+      .two .cover-page:after {
+        content: '';
+        background-size: 13%;
+        position: absolute;
+        top: 130pt;
+        left: 22.5pt;
+        right: 0;
+        bottom: 57pt;
+        width: 100%;
+        z-index: -1;
+        background-color: {{{account.colors.cloudera-slate--new-}}};
+      }
+      
+      .two .headline-container h2 { color: {{{account.colors.cloudera-bright-orange--new-}}}; }
+      .two h4 { color: {{{account.colors.cloudera-slate--new-}}}; }
+      
+      .headline-two {
+        font-size: {{{ headline-font-size }}}pt !important;
+      }
+      
+      /*  ### START Table Stlying ### */
+      table { 
+        width: 100%; 
+        margin: 0 0 1em;
+      }
+      table td { font-weight: normal; padding: 1px 1px 1px 3px; font-size: 8.4pt; vertical-align: top; }      
+      
+      table tr td:last-child {
+        border-right: none;
+      }
+      
+      .table-row td { border-bottom: 1px solid {{{account.colors.cloudera-blue--new-}}}; background-color: white; line-height: 1em; }
+      .table-row td { border-right: 1px solid {{{account.colors.medium-gray}}}; }
+      /* .table-row:nth-child(odd) td { background-color: {{{account.colors.light-gray}}}; } */
+
+      /* 1 */
+      .row-align-1 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+	        
+      /* 2 */
+      .row-align-2 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-2 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      
+      /* 3 */
+      .row-align-3 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-3 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      .row-align-3 .table-row td:nth-last-child(3) { text-align: center; vertical-align: middle; }
+      
+      /* 4 */
+      .row-align-4 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-4 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      .row-align-4 .table-row td:nth-last-child(3) { text-align: center; vertical-align: middle; }
+      .row-align-4 .table-row td:nth-last-child(4) { text-align: center; vertical-align: middle; }
+      
+      /* 5 */
+      .row-align-5 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-5 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      .row-align-5 .table-row td:nth-last-child(3) { text-align: center; vertical-align: middle; }
+      .row-align-5 .table-row td:nth-last-child(4) { text-align: center; vertical-align: middle; }
+      .row-align-5 .table-row td:nth-last-child(5) { text-align: center; vertical-align: middle; }
+      
+      /* 6 */
+      .row-align-6 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-6 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      .row-align-6 .table-row td:nth-last-child(3) { text-align: center; vertical-align: middle; }
+      .row-align-6 .table-row td:nth-last-child(4) { text-align: center; vertical-align: middle; }
+      .row-align-6 .table-row td:nth-last-child(5) { text-align: center; vertical-align: middle; }
+      .row-align-6 .table-row td:nth-last-child(6) { text-align: center; vertical-align: middle; }
+      
+      /* 7 */
+      .row-align-7 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-7 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      .row-align-7 .table-row td:nth-last-child(3) { text-align: center; vertical-align: middle; }
+      .row-align-7 .table-row td:nth-last-child(4) { text-align: center; vertical-align: middle; }
+      .row-align-7 .table-row td:nth-last-child(5) { text-align: center; vertical-align: middle; }
+      .row-align-7 .table-row td:nth-last-child(6) { text-align: center; vertical-align: middle; }
+      .row-align-7 .table-row td:nth-last-child(7) { text-align: center; vertical-align: middle; }
+      
+      /* 8 */
+      .row-align-8 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-8 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      .row-align-8 .table-row td:nth-last-child(3) { text-align: center; vertical-align: middle; }
+      .row-align-8 .table-row td:nth-last-child(4) { text-align: center; vertical-align: middle; }
+      .row-align-8 .table-row td:nth-last-child(5) { text-align: center; vertical-align: middle; }
+      .row-align-8 .table-row td:nth-last-child(6) { text-align: center; vertical-align: middle; }
+      .row-align-8 .table-row td:nth-last-child(7) { text-align: center; vertical-align: middle; }
+      .row-align-8 .table-row td:nth-last-child(8) { text-align: center; vertical-align: middle; }
+      
+      /* 9 */
+      .row-align-9 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-9 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      .row-align-9 .table-row td:nth-last-child(3) { text-align: center; vertical-align: middle; }
+      .row-align-9 .table-row td:nth-last-child(4) { text-align: center; vertical-align: middle; }
+      .row-align-9 .table-row td:nth-last-child(5) { text-align: center; vertical-align: middle; }
+      .row-align-9 .table-row td:nth-last-child(6) { text-align: center; vertical-align: middle; }
+      .row-align-9 .table-row td:nth-last-child(7) { text-align: center; vertical-align: middle; }
+      .row-align-9 .table-row td:nth-last-child(8) { text-align: center; vertical-align: middle; }
+      .row-align-9 .table-row td:nth-last-child(9) { text-align: center; vertical-align: middle; }  
+      
+      /* 10 */
+      .row-align-10 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-10 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      .row-align-10 .table-row td:nth-last-child(3) { text-align: center; vertical-align: middle; }
+      .row-align-10 .table-row td:nth-last-child(4) { text-align: center; vertical-align: middle; }
+      .row-align-10 .table-row td:nth-last-child(5) { text-align: center; vertical-align: middle; }
+      .row-align-10 .table-row td:nth-last-child(6) { text-align: center; vertical-align: middle; }
+      .row-align-10 .table-row td:nth-last-child(7) { text-align: center; vertical-align: middle; }
+      .row-align-10 .table-row td:nth-last-child(8) { text-align: center; vertical-align: middle; }
+      .row-align-10 .table-row td:nth-last-child(9) { text-align: center; vertical-align: middle; }  
+      .row-align-10 .table-row td:nth-last-child(10) { text-align: center; vertical-align: middle; }  
+
+      .table-main-header td {
+        text-transform: uppercase; border-top: 1px solid {{{account.colors.cloudera-slate--new-}}}; border-bottom: 1px solid {{{account.colors.cloudera-blue--new-}}};
+        font-size: 10pt; font-weight: bold; padding: 2px 5px 5px 5px; vertical-align: top;
+        border-right: 1px solid #D1D2D4; line-height: 1em;
+      }
+
+      .table-row-header { 
+        border-bottom: 1px solid {{{account.colors.cloudera-blue--new-}}};
+        color: {{{account.colors.cloudera-slate--new-}}};  
+      }
+
+      .table-row-header td { padding: 2px 1px 2px 3px; line-height: 1em; font-size: 9.5pt; font-weight: bold; background-color: {{{account.colors.medium-gray}}} !important; text-align: left !important; }
+	/* ### END Table Styles ### */
+      
+    </style>
+    <script src="moment.js"></script>
+    <script src="numeral.js"></script>
+  </head>
+  <body class="{{{ theme }}}">
+
+    <div class="main">
+
+      <div class="cover-page">
+        <div class="logo" style="background-image: url('{{{account.logos.New_2019_Primary_Cropped}}}')"></div>
+        
+        <div class="headline-container">
+          <div class="event-logo">
+            <img src="{{{ event-logo }}}">
+          </div>
+          <h1>{{{ headline-one }}}</h1>
+          <h2>{{{ subheading }}}</h2>
+        </div><!--headline-container-->
+        <div class="footer" style="visibility: hidden;"></div>
+      </div><!--cover-page-->
+
+      <div class="page">
+        <div class="main-text" id="print-container-1">
+         
+          <h1 class="headline-two">{{{ headline-two }}}</h1>
+          <h3>{{{ introduction-copy }}}</h3>
+          
+          {{#collection.prospectus-sections}}
+            {{#block.text-section}}
+              <div class="text {{label}}" style="margin-bottom: 25pt;">
+                {{{ body-copy }}}
+              </div>
+          	{{/block.text-section}}
+          
+            {{#block.form-section}}
+              <div class="form {{label}}" style="margin-bottom: 15pt;">
+                {{#form-headline}}<h5>{{{ form-headline }}}</h5>{{/form-headline}}
+                <div class="form">
+                  {{#spreadsheet.company-information}}
+                  <div class="form-row">
+                    {{#col-1}}
+                    <div class="form-cell">{{{ col-1 }}}</div>
+                    {{/col-1}}
+
+                    {{#col-2}}
+                    <div class="form-cell">{{{ col-2 }}}</div>
+                    {{/col-2}}
+
+                    {{#col-3}}
+                    <div class="form-cell">{{{ col-3 }}}</div>
+                    {{/col-3}}
+                  </div>
+                  {{/spreadsheet.company-information}}
+                </div><!--form-->
+              </div>
+            {{/block.form-section}}
+          
+          	<!-- ### START Table Section ### -->
+            {{#block.table-section}}
+              <table class="row-align-{{{ row-alignment }}}">
+                <tbody>
+
+                  {{#spreadsheet.table-rows}}
+                  <tr class="table-row {{{ row-style }}}">
+                    {{#col-1}}<td>{{{ col-1 }}}</td>{{/col-1}}
+                    {{#col-2}}<td>{{{ col-2 }}}</td>{{/col-2}}
+                    {{#col-3}}<td>{{{ col-3 }}}</td>{{/col-3}}
+                    {{#col-4}}<td>{{{ col-4 }}}</td>{{/col-4}}
+                    {{#col-5}}<td>{{{ col-5 }}}</td>{{/col-5}}
+                    {{#col-6}}<td>{{{ col-6 }}}</td>{{/col-6}}
+                    {{#col-7}}<td>{{{ col-7 }}}</td>{{/col-7}}
+                    {{#col-8}}<td>{{{ col-8 }}}</td>{{/col-8}}
+                    {{#col-9}}<td>{{{ col-9 }}}</td>{{/col-9}}
+                    {{#col-10}}<td>{{{ col-10 }}}</td>{{/col-10}}
+                  </tr>
+                  {{/spreadsheet.table-rows}}
+
+                </tbody>
+              </table>
+            {{/block.table-section}}
+          	<!-- ### END Table Section -->
+          {{/collection.prospectus-sections}}
+          
+          {{{ terms-and-conditions }}}
+        </div><!--main-text-->
+      </div><!--page-1-->
+
+    </div><!--main-->
+
+    <script type="text/javascript" src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/outflo.0.1.1.min.js"></script>
+    <script>
+
+      document.querySelectorAll('.date-field').forEach(function(el) {
+        el.textContent = el.textContent ? moment(el.textContent, "YYYY-MM-DD").format('DD/MM/YYYY') : '-';
+      });
+
+      document.querySelectorAll('.currency-field').forEach(function(el) {
+        el.textContent = el.textContent ? numeral(el.textContent).format('$0,0.00') : '-';
+      });
+
+      var print1 = new OutFlo({
+        domID: 'print-container-1', // The id of the HTML element that contains the content to be printed
+        size: 'letter', // Dimensions when printed (A4, A3, letter, legal, or tabloid), takes precedence over width and height
+        width: 816, // Width when printed (pixels), does not apply if size is set
+        height: 1056, // Height when printed (pixels), does not apply if size is set
+        marginTop: 143, // Margin when printed (pixels), defaults to 0 if omitted
+        marginBottom: 147, // Margin when printed (pixels), defaults to 0 if omitted
+        marginLeft: 105, // Margin when printed (pixels), defaults to 0 if omitted
+        marginRight: 161, // Margin when printed (pixels), defaults to 0 if omitted
+        createHeaderTemplate: function(pageNumber) { // Optional, called every time a page is created, should return a DOM node
+          var header = document.createElement('div');
+          header.innerHTML = "<div class='header'><div class='logo'><img src='{{{account.logos.New_2019_Primary_Cropped}}}'></div></div>"
+
+          return header;
+        },
+        createFooterTemplate: function(pageNumber) { // Optional, called every time a page is created, should return a DOM node
+          var footer = document.createElement('div');
+          footer.innerHTML = '<div class="footer-container"><div class="footer">{{{ footer-copy }}}</div></div>'
+
+          return footer;
+        },
+        before: function() { //Optional, runs before printing
+          // Do any necessary preparations for printing
+        },
+        after: function() { //Optional, runs after printing
+          // Clean up any preparations for printing
+        }
+      });
+
+      window.addEventListener('load', function() {
+        print1.pagify();
+      });
+
+    </script>
+  </body>
+</html>
