@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Print Generic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/stylesheets/main.css">
+    <link  rel="stylesheet" href="https://outfit-assets-production.s3.amazonaws.com/fonts/Calibre/stylesheet.css">
+    <link  rel="stylesheet" href="https://outfit-assets-production.s3.amazonaws.com/fonts/neuePlak/stylesheet.css">
+    <script src="https://cdn.jsdelivr.net/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <style>
+
+      .placeholder {
+        background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/76b0014081c1902f62d28138aacf0054/clo_event_4x3_name_badges_template_301_Page_1.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        z-index: 100;
+      }
+
+      /*
+      .placeholder.one {
+      background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/a87864d736601e76d9536a5aa9e5c1df/A4.png');
+      }
+      */
+
+      .show-crop-marks .test-background-image {
+        top: 0.5in;
+        left: 0.5in;
+        right: 0.5in;
+        bottom: 0.5in;
+      }
+
+      body { color: {{{account.colors.cloudera-blue--new-}}}; font-family: 'Neue Plak Text'; }
+
+      .logo {    
+        position: absolute;
+        top: 25.5pt;
+        left: 87pt;
+        width: 112pt;
+        z-index: 9999;
+      }
+
+      .block { position: absolute; top: 0; left: 0; right: 0; height: 67pt; background-color: {{{account.colors.cloudera-slate--new-}}}; }
+
+      .hashtag { position: absolute; bottom: 8.8pt; left: 18pt; right: 18pt; text-align: center; z-index: 9999; }
+      .hashtag p { color: white; font-size: 16.5pt; font-weight: normal; }
+
+      .text { position: absolute; top: 100pt; left: 18pt; right: 18pt; text-align: center; }
+      .text h1 { font-size: 21pt; font-weight: normal; }
+      .text h2 { margin: 0.8pt 0 0 0; font-size: 16.5pt; font-weight: normal; }
+
+      .label { position: absolute; top: 15pt; left: 15pt; font-size: 8pt; color: {{{account.colors.cloudera-slate--new-}}}; }
+      .texture { position: absolute; bottom: -10pt; left: 0; right: 0; }
+      .texture img { width: 100%; }
+
+    </style>
+  </head> 
+  <body>
+
+    <!-- where everything will be appended -->
+    <div class="pages"></div>
+
+    <!-- displayed none page template --> 
+    <div class="template" style="display: none">
+
+
+      <div class="page">
+        <div class="label">Avery Label 5392 </div>
+        <div class="test-background-image"></div>
+        <div class="document">
+          <!--<div class="placeholder one"></div>-->
+          <div class="content">
+            <div class="spreadsheet">
+            </div>
+          </div><!--content-->
+        </div><!--document-->
+      </div><!--page-->
+
+    </div>
+
+    {{#spreadsheet.names}}
+    <div class="names">
+      <div class="placeholder"></div>
+      <div class="block"></div>
+      <img class="logo" src="{{{account.logos.New_2019_Reversed_Cropped}}}">
+      <div class="text">
+        <h1>{{{ first-name }}} {{last-name}}</h1>
+        <h2>{{{ company }}}</h2>
+      </div>
+      <div class="hashtag"></div>
+      <div class="texture"></div>
+    </div>
+    {{/spreadsheet.names}}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/javascripts/main.js"></script>
+
+    <script>
+
+      loopThroughPages()
+
+      function loopThroughPages() {
+
+        var pages = document.querySelector('.pages');
+        var pageTemplate = document.querySelector('.template .page');
+        var entries = Array.prototype.slice.call(document.querySelectorAll('.names'));
+
+        pages.insertBefore(pageTemplate.cloneNode(true), null);
+
+        // item count to decide when to add a new page
+        var itemCount = 0;
+
+        // so we know which page to append to
+
+        entries.forEach(function(entry) {
+
+          if (itemCount < 6 ) {
+            var allPages = document.querySelectorAll('.pages .page')
+            allPages[allPages.length - 1].querySelector('.spreadsheet').insertBefore(entry, null)
+
+            itemCount++
+          }
+
+          else {
+
+            // add a new page
+            pages.insertBefore(pageTemplate.cloneNode(true), null);
+
+            var allPages = document.querySelectorAll('.pages .page')
+            allPages[allPages.length - 1].querySelector('.spreadsheet').insertBefore(entry, null)
+
+            // reset count
+            itemCount = 1 
+          }
+        })
+
+      }
+
+      function addOption () {
+
+        var texture = document.querySelectorAll('.texture');
+
+        for (i = 0; i < texture.length; i++) {
+          texture[i].innerHTML = `<img src="{{{ nametag-texture-color }}}">`;
+        }
+
+      }
+
+      addOption ();   
+
+      function addHashtag () {
+
+        var hashtag = document.querySelectorAll('.hashtag');
+
+        for (i = 0; i < hashtag.length; i++) {
+          hashtag[i].innerHTML = `<p>{{{ hashtag }}}</p>`;
+        }
+
+      }
+
+      addHashtag ();  
+
+    </script>
+  </body>
+</html>
