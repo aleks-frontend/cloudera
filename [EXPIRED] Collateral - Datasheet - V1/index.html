@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Print Generic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Akzidenz%20Grotesk/stylesheet.css" rel="stylesheet">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Calibre/stylesheet.css" rel="stylesheet">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/neuePlak/stylesheet.css" rel="stylesheet">
+    <script src="tinycolor.js"></script>
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="crop.css">
+    <style>
+
+      * {
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body { font-family: 'Neue Plak Text'; }
+      
+      .overflow {
+        border: 1px dashed red;
+        position: relative; }
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 5px;
+        right: 5px;
+        height: 15px;
+        width: 15px;
+        border: 1px solid red;
+        color: red;
+        padding: 2px 2px 2px 3px;
+        box-sizing: border-box;
+        font-size: 13px;
+        text-align: center;
+        line-height: 8px;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 25px;
+        right: 5px;
+        background-color: black;
+        color: white;
+        border-radius: 2px;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.1em;
+        text-align: right;
+        width: 15em;
+      }
+      
+      .container {
+        position: absolute;
+        top: 81pt;
+        left: 55pt;
+        right: 55pt;
+        bottom: 45pt;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      
+      .main-container {
+        height: 86.8%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .tinymce_style--light, .tinymce_style--dark { color: {{{account.colors.dark-gray}}}; }
+
+      .document { display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: 3mm; }
+      
+      .callout { margin: 2em auto 0 auto; font-size }
+
+      .page-one .logos { 
+        position: absolute; 
+        top: 47pt; 
+        left: 55pt; 
+        display: flex; 
+        align-items: center; 
+      }
+      .page-one .cloudera-logo { max-width: 6.6em; }
+      .page-one .cloudera-logo img { width: 100%; }
+      .seperator { height: 40px; width: 1px; margin: 0 0.8em; background-color: black; }
+      .support-logo { max-width: 6.6em; }
+      .support-logo img { width: 100%; }
+      
+      .masthead {
+    	border-top: solid 1.5pt #008cff;
+    	border-bottom: solid 1.5pt #008cff;
+    	padding: 8pt 0 11pt;
+    	margin-bottom: 23pt;
+        max-height: 140px;
+	  }
+      
+      .title { 
+        position: absolute; 
+        top: 56pt; 
+        right: 62pt; 
+      }
+      .title p { font-size: 8.5pt; letter-spacing: 0.5px; text-transform: uppercase; }
+      
+      .header-image { 
+        max-height: 140px;
+        margin-bottom: 23pt;
+        border-top: 2px solid {{{account.colors.cloudera-blue--new-}}}; border-bottom: 2px solid {{{account.colors.cloudera-blue--new-}}};
+        padding: 8pt 0 11pt;
+      }
+      .header-image-inner { position: relative; height: 100%; }
+      .header { width: 80%; max-height: 7.8em; }
+      .header h1 {
+        margin: 8pt 0 0 0;
+        color: #008cff;
+        font-family: 'Neue Plak Extended';
+        font-size: 24pt;
+        font-weight: normal;
+        line-height: 1.1em;
+      }
+      .header h2 {
+        color: black;
+        font-family: 'Neue Plak Text';
+        font-size: 14pt;
+        font-weight: normal;
+        line-height: 1.25em;
+        margin-bottom: 5pt;
+      }
+      .header h3 { margin: 0.9em 0 0 0; color: {{{account.colors.cloudera-blue--new-}}}; font-size: 1.2em; }
+
+      .wow-graphic { position: absolute; top: 1em; right: 1em; height: 6.5em; }
+      .wow-graphic img { height: 100%; }
+      
+      .sidebar-section { width: 150pt; }
+      .main-sidebar-item { background-color: {{{account.colors.light-gray}}}; }
+      .sidebar-quote {
+        background-color: {{{account.colors.light-gray}}};
+        padding: 10pt;
+        margin-top: 15pt;
+      }
+      
+      .sidebar-quote h2 {
+        color: {{{account.colors.cloudera-blue--new-}}};
+        font-size: 9pt;
+        line-height: 1.4em;
+        margin-bottom: 6pt;
+        font-weight: normal;
+      }
+      
+      .sidebar-quote p {
+        font-size: 8pt;
+        font-weight: normal;
+        line-height: 1.3;
+      }
+      
+      .sidebar-inner { padding: 0.9em 0.8em; }
+      
+      .sidebar-section h3:first-of-type { margin: 0 0 0.9em 0; }
+      .sidebar-section h3 { margin: 1em 0 0.6em 0; font-size: 9pt; font-weight: bold; line-height: 1.1em; }
+      .sidebar-section p { font-size: 8pt; line-height: 1.3em; }
+      .sidebar-section ul,
+      .main-section ul { 
+        position: relative; 
+        list-style-type: none; 
+        font-size: 8pt; 
+      }
+      .sidebar-section ul li:before, 
+      .sidebar-section ol li:before,
+      .main-section ul li:before, 
+      .main-section ol li:before {
+        content: "\00b7";
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 1em;
+      }
+      .sidebar-section ul li:before,
+      .main-section ul li:before {
+        font-size: 2em;
+      }
+      .sidebar-section li { font-size: 8pt; position: relative; padding: 0.3em 0 0 0.8em; line-height: 1.3em; }
+      .sidebar-section strong { font-weight: bold; }
+
+      .main-section {    
+        width: 66%;
+        max-height: 100%; }
+      .main-section h2 { color: {{{account.colors.cloudera-blue--new-}}}; margin: 1em 0 0.2em 0; font-size: 10.5pt; line-height: 1.26em; }
+      .main-section p { margin: 8pt 0 0 0; font-size: 9.4pt; line-height: 1.27em; font-weight: normal; }
+      .main-section h2 + p {
+        margin-top: 0;
+      }
+      .main-section p:first-child {
+        margin-top: 0;
+      }
+      .main-section img { margin: 0.7em 0 0 0 }
+      .main-section strong { font-weight: bold; }
+      .main-section li { position: relative; padding: 0.4em 0 0 0.8em; line-height: 1.3em; font-weight: normal; font-size: 9.4pt; }
+      
+      .footer { position: absolute; bottom: 77pt; left: 55pt; right: 55pt; border-top: 1px solid black; }
+      .footer .cloudera-logo {
+          width: 6.6em;
+          margin: 0.6em 0 0 0;
+      }
+      .footer .logos {
+        left: 0;
+        top: initial;
+      }
+      .footer-inner {
+        position: absolute;
+        left: 15.5em;
+        right: 0;
+      }      
+      .website { color: {{{account.colors.cloudera-blue--new-}}}; }
+      
+      .footer h3 { margin: 0.6em 0; font-size: 0.7em; }
+      .footer p { font-size: 0.6em; }
+      
+      .pattern {
+        width: 100%;
+        height: 7px;
+      }
+      
+      .gray.pattern.thin {
+        background-image: url("https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/be35e5efcea821d8e2298d8319497612/Screen%20Shot%202018-01-30%20at%203.23.22%20pm.png");
+        background-size: 100%;
+      }
+      
+      .lightgray.pattern.thin {
+        background-image: url("https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/8f2ab473a91871bb7cc58e61a62163f3/Screen%20Shot%202018-01-30%20at%203.31.18%20pm.png");2
+      }      
+      
+      .placeholder {
+        background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/b1981ed70e9fb999d706d3e2f2095fa8/Cloudera_Datasheet_with_table_Template_101_Page_2.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.7;
+        z-index: 100;
+        pointer-events: none;
+      }
+      
+      table { 
+        width: 100%; 
+        margin: 0 0 8pt;
+      }
+      table td { font-weight: normal; padding: 1px 1px 1px 3px; font-size: 8.4pt; vertical-align: top; }      
+      
+      table tr td:last-child {
+        border-right: none;
+      }
+      
+      .table-row td { border-bottom: 1px solid {{{account.colors.cloudera-blue--new-}}}; background-color: white; line-height: 1em; }
+      .table-row td { border-right: 1px solid {{{account.colors.medium-gray}}}; }
+      /* .table-row:nth-child(odd) td { background-color: {{{account.colors.light-gray}}}; } */
+
+      /* 1 */
+      .row-align-1 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+	        
+      /* 2 */
+      .row-align-2 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-2 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      
+      /* 3 */
+      .row-align-3 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-3 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      .row-align-3 .table-row td:nth-last-child(3) { text-align: center; vertical-align: middle; }
+      
+      /* 4 */
+      .row-align-4 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-4 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      .row-align-4 .table-row td:nth-last-child(3) { text-align: center; vertical-align: middle; }
+      .row-align-4 .table-row td:nth-last-child(4) { text-align: center; vertical-align: middle; }
+      
+      /* 5 */
+      .row-align-5 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-5 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      .row-align-5 .table-row td:nth-last-child(3) { text-align: center; vertical-align: middle; }
+      .row-align-5 .table-row td:nth-last-child(4) { text-align: center; vertical-align: middle; }
+      .row-align-5 .table-row td:nth-last-child(5) { text-align: center; vertical-align: middle; }
+      
+      /* 6 */
+      .row-align-6 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-6 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      .row-align-6 .table-row td:nth-last-child(3) { text-align: center; vertical-align: middle; }
+      .row-align-6 .table-row td:nth-last-child(4) { text-align: center; vertical-align: middle; }
+      .row-align-6 .table-row td:nth-last-child(5) { text-align: center; vertical-align: middle; }
+      .row-align-6 .table-row td:nth-last-child(6) { text-align: center; vertical-align: middle; }
+      
+      /* 7 */
+      .row-align-7 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-7 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      .row-align-7 .table-row td:nth-last-child(3) { text-align: center; vertical-align: middle; }
+      .row-align-7 .table-row td:nth-last-child(4) { text-align: center; vertical-align: middle; }
+      .row-align-7 .table-row td:nth-last-child(5) { text-align: center; vertical-align: middle; }
+      .row-align-7 .table-row td:nth-last-child(6) { text-align: center; vertical-align: middle; }
+      .row-align-7 .table-row td:nth-last-child(7) { text-align: center; vertical-align: middle; }
+      
+      /* 8 */
+      .row-align-8 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-8 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      .row-align-8 .table-row td:nth-last-child(3) { text-align: center; vertical-align: middle; }
+      .row-align-8 .table-row td:nth-last-child(4) { text-align: center; vertical-align: middle; }
+      .row-align-8 .table-row td:nth-last-child(5) { text-align: center; vertical-align: middle; }
+      .row-align-8 .table-row td:nth-last-child(6) { text-align: center; vertical-align: middle; }
+      .row-align-8 .table-row td:nth-last-child(7) { text-align: center; vertical-align: middle; }
+      .row-align-8 .table-row td:nth-last-child(8) { text-align: center; vertical-align: middle; }
+      
+      /* 9 */
+      .row-align-9 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-9 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      .row-align-9 .table-row td:nth-last-child(3) { text-align: center; vertical-align: middle; }
+      .row-align-9 .table-row td:nth-last-child(4) { text-align: center; vertical-align: middle; }
+      .row-align-9 .table-row td:nth-last-child(5) { text-align: center; vertical-align: middle; }
+      .row-align-9 .table-row td:nth-last-child(6) { text-align: center; vertical-align: middle; }
+      .row-align-9 .table-row td:nth-last-child(7) { text-align: center; vertical-align: middle; }
+      .row-align-9 .table-row td:nth-last-child(8) { text-align: center; vertical-align: middle; }
+      .row-align-9 .table-row td:nth-last-child(9) { text-align: center; vertical-align: middle; }  
+      
+      /* 10 */
+      .row-align-10 .table-row td:nth-last-child(1) { text-align: center; border-right: none; vertical-align: middle; }
+      .row-align-10 .table-row td:nth-last-child(2) { text-align: center; vertical-align: middle; }
+      .row-align-10 .table-row td:nth-last-child(3) { text-align: center; vertical-align: middle; }
+      .row-align-10 .table-row td:nth-last-child(4) { text-align: center; vertical-align: middle; }
+      .row-align-10 .table-row td:nth-last-child(5) { text-align: center; vertical-align: middle; }
+      .row-align-10 .table-row td:nth-last-child(6) { text-align: center; vertical-align: middle; }
+      .row-align-10 .table-row td:nth-last-child(7) { text-align: center; vertical-align: middle; }
+      .row-align-10 .table-row td:nth-last-child(8) { text-align: center; vertical-align: middle; }
+      .row-align-10 .table-row td:nth-last-child(9) { text-align: center; vertical-align: middle; }  
+      .row-align-10 .table-row td:nth-last-child(10) { text-align: center; vertical-align: middle; }  
+
+      .table-main-header td {
+        text-transform: uppercase; border-top: 1px solid {{{account.colors.cloudera-slate--new-}}}; border-bottom: 1px solid {{{account.colors.cloudera-blue--new-}}};
+        font-size: 10pt; font-weight: bold; padding: 2px 5px 5px 5px; vertical-align: top;
+        border-right: 1px solid #D1D2D4; line-height: 1em;
+      }
+
+      .table-row-header { 
+        border-bottom: 1px solid {{{account.colors.cloudera-blue--new-}}};
+        color: {{{account.colors.cloudera-slate--new-}}};  
+      }
+
+      .table-row-header td { padding: 2px 1px 2px 3px; line-height: 1em; font-size: 9.5pt; font-weight: bold; background-color: {{{account.colors.medium-gray}}} !important; text-align: left !important; }
+      
+      .headline {
+        font-family: 'Neue Plak Extended';
+        font-size: 24pt;
+        font-weight: normal;
+        line-height: 1.1em;
+        color: #008cff;
+        text-transform: uppercase;
+        max-height: 2.2em;
+      }
+
+      .subheading {
+        font-family: 'Neue Plak Text';
+        font-size: 14pt;
+        line-height: 1.25em;
+        margin-bottom: 5pt;
+        max-height: 1.25em;
+      }
+
+    </style>
+  </head>
+  <body style="background: white">
+    <div class="page-one page">
+      <div class="bleed">
+        <div class="document">
+          
+          <div class="logos">
+            <div class="cloudera-logo"><img src="{{{account.logos.New_2019_Colour_Cropped}}}"></div>
+          </div>
+          
+          <div class="title" style="color: {{{account.colors.dark-gray}}};"><p>{{{ title }}}</p></div>
+          
+          
+          <div class="container">
+            <div class="header-image">
+              <div class="header-image-inner">
+                <div class="header">
+                  <div class="header-overflow check-overflow">
+                    <h2>{{{ subheader }}}</h2>
+                    <h1 style="text-transform: uppercase;">{{{ headline }}}</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="main-container">
+              <div class="sidebar-section">
+                <div class="main-sidebar-item">
+                  <div class="gray pattern thin"></div>
+                  <div class="sidebar-inner">
+                    {{{ sidebar }}}
+                  </div>
+                  <div class="gray pattern thin"></div>
+                </div><!--main-sidebar-item-->
+                
+                {{#quote}}
+                <div class="sidebar-quote">
+                  <h2>{{{ quote }}}</h2>
+                  <p>{{{ author }}}</p>
+                </div>
+                {{/quote}}
+              </div>
+
+              <div class="main-section">
+                <div class="main-section-overflow check-overflow">
+                  {{#collection.page-one-sections}}
+                    {{#block.text-section}}
+                  		{{{ copy-section }}}
+                    {{/block.text-section}}
+                  
+                    {{#block.image-section}}
+	                    <img src="{{{ image }}}"/>
+                    {{/block.image-section}}
+                  {{/collection.page-one-sections}}
+                </div>
+              </div>
+
+            </div><!--main-container-->
+          </div><!--container-->
+
+          <div class="footer">
+            <div class="logos">
+              <div class="cloudera-logo"><img src="{{{account.logos.New_2019_Colour_Cropped}}}"></div>
+            </div>
+            <div class="footer-inner">
+              <h3 style="color: {{{account.colors.cloudera-slate--new-}}}; font-weight: bold;">{{{ company }}}  {{{ adress }}} <span class="website">{{{ website }}}</span></h3>
+              <p>{{{ details }}}</p>
+            </div>
+          </div>          
+          
+        </div><!--document-->
+
+      </div><!--bleed-->
+    </div><!--page-->
+    
+    <script>
+      window.showCrop = {{show-crop}};
+    </script>
+    <script src="main.js"></script>
+    <script src="prefixfree.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    <script>
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+
+      } setInterval(loop, 500);
+
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }
+    </script>
+    <script>
+      if ($('.table-row').hasClass('table-row-header')) {
+          $('.table-row-header td:first-child').attr('colspan', '10')
+      }
+    </script>
+
+  </body>
+</html>
