@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Print Generic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Akzidenz%20Grotesk/stylesheet.css" rel="stylesheet">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Calibre/stylesheet.css" rel="stylesheet">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/neuePlak/stylesheet.css" rel="stylesheet">
+    <script src="tinycolor.js"></script>
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="crop.css">
+    <style>
+
+      * {
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body { font-family: 'Neue Plak Text'; }
+      
+      .logos img {
+        width: 100%;
+      }
+      
+      .overflow {
+        border: 1px dashed red;
+        position: relative; }
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 5px;
+        right: 5px;
+        height: 15px;
+        width: 15px;
+        border: 1px solid red;
+        color: red;
+        padding: 2px 2px 2px 3px;
+        box-sizing: border-box;
+        font-size: 13px;
+        text-align: center;
+        line-height: 8px;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 25px;
+        right: 5px;
+        background-color: black;
+        color: white;
+        border-radius: 2px;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.1em;
+        text-align: right;
+        width: 15em;
+      }
+      
+      .fit {
+        margin: 3mm;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      
+      .header-image-inner { position: relative; height: 100%; }
+      .header { width: 80%; max-height: 7.8em; }
+      .header h1 { margin: 8pt 0 0 0; color: {{{account.colors.cloudera-blue--new-}}}; font-family: 'Neue Plak Extended'; font-size: 25pt; font-weight: normal; line-height: 1.2em; letter-spacing: 0.04em; }
+      .header h2 { margin: 0 0 14pt 0; color: black; font-family: 'Neue Plak Extended'; font-size: 12.5pt; font-weight: normal; letter-spacing: 0.04em; }
+      .header h1 .token-value { font-family: 'Neue Plak Extended'; }
+      .header h2 .token-value { font-family: 'Neue Plak Extended'; }
+      .header h3 { margin: 0.9em 0 0 0; color: {{{account.colors.cloudera-blue--new-}}}; font-size: 1.2em; }      
+      
+      .placeholder {
+        background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/154abf844fcbcd045e46abe2112bc341/clo_flyer_101_Page_3.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.7;
+        z-index: 100;
+        pointer-events: none;
+      }
+      
+      .header-data-line {
+        background-image: url('https://files.outfit.io/media_library_items/92923/blue-data-line-artwork.png');
+        background-size: 100%;
+        background-position: 0% 0%;
+        position: absolute;
+        top: -3mm;
+        left: 10mm;
+        right: 10mm;
+        height: calc(62pt + 3mm);
+      }
+      
+      .footer-data-line {
+        background-image: url('https://files.outfit.io/media_library_items/92924/grey-data-line-artwork.png');
+        background-size: 100%;
+        background-position: 0% 0%;
+        position: absolute;
+        bottom: -3mm;
+        left: 10mm;
+        right: 10mm;
+        height: calc(64pt + 3mm);
+        
+        display: flex;
+        align-items: center;
+      }
+      
+      .logos {
+        padding-left: 25pt;
+        margin-top: -8pt;
+      }
+      
+      .cloudera-logo {
+        width: 112pt;
+      }
+      
+      .event-logo {
+        height: 32pt;
+      }
+      
+      .intro {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 37pt;
+      }
+      
+      /* BODY */
+      .body {
+        position: absolute;
+        top: 36mm;
+        left: 17mm;
+        right: 17mm;
+        bottom: 34mm;
+      }
+      
+      h1 {
+        font-family: 'Neue Plak Extended';
+        font-size: 28pt;
+        font-weight: normal;
+        line-height: 1.2em;
+        letter-spacing: 0.04em;
+        color: #221F20;
+        max-height: 2.4em;
+        margin-top: -5pt;
+        text-transform: uppercase;
+        margin-bottom: 40pt;
+      }
+      
+      h2 {
+        margin-top: 12pt;
+        font-size: 23pt;
+        font-weight: normal;
+        line-height: 1.19em;
+        color: #221F20;
+        max-height: 3.6em;
+      }
+      
+      h3 {
+        font-size: 23pt;
+        font-weight: bold;
+        line-height: 1.19em;
+        color: #221F20;
+        text-transform: uppercase;
+        max-height: 2.4em;
+      }
+      
+      h4 {
+        font-size: 23pt;
+        font-weight: normal;
+        line-height: 1.19em;
+        color: {{{account.colors.cloudera-blue--new-}}};
+      }
+      
+      h5 {
+        text-transform: uppercase;
+        font-size: 23pt;
+        font-weight: bold;
+        line-height: 1.18em;
+        color: {{{account.colors.cloudera-blue--new-}}};
+      }
+      
+      p, li {
+        font-size: 23pt;
+        font-weight: normal;
+        line-height: 1.18em;
+        color: #221F20;
+      }
+      
+      strong {
+        font-weight: bold; 
+      }
+      
+      ul {
+        margin-top: 3pt;
+      }
+      
+      li:before {
+        content: '_';
+        padding-right: 7pt;
+      }
+      
+      .disclaimer {
+        margin-top: 9pt;
+        font-size: 16pt;
+        line-height: 1.2em;
+      }
+      
+      .text-container {
+        margin-bottom: 22pt;
+      }
+      
+      .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 2pt;
+        flex-shrink: 0;
+      }
+      .row p {
+        font-size: 16pt;
+      }
+      
+      .row p:first-child {
+        width: 33%;
+      }
+      
+      .row p:last-child {
+        width: 64%;
+      }
+      
+      .url {
+        width: 100%;
+        text-align: center;
+        font-size: 23pt;
+        font-weight: bold;
+        line-height: 1.18em;
+        color: #221F20;
+        position: absolute;
+        bottom: -8pt;
+        left: 0;
+        right: 0;
+      }
+      
+      .url span {
+        color: {{{account.colors.cloudera-blue--new-}}};
+      }
+      
+      .flyer-copy {
+        max-height: 4.8em;
+      }
+      
+      /* A4 ADJUSTMENTS */
+      .a4 .body {
+        top: 38mm;
+        left: 17mm;
+        right: 17mm;
+        bottom: 38mm;
+      }
+      
+      .a4 .header-data-line, .a4 .footer-data-line {
+        left: 7mm;
+        right: 7mm;
+      }
+      
+      .a4 .free-text {
+        max-height: 500px;
+      }
+      
+      .a4 .left {
+        width: 34%;
+      }
+      
+      .a4 .right {
+        width: 64%;
+      }  
+      
+      .a4 .flyer-copy {
+        max-height: 6em;
+      }
+      
+    </style>
+  </head>
+  <body style="background: white" class="{{{ size }}}">
+    <div class="page-one page">
+      <div class="bleed">
+        <div class="document">
+          <div class="fit">
+            <!--<div class="placeholder"></div>-->
+            
+            <div class="header-data-line"></div><!--header-data-line-->
+            
+            <div class="body">
+              <div class="intro">
+                <img class="event-logo" src="{{{ event-logo }}}">
+              </div><!--intro-->
+              
+              <div class="main">
+                <div class="text-container">
+                  {{#copy-title}}<h5 style="max-height: 1.2em;" class="text-overflow">{{{ copy-title }}}</h5>{{/copy-title}}
+                  {{#event-flyer-copy}}<p class="flyer-copy text-overflow">{{{ event-flyer-copy }}}</p>{{/event-flyer-copy}}
+                </div><!--container-->
+                
+                <div class="text-container">
+                  {{#event-secondary-title}}<h5 style="max-height: 1.2em;" class="text-overflow">{{{ event-secondary-title }}}</h5>{{/event-secondary-title}}
+                  
+                  {{#spreadsheet.event-dates}}
+                    <div class="row">
+                      <p>{{{ city }}}</p>
+                      <p>{{{ date }}}</p>
+                    </div><!--row-->
+                  {{/spreadsheet.event-dates}}
+                </div><!--container-->
+              </div><!--main-->
+              
+              {{#url}}<div class="url">Register now <span>{{{ url }}}</span></div>{{/url}}
+              
+            </div><!--body-->
+
+			<div class="footer-data-line">
+              <div class="logos"><div class="cloudera-logo"><img src="{{{account.logos.New_2019_Primary_Cropped}}}"></div></div>
+            </div><!--footer-data-line-->
+
+          </div>
+        </div><!--document-->
+
+      </div><!--bleed-->
+    </div><!--page-->
+    
+    <script>
+      window.showCrop = {{show-crop}};
+    </script>
+    <script src="main.js"></script>
+    <script src="prefixfree.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    <script>
+      function checkLimitedText() {
+        Array.prototype.slice.call(document.querySelectorAll('.text-overflow'))
+          .forEach(function(e) {
+          const height = $(e).height();          	
+          const maxHeight = $(e).data('limit') 
+          ? parseFloat($(e).data('limit'))
+          : $(e).css('max-height');
+
+          $(e)
+            .css('max-height', 'none')
+            .attr('data-limit', maxHeight);
+
+          if (height > maxHeight) {
+            e.classList.add("overflow");
+          } else {
+            e.classList.remove("overflow");
+          }
+        });
+      }
+
+      function loop() {
+        checkLimitedText();
+      } setInterval(loop, 1000);
+
+      $(window).bind("load", function() {
+        // Document has been loaded..        
+      });
+    </script>
+
+  </body>
+</html>
