@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Print Generic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/neuePlak/stylesheet.css" rel="stylesheet">    
+    <link rel="stylesheet" type="text/css" href="global.css" />
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <style type="text/css">
+      :root {
+        --black: #000000;
+        --dark-gray: #313e49;
+       	--gray: #939598;
+        --light-gray: #F6F7F7;
+        --white: #ffffff;
+        --dark-orange: #f96702;
+        --bright-orange: #ff8400;
+        --mint: #00a3af;
+        --slate: #305868;
+
+        --primary: #00a7e0;
+      }           
+    </style>  
+  </head>
+  <body style="background: white">
+    <div class="page page-front">
+      <div class="bleed">
+        <div class="fit test d-none"></div>
+        <div class="fit wrapper">
+          <div class="page-header">
+            <div class="logos">
+              <div class="cloudera-logo">
+                <img src="{{{account.logos.New_2019_Colour_Cropped}}}">
+              </div>
+            </div>
+          	<div class="box-limit p document-type">
+              <div class="box-inner">
+                <p>{{{Document-Type}}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="masthead">            
+            {{#Subheading}}
+            <div class="box-limit h2 subheading">
+              <div class="box-inner">
+                <h2>{{{Subheading}}}</h2>
+              </div>
+            </div>
+            {{/Subheading}}
+            {{#Title}}
+            <div class="box-limit h1 title">
+              <div class="box-inner">
+                <h1>{{{Title}}}</h1>
+              </div>
+            </div>
+            {{/Title}}
+          </div>
+          <div class="main">
+            <div class="box-limit sidebar">
+              <div class="box-inner">
+                {{#sidebar}}                
+                <div class="widget has-border">
+                  <div class="border"></div>
+                  {{{sidebar}}}
+                  <div class="border border-bottom"></div>
+                </div>
+                {{/sidebar}}
+                {{#quote}}
+                <div class="widget more-info">
+                  <h3>{{{quote}}}</h3>
+                  {{#author}}<p>{{{author}}}</p>{{/author}}
+                </div>
+                {{/quote}}
+                <!-- {{#more-info}}{{/more-info}} -->
+                <!-- {{#about-us}}{{/about-us}} -->
+              </div>
+            </div>            
+            <div class="box-limit content">
+              <div class="box-inner">
+                {{#collection.page-one-sections}}
+                {{#block.text-section}}
+                {{{ copy-section }}}
+                {{/block.text-section}}
+
+                {{#block.image-section}}
+                <img src="{{{ image }}}"/>
+                {{/block.image-section}}
+                {{/collection.page-one-sections}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fit boundary-l"></div>
+        <div class="fit boundary-r"></div>
+        <div class="fit boundary-b"></div>
+        <div class="fit boundary-t"></div>
+      </div>
+    </div>    
+
+    <div class="page back">
+      <div class="bleed">
+        <div class="fit test d-none"></div>
+        <div class="fit wrapper">
+          <div class="page-header">
+            <div class="logos"></div>
+          	<div class="document-type p js"></div>
+          </div>
+          <div class="main">
+            <div class="box-limit sidebar">
+              <div class="box-inner">
+                {{#more-info}}
+                <div class="widget more-info">
+                  {{{more-info}}}
+                </div>
+                {{/more-info}}
+                {{#about-us}}
+                <div class="widget about">
+                  {{{about-us}}}
+                </div>
+                {{/about-us}}
+              </div>
+            </div>
+            <div class="box-limit content">
+              <div class="box-inner">
+                {{#collection.page-two-sections}}
+                {{#block.text-section}}
+                {{{ copy-section }}}
+                {{/block.text-section}}
+
+                {{#block.image-section}}
+                <img style="width: {{{ image-width }}}{{ ^image-width }}100{{ /image-width }}%" src="{{{ image }}}"/>
+                {{/block.image-section}}
+
+                {{#block.table-section}}
+                <table class="row-align-{{{ row-alignment }}}">
+                  <tbody>
+
+                    {{#spreadsheet.table-rows}}
+                    <tr class="table-row {{{ row-style }}}">
+                      {{#col-1}}<td>{{{ col-1 }}}</td>{{/col-1}}
+                      {{#col-2}}<td>{{{ col-2 }}}</td>{{/col-2}}
+                      {{#col-3}}<td>{{{ col-3 }}}</td>{{/col-3}}
+                      {{#col-4}}<td>{{{ col-4 }}}</td>{{/col-4}}
+                      {{#col-5}}<td>{{{ col-5 }}}</td>{{/col-5}}
+                      {{#col-6}}<td>{{{ col-6 }}}</td>{{/col-6}}
+                      {{#col-7}}<td>{{{ col-7 }}}</td>{{/col-7}}
+                      {{#col-8}}<td>{{{ col-8 }}}</td>{{/col-8}}
+                      {{#col-9}}<td>{{{ col-9 }}}</td>{{/col-9}}
+                      {{#col-10}}<td>{{{ col-10 }}}</td>{{/col-10}}
+                    </tr>
+                    {{/spreadsheet.table-rows}}
+
+                  </tbody>
+                </table>
+                {{/block.table-section}}
+                {{/collection.page-two-sections}}
+              </div>
+            </div>
+          </div>
+          <div class="page-footer">
+            <div class="logos">
+              <div class="cloudera-logo">
+                <img src="{{{account.logos.New_2019_Colour_Cropped}}}">
+              </div>
+            </div>
+            <div class="info">
+              <h3>{{{ company }}}  {{{ adress }}} <a href="#" target="blank" class="website">{{{ website }}}</a></h3>
+              <p>{{{ details }}}</p>
+            </div>
+          </div>
+        </div><!--wrapper-->
+        <div class="fit boundary-l"></div>
+        <div class="fit boundary-r"></div>
+        <div class="fit boundary-b"></div>
+        <div class="fit boundary-t"></div>
+      </div><!--bleed-->
+    </div><!--page-->
+
+    <script src="prefixfree.js"></script>
+    <script>
+      window.showCrop = {{show-crop}};
+      window.documentTypeHtml = '<p>{{{Document-Type}}}</p>';
+      
+      function cropMarks(showCrop) {
+        if (showCrop) {
+          document.querySelector('body').classList.add('crop');
+        }
+
+        Array.prototype.slice.call(document.querySelectorAll('.page')).forEach(function (page) {
+          const parser = new DOMParser();
+          const cropString = '<div class="crop-marks"><span class="cm1"></span><span class="cm2"></span><span class="cm3"></span><span class="cm4"></span></div>';
+          const cropNode = parser.parseFromString(cropString, "text/html").body.firstChild;
+          !!showCrop && page.insertBefore(cropNode, null);
+        });
+      }
+      
+      function documentType() {
+        Array.prototype.slice.call(document.querySelectorAll('.document-type.js')).forEach(function (e) {
+          e.innerHTML = documentTypeHtml;
+        });
+      }
+
+      function heightObservable() {
+        Array.prototype.slice.call(document.querySelectorAll('.box-limit .box-inner')).forEach(function (e) {
+          checkHeight(e);
+        });
+      }
+
+      function widthObservable() {
+        Array.prototype.slice.call(document.querySelectorAll('.box-width-limit .box-inner')).forEach(function (e) {
+          checkWidth(e);
+        });
+      }
+
+      function checkHeight(element) {
+        const elementHeight = element.getBoundingClientRect().height;
+        const parent = element.parentElement;
+        const parentHeight = parent.getBoundingClientRect().height;
+
+        if (elementHeight > parentHeight) {
+          parent.classList.add('overflow');
+        } else {
+          parent.classList.remove('overflow');
+        }
+      }
+
+      function checkWidth(element) {
+        const elementWidth = element.getBoundingClientRect().width;
+        const parent = element.parentElement;
+        const parentWidth = parent.getBoundingClientRect().width;
+
+        if (elementWidth > parentWidth) {
+          parent.classList.add('overflow');
+        } else {
+          parent.classList.remove('overflow');
+        }
+      }
+      
+      cropMarks(showCrop);
+
+      window.addEventListener('resize', function () {
+        setSize();
+      });
+
+      window.addEventListener('load', function () {
+        documentType();
+        heightObservable();
+        widthObservable();        
+      });
+
+      window.addEventListener('DOMSubtreeModified', function () {
+        heightObservable();
+        widthObservable();
+      });    
+    </script>    
+  </body>
+</html>
