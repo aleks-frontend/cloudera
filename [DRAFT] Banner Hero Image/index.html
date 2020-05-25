@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Print Generic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Akzidenz%20Grotesk/stylesheet.css" rel="stylesheet">
+    <link href="https://outfit-assets-production.s3.amazonaws.com/fonts/Calibre/stylesheet.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="crop.css">
+    <style>
+
+      * {
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body { font-family: 'Akzidenz Grotesk'; }
+      h1, h2 { font-weight: normal; }
+
+      .character-error { color: red !important; }
+
+      .overflow {
+        border: 1px dashed red;
+        position: relative;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif; }
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 5px;
+        right: 5px;
+        height: 15px;
+        width: 15px;
+        border: 1px solid red;
+        color: red;
+        padding: 2px 2px 2px 3px;
+        box-sizing: border-box;
+        font-size: 13px;
+        text-align: center;
+        line-height: 8px;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 25px;
+        right: 5px;
+        background-color: black;
+        color: white;
+        border-radius: 2px;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.1em;
+        text-align: right;
+        width: 15em;
+      }
+
+      .placeholder {
+        display: {{{ placeholder-visibility }}};
+        background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/97ad9de54e29787e4ff979d4f8e22d6b/160%20x%20600.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.7;
+        z-index: 100;
+      }
+
+      .tinymce_style--light, .tinymce_style--dark { color: {{{account.colors.orange}}}; }
+
+      .page { display: flex; flex-direction: column; background-color: {{{account.colors.primary}}}; }
+      .background-image { overflow: hidden; }
+
+      .cta-wrap:before { 
+        content: "{{{ cta-choice }}}";
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+
+      .gray.pattern.thin { background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 5.2 5.2' style='enable-background:new 0 0 5.2 5.2;' xml:space='preserve'%3E %3Cstyle type='text/css'%3E .st0%7B fill:%23F5F5F5; %7D %3C/style%3E %3Cpath class='st0' d='M5.2,0L0,5.2l0,0V3.4L3.4,0H5.2L5.2,0z M5.2,5.2L5.2,5.2V3.4L3.4,5.2H5.2z'/%3E %3C/svg%3E"); }
+
+      .blue.pattern.thin { background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 5.2 5.2' style='enable-background:new 0 0 5.2 5.2;' xml:space='preserve'%3E %3Cstyle type='text/css'%3E .st0%7B fill:%2329A7DE; %7D %3C/style%3E %3Cpath class='st0' d='M5.2,0L0,5.2l0,0V3.4L3.4,0H5.2L5.2,0z M5.2,5.2L5.2,5.2V3.4L3.4,5.2H5.2z'/%3E %3C/svg%3E"); }
+
+      .overlay.pattern.thin { background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 5.2 5.2' style='enable-background:new 0 0 5.2 5.2;' xml:space='preserve'%3E %3Cstyle type='text/css'%3E .st0%7B fill:%2329A7DE; %7D %3C/style%3E %3Cpath class='st0' d='M5.2,0L0,5.2l0,0V3.4L3.4,0H5.2L5.2,0z M5.2,5.2L5.2,5.2V3.4L3.4,5.2H5.2z'/%3E %3C/svg%3E"); }
+
+      @media (min-width: 295px) and (max-width: 300px) and (min-height: 245px) and (max-height: 250px) {
+
+        .placeholder { background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/988b70357d607e9a60f7b9328d8294a1/300%20x%20250.jpg'); }
+
+        .cloudera-key-player { height: 0.6em; margin: 0.15em 0 0 0; }
+        .background-image { position: absolute; top: 0; bottom: 0; right: 0; width: 5.8em; }
+        .content { position: absolute; top: 0; bottom: 0; left: 0; width: 9.8em; padding: 1.5em 0 0 1.3em; }
+        .content h1 { color: white; margin: 0 0 0.55em 0; font-size: 0.8em; line-height: 1.6em; text-transform: uppercase; } 
+        .cloudera-logo-reversed { height: 1.43em; margin: 0 0 1em 0; }
+        .cloudera-key-player { display: none; }
+        .cta { position: relative; display: inline-block; background-color: #47B3E3; padding: 0.4em 0.9em; overflow: hidden; }
+        .cta-wrap { display: flex; } .cta-wrap:before { color: white; border-bottom: 1px solid white; padding: 0 0 0.1em 0; font-size: 0.78em; z-index: 3; }
+        .overlay.pattern.thin { position: absolute; top: 0; bottom: 0; right: 5em; width: 2.6em; background-size: 20%; z-index: 1; }
+        .blue.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 9%; z-index: 1; }
+
+      }
+
+      @media (min-width: 625px) and (max-width: 630px) and (min-height: 347px) and (max-height: 352px) {
+
+        .placeholder { background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/d4ec046fe58b91681bc1a56e4adeeed0/630%20x%20352%20copy%204.jpg'); }
+
+        .background-image { position: absolute; top: 0; bottom: 0; right: 0; width: 11.2em; }
+        .content { position: absolute; top: 0; bottom: 0; left: 0; width: 12.1em; padding: 1em 0 0 1.8em; }
+        .content h1 { color: white; margin: 0 0 0.55em 0; font-size: 1em; line-height: 1.3em; text-transform: uppercase; } 
+        .cloudera-logo-reversed { height: 1.37em; margin: 0 0 1.35em 0; }
+        .cloudera-key-player { height: 0.97em; margin: 0 0 0.2em 0; }
+        .cta { position: relative; display: inline-block; background-color: #47B3E3; margin: 0.4em 0 0 0; padding: 0.3em 1.6em; overflow: hidden; }
+        .cta-wrap { display: flex; } .cta-wrap:before { color: white; border-bottom: 1px solid white; padding: 0 0 0.1em 0; font-size: 0.5em; z-index: 3; }
+        .overlay.pattern.thin { position: absolute; top: 0; bottom: 0; right: 10.4em; width: 1.7em; background-size: 20%; z-index: 1; }
+        .blue.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 9%; z-index: 1; }
+
+      }
+
+      @media (min-width: 575px) and (max-width: 580px) and (min-height: 245px) and (max-height: 250px) {
+
+        .placeholder { background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/f1e95b4663f0864115b1febebcaf293a/580%20x%20250%20email%20header.jpg'); }
+
+        .background-image { position: absolute; top: 0; bottom: 0; right: 0; width: 11.1em; }
+        .content { position: absolute; top: 0; bottom: 0; left: 0; width: 15.3em; padding: 1.55em 0 0 1.5em; }
+        .content h1 { color: white; margin: 0 0 0.55em 0; font-size: 0.94em; line-height: 1.35em; text-transform: uppercase; } 
+        .cloudera-logo-reversed { height: 1.37em; margin: 0 0 1.85em 0; }
+        .cloudera-key-player { display: block; height: 1.07em; margin: 0 0 0.7em 0; }
+        .cta { display: none; }
+        .overlay.pattern.thin { position: absolute; top: 0; bottom: 0; right: 10em; width: 2.1em; background-size: 20%; z-index: 1; }
+
+      }
+
+      @media (min-width: 1195px) and (max-width: 1200px) and (min-height: 623px) and (max-height: 628px) {
+
+        .placeholder { background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/26165c5f26f3bba9ac41bb5dc4095e49/1200%20x%20628%20facebook%2020%25.jpg'); }        
+
+        .background-image { position: absolute; top: 0; bottom: 0; right: 0; width: 13.65em; }
+        .content { position: absolute; top: 0; bottom: 0; left: 0; width: 12.3em; padding: 0.95em 0 0 1.1em; }
+        .content h1 { color: white; margin: 0 0 1.4em 0; font-size: 0.78em; line-height: 1.33em; text-transform: uppercase; } 
+        .cloudera-logo-reversed { height: 0.8em; margin: 0 0 2.25em 0; }
+        .cloudera-key-player { display: block; height: 0.72em; margin: 0 0 1.15em 0; }
+        .cta { position: relative; display: inline-block; background-color: #47B3E3; margin: 0; padding: 0.3em 0.65em 0.3em 0.65em; overflow: hidden; }
+        .cta-wrap { display: flex; } .cta-wrap:before { color: white; border-bottom: 2px solid white; padding: 0 0 0.1em 0; font-size: 0.54em; z-index: 3; }
+        .blue.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 9%; z-index: 1; }
+        .overlay.pattern.thin { position: absolute; top: 0; bottom: 0; right: 13.35em; width: 1em; background-size: 20%; z-index: 1; }
+
+      }
+
+      @media (min-width: 723px) and (max-width: 728px) and (min-height: 85px) and (max-height: 90px) {
+
+        .placeholder { background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/8a5e3bee2a37db41e115cac53308c6f1/728%20x%2090.jpg'); }
+
+        .background-image { display: none; }
+        .content { position: absolute; top: 0; bottom: 0; left: 0; right: 0; padding: 0.5em 0.6em 0.5em 2.2em; display: flex; justify-content: space-between; align-items: center; }
+        .content h1 { color: white; margin: 0; font-size: 1.14em; line-height: 1.33em; text-transform: uppercase; } 
+        .cloudera-logo-reversed { height: 1.4em; margin: 0 3.7em 0 0; }
+        .cloudera-key-player { display: none; }
+        .cta { position: relative; display: inline-block; background-color: #47B3E3; height: 100%; width: 27%; margin: 0; padding: 0.3em 0.65em 0.3em 0.65em; overflow: hidden; }
+        .cta-wrap { display: flex; align-items: center; justify-content: center; height: 100%; } 
+        .cta-wrap:before { color: white; border-bottom: 2px solid white; padding: 0 0 0.1em 0; font-size: 0.95em; z-index: 3; }
+        .blue.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 9%; z-index: 1; }
+        .overlay.pattern.thin { display: none; }
+
+      }
+
+      @media (min-width: 155px) and (max-width: 160px) and (min-height: 595px) and (max-height: 600px) {
+
+        .placeholder { background-image: url('https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/97ad9de54e29787e4ff979d4f8e22d6b/160%20x%20600.jpg'); }
+
+        .background-image { position: absolute; bottom: 0; left: 0; right: 0; height: 8.5em; }
+        .content { position: absolute; top: 0; left: 0; right: 0; height: 13.2em; padding: 0.9em 0.6em 0.6em 0.6em; }
+        .content h1 { color: white; margin: 1.6em 0 0 0; font-size: 0.67em; line-height: 1.4em; text-transform: uppercase; text-align: center; } 
+        .cloudera-logo-reversed { height: 1.4em; margin: 0; }
+        .cloudera-key-player { display: none; }
+        .cta { position: relative; display: inline-block; background-color: #47B3E3; height: 2.6em; width: 100%; margin: 0.7em 0 0 0; padding: 0.3em 0.65em 0.3em 0.65em; overflow: hidden; }
+        .cta-wrap { display: flex; align-items: center; justify-content: center; height: 100%; } 
+        .cta-wrap:before { color: white; border-bottom: 2px solid white; margin: 0; padding: 0 0 0.1em 0; font-size: 0.6em; z-index: 3; }
+        .blue.pattern.thin { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-size: 9%; z-index: 1; }
+        .overlay.pattern.thin { position: absolute; bottom: 7.7em; left: 0; right: 0; height: 1.75em; background-size: 5%; z-index: 1; }
+
+      }
+
+    </style>
+  </head>
+  <body style="background-color: #1c2125;">
+    <div class="page">
+      <div class="placeholder"></div>
+      <div class="overlay pattern thin"></div>
+      <div class="background-image">
+        {{{background-image}}}
+      </div><!--background-image-->
+
+      <div class="content">
+        <img class="cloudera-logo-reversed"src="{{{account.logos.reversed}}}"><!--cloudera-logo-reversed-->
+        <img  class="cloudera-key-player" src="{{{key-play}}}"><!--cloudera-logo-->
+        <h1>{{{ header }}}</h1>
+        <div class="cta"><!--cta-->
+          <div class="cta-wrap"></div><!--cta-wrap-->
+          <div class="blue pattern thin"></div><!--gray-pattern-thin-->
+        </div><!--cta-->  
+      </div><!--content-->
+
+    </div><!--page-->
+
+    <script>
+      window.showCrop = {{show-crop}};
+    </script>
+    <script src="main.js"></script>
+    <script src="prefixfree.js"></script>
+    <script>
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+
+      } setInterval(loop, 500);
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }
+      function checkLength() {
+        setInterval(function(){
+          var nodes = document.querySelectorAll('.character-limit');
+
+          Array.prototype.slice.call(nodes).forEach(function(node) {
+            console.log(node.innerText.length)
+            if (node.innerText.length >= 61) {
+              if (!node.classList.contains('character-error')) {
+                node.classList.add('character-error');
+              }
+            } else {
+              if (node.classList.contains('character-error')) {
+                node.classList.remove('character-error');
+              }
+            }
+          })
+
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>
